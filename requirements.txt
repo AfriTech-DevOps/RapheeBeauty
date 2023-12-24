@@ -1,0 +1,10 @@
+flask
+flask-wtf
+flask-login
+flask-cors
+mysql-connector-python
+gunicorn
+WTForms
+mysql-connector
+passlib
+python-dotenv
