@@ -2,9 +2,9 @@
 [![Security Rating](http://216.80.104.71:9005/api/project_badges/measure?project=rapheeBeauty&metric=security_rating&token=sqb_48233a0fe21452f98719d27faff796868cdd721d)](http://216.80.104.71:9005/dashboard?id=rapheeBeauty)
 [![Bugs](http://216.80.104.71:9005/api/project_badges/measure?project=rapheeBeauty&metric=bugs&token=sqb_48233a0fe21452f98719d27faff796868cdd721d)](http://216.80.104.71:9005/dashboard?id=rapheeBeauty)
 [![Technical Debt](http://216.80.104.71:9005/api/project_badges/measure?project=rapheeBeauty&metric=sqale_index&token=sqb_48233a0fe21452f98719d27faff796868cdd721d)](http://216.80.104.71:9005/dashboard?id=rapheeBeauty)
-![dev branch](https://github.com/github/docs/actions/workflows/rapheebeauty_cicd.yaml/badge.svg?branch=dev)
-![qa branch](https://github.com/github/docs/actions/workflows/rapheebeauty_cicd.yaml/badge.svg?branch=qa)
-![prod branch](https://github.com/github/docs/actions/workflows/rapheebeauty_cicd.yaml/badge.svg?branch=prod)
+![dev branch](https://github.com/AfriTech-DevOps/RapheeBeauty/actions/workflows/rapheebeauty_cicd.yaml/badge.svg?branch=dev)
+![qa branch](https://github.com/AfriTech-DevOps/RapheeBeauty/actions/workflows/rapheebeauty_cicd.yaml/badge.svg?branch=qa)
+![prod branch](https://github.com/AfriTech-DevOps/RapheeBeauty/actions/workflows/rapheebeauty_cicd.yaml/badge.svg?branch=prod)
 # RapheeBeauty
 
 This is an ecommerce website for Rahpee Beauty, a beauty product seller partnered with Oriflame. This website is built using Flask, a Python web framework, and MySQL database.
