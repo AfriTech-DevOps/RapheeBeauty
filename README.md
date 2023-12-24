@@ -2,9 +2,9 @@
 [![Security Rating](http://216.80.104.71:9005/api/project_badges/measure?project=rapheeBeauty&metric=security_rating&token=sqb_48233a0fe21452f98719d27faff796868cdd721d)](http://216.80.104.71:9005/dashboard?id=rapheeBeauty)
 [![Bugs](http://216.80.104.71:9005/api/project_badges/measure?project=rapheeBeauty&metric=bugs&token=sqb_48233a0fe21452f98719d27faff796868cdd721d)](http://216.80.104.71:9005/dashboard?id=rapheeBeauty)
 [![Technical Debt](http://216.80.104.71:9005/api/project_badges/measure?project=rapheeBeauty&metric=sqale_index&token=sqb_48233a0fe21452f98719d27faff796868cdd721d)](http://216.80.104.71:9005/dashboard?id=rapheeBeauty)
-![dev branch](https://github.com/AfriTech-DevOps/RapheeBeauty/actions/workflows/rapheebeauty_cicd.yaml/badge.svg?branch=dev)
-![qa branch](https://github.com/AfriTech-DevOps/RapheeBeauty/actions/workflows/rapheebeauty_cicd.yaml/badge.svg?branch=qa)
-![prod branch](https://github.com/AfriTech-DevOps/RapheeBeauty/actions/workflows/rapheebeauty_cicd.yaml/badge.svg?branch=prod)
+[![dev branch](https://github.com/AfriTech-DevOps/RapheeBeauty/actions/workflows/rapheebeauty_cicd.yaml/badge.svg?branch=dev)]
+[![qa branch](https://github.com/AfriTech-DevOps/RapheeBeauty/actions/workflows/rapheebeauty_cicd.yaml/badge.svg?branch=qa)]
+[![prod branch](https://github.com/AfriTech-DevOps/RapheeBeauty/actions/workflows/rapheebeauty_cicd.yaml/badge.svg?branch=prod)]
 # RapheeBeauty
 
 This is an ecommerce website for Rahpee Beauty, a beauty product seller partnered with Oriflame. This website is built using Flask, a Python web framework, and MySQL database.
@@ -47,7 +47,11 @@ This is an ecommerce website for Rahpee Beauty, a beauty product seller partnere
         SQLALCHEMY_DATABASE_URI=your_database_uri
         SQLALCHEMY_TRACK_MODIFICATIONS=False
     ```
-6. Building the docker image
+6. Run the application locally using the command
+    ```bash
+        flask run
+    ```
+7. Building the docker image
     - For development
         ```bash
             git checkout dev
@@ -63,7 +67,7 @@ This is an ecommerce website for Rahpee Beauty, a beauty product seller partnere
             git checkout master
             docker build -t raphee-beauty:prod  .
         ```
-7. Running the docker container
+8. Running the docker container
     - For development
         ```bash
             docker run -d -p 5000:5000 raphee-beauty:dev
@@ -76,7 +80,7 @@ This is an ecommerce website for Rahpee Beauty, a beauty product seller partnere
         ```bash
             docker run -d -p 5000:5000 raphee-beauty:prod
         ```
-8. Access the application on `http://localhost:5000`
+9. Access the application on `http://localhost:5000`
 
 ## BRANCE GUIDELINES
 - Devlopment: Utilize the `dev` branch for development. This branch is protected and requires a pull request to merge into it. This is used for ongoing development work.
