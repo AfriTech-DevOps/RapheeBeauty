@@ -1,6 +1,13 @@
-# RapeeBeauty
+[![Quality Gate Status](http://216.80.104.71:9005/api/project_badges/measure?project=rapheeBeauty&metric=alert_status&token=sqb_48233a0fe21452f98719d27faff796868cdd721d)](http://216.80.104.71:9005/dashboard?id=rapheeBeauty)
+[![Security Rating](http://216.80.104.71:9005/api/project_badges/measure?project=rapheeBeauty&metric=security_rating&token=sqb_48233a0fe21452f98719d27faff796868cdd721d)](http://216.80.104.71:9005/dashboard?id=rapheeBeauty)
+[![Bugs](http://216.80.104.71:9005/api/project_badges/measure?project=rapheeBeauty&metric=bugs&token=sqb_48233a0fe21452f98719d27faff796868cdd721d)](http://216.80.104.71:9005/dashboard?id=rapheeBeauty)
+[![Technical Debt](http://216.80.104.71:9005/api/project_badges/measure?project=rapheeBeauty&metric=sqale_index&token=sqb_48233a0fe21452f98719d27faff796868cdd721d)](http://216.80.104.71:9005/dashboard?id=rapheeBeauty)
+![dev branch parameter](https://github.com/github/docs/actions/workflows/rapheebeauty_ci.yml/badge.svg?branch=dev)
+![qa branch parameter](https://github.com/github/docs/actions/workflows/rapheebeauty_ci.yml/badge.svg?branch=qa)
+![prod branch parameter](https://github.com/github/docs/actions/workflows/rapheebeauty_ci.yml/badge.svg?branch=prod)
+# RapheeBeauty
 
-This is an ecommerce website for Rapee Beauty, a beauty product seller partnered with Oriflame. This website is built using Flask, a Python web framework, and MySQL database.
+This is an ecommerce website for Rahpee Beauty, a beauty product seller partnered with Oriflame. This website is built using Flask, a Python web framework, and MySQL database.
 
 ### Prerequisites
 
@@ -11,7 +18,7 @@ This is an ecommerce website for Rapee Beauty, a beauty product seller partnered
 
 1. Clone this repository
  ```bash
- git clone https://github.com/AfriTech-DevOps/RapeeBeauty.git
+ git clone https://github.com/AfriTech-DevOps/rapheeBeauty.git
  ```
 2. Create a virtual environment
  ```bash
@@ -44,30 +51,30 @@ This is an ecommerce website for Rapee Beauty, a beauty product seller partnered
     - For development
         ```bash
             git checkout dev
-            docker build -t rapee-beauty:dev  .
+            docker build -t raphee-beauty:dev  .
         ``` 
     - For QA/Testing
         ```bash
             git checkout qa
-            docker build -t rapee-beauty:qa  .
+            docker build -t raphee-beauty:qa  .
         ```
     - For Production
         ```bash
             git checkout master
-            docker build -t rapee-beauty:prod  .
+            docker build -t raphee-beauty:prod  .
         ```
 7. Running the docker container
     - For development
         ```bash
-            docker run -d -p 5000:5000 rapee-beauty:dev
+            docker run -d -p 5000:5000 raphee-beauty:dev
         ``` 
     - For QA/Testing
         ```bash
-            docker run -d -p 5000:5000 rapee-beauty:qa
+            docker run -d -p 5000:5000 raphee-beauty:qa
         ```
     - For Production
         ```bash
-            docker run -d -p 5000:5000 rapee-beauty:prod
+            docker run -d -p 5000:5000 raphee-beauty:prod
         ```
 8. Access the application on `http://localhost:5000`
 

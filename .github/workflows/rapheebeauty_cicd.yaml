@@ -1,0 +1,39 @@
+name: "Building, Pushing, and Testing Raphee Beauty Docker Images"
+on:
+    push:
+        branches:
+            - master
+            - dev
+            - qa
+            - prod
+    pull_request:
+        branches:
+            - master
+            - dev
+            - qa
+            - prod
+jobs:
+    check-branch:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out code
+              uses: actions/checkout@v2
+            - name: Check branch name
+              run: |
+                  if [[ ${{ github.ref }} != 'refs/heads/master' && ${{ github.ref }} != 'refs/heads/dev' && ${{ github.ref }} != 'refs/heads/qa' && ${{ github.ref }} != 'refs/heads/prod' ]]; then
+                      echo "Invalid branch name. Please use master, dev, qa, or prod."
+                      exit 1
+                  fi
+    sonaqube-scan:
+        runs-on: ubuntu-latest
+        permissions: read-all
+        steps:
+            - name: Check out code
+              uses: actions/checkout@v2
+              with:
+                  fetch-depth: 0
+            - name: SonarQube Scan
+              uses: sonarsource/sonarqube-scan-action@master
+              env:
+                  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+                  SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
