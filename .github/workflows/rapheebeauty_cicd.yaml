@@ -20,13 +20,14 @@ jobs:
               uses: actions/checkout@v2
             - name: Check branch name
               run: |
-                  if [[ ${{ github.ref }} != 'refs/heads/master' && ${{ github.ref }} != 'refs/heads/dev' && ${{ github.ref }} != 'refs/heads/qa' && ${{ github.ref }} != 'refs/heads/prod' ]]; then
-                      echo "Invalid branch name. Please use master, dev, qa, or prod."
-                      exit 1
-                  fi
+                if [[ "${{ github.event_name }}" == "pull_request" && ("${{ github.event.pull_request.base.ref }}" != "dev" && "${{ github.event.pull_request.base.ref }}" != "prod" && "${{ github.event.pull_request.base.ref }}" != "qa") ]]; then
+                    echo "Invalid merge destination. Please merge into dev, prod, or qa only."
+                    exit 1
+                fi
     sonaqube-scan:
         runs-on: ubuntu-latest
         permissions: read-all
+        needs: check-branch
         steps:
             - name: Check out code
               uses: actions/checkout@v2
