@@ -1,11 +1,11 @@
 [![Quality Gate Status](http://216.80.104.71:9005/api/project_badges/measure?project=rapheeBeauty&metric=alert_status&token=sqb_48233a0fe21452f98719d27faff796868cdd721d)](http://216.80.104.71:9005/dashboard?id=rapheeBeauty)
 [![Security Rating](http://216.80.104.71:9005/api/project_badges/measure?project=rapheeBeauty&metric=security_rating&token=sqb_48233a0fe21452f98719d27faff796868cdd721d)](http://216.80.104.71:9005/dashboard?id=rapheeBeauty)
 [![Bugs](http://216.80.104.71:9005/api/project_badges/measure?project=rapheeBeauty&metric=bugs&token=sqb_48233a0fe21452f98719d27faff796868cdd721d)](http://216.80.104.71:9005/dashboard?id=rapheeBeauty)
-[![Technical Debt](http://216.80.104.71:9005/api/project_badges/measure?project=rapheeBeauty&metric=sqale_index&token=sqb_48233a0fe21452f98719d27faff796868cdd721d)](http://216.80.104.71:9005/dashboard?id=rapheeBeauty)
-Dev Branch:
-![dev branch](https://github.com/AfriTech-DevOps/RapheeBeauty/actions/workflows/rapheebeauty_cicd.yaml/badge.svg?branch=dev)
+[![Technical Debt](http://216.80.104.71:9005/api/project_badges/measure?project=rapheeBeauty&metric=sqale_index&token=sqb_48233a0fe21452f98719d27faff796868cdd721d)](http://216.80.104.71:9005/dashboard?id=rapheeBeauty)<br>
+Dev Branch: 
+![dev branch](https://github.com/AfriTech-DevOps/RapheeBeauty/actions/workflows/rapheebeauty_cicd.yaml/badge.svg?branch=dev)<br>
 QA Branch:
-![qa branch](https://github.com/AfriTech-DevOps/RapheeBeauty/actions/workflows/rapheebeauty_cicd.yaml/badge.svg?branch=qa)
+![qa branch](https://github.com/AfriTech-DevOps/RapheeBeauty/actions/workflows/rapheebeauty_cicd.yaml/badge.svg?branch=qa)<br>
 Prod Branch:
 ![prod branch](https://github.com/AfriTech-DevOps/RapheeBeauty/actions/workflows/rapheebeauty_cicd.yaml/badge.svg?branch=prod)
 # RapheeBeauty
