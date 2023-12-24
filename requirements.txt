@@ -1,5 +1,7 @@
 flask
 flask-wtf
+flask-mysqldb
+flask-sqlalchemy
 flask-login
 flask-cors
 mysql-connector-python
