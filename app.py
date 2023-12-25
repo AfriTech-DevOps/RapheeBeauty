@@ -11,16 +11,6 @@ app = Flask(__name__)
 CORS(app)
 token = ''.join(random.sample('abcdefghijklmnopqrstuvwxyz1234567890', 32))
 app.secret_key = token
-
-headers = {
-    'Content-Type': 'text/html',
-    'charset': 'utf-8',
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
-    "Authorization": "Bearer " + token,
-}
-
 app.config['SECRET_KEY'] = token
 app.config['SESSION_COOKIE_NAME'] = 'session'
 app.config['SESSION_COOKIE_HTTPONLY'] = False
@@ -34,6 +24,23 @@ app.config['FLASK_ENV'] = 'development'
 app.config['DEBUG'] = True
 app.config['TESTING'] = True
 app.config['FLASK_APP'] = 'app.py'
+
+
+headers = {
+    'Content-Type': 'text/html',
+    'charset': 'utf-8',
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
+    "Authorization": "Bearer " + token,
+    "Session-Cookie-Domain": app.config['SESSION_COOKIE_DOMAIN'],
+    "Session-Cookie-Path": app.config['SESSION_COOKIE_PATH'],
+    "Session-Cookie-Secure": app.config['SESSION_COOKIE_SECURE'],
+    "Session-Cookie-HttpOnly": app.config['SESSION_COOKIE_HTTPONLY'],
+    "Session-Cookie-SameSite": app.config['SESSION_COOKIE_SAMESITE'],
+    "Session-Cookie-Name": app.config['SESSION_COOKIE_NAME']
+}
+
 
 
 login_manager = LoginManager()
@@ -74,7 +81,8 @@ def login():
         else:
             flash('Email does not exist.', 'danger')
             return redirect(url_for('login'))
-    return render_template('login.html')
+    return make_response(render_template('login.html'), headers)
+    # return render_template('login.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -93,7 +101,8 @@ def signup():
             db.session.commit()
             flash('Account created successfully.', 'success')
             return redirect(url_for('login'))
-    return render_template('signup.html')
+    return make_response(render_template('signup.html'), headers)
+    # return render_template('signup.html')
 
 @app.route('/logout')
 @login_required
@@ -104,7 +113,8 @@ def logout():
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return make_response(render_template('index.html'), headers)
+    # return render_template('index.html')
 
 
 if __name__ == '__main__':
