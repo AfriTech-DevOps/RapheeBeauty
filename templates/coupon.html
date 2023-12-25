@@ -3,7 +3,7 @@
    <head>
       <meta charset="utf-8">
       <meta http-equiv="x-ua-compatible" content="ie=edge">
-      <title>Raphee: Glow Beyond Beauty</title>
+      <title>Shofy - Multipurpose eCommerce HTML Template</title>
       <meta name="description" content="">
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -17,7 +17,7 @@
       <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/slick.css') }}">
       <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/magnific-popup.css') }}">
       <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/font-awesome-pro.css') }}">
-      <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/flaticon_RapheeBeautycss') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/flaticon_shofy.css') }}">
       <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/spacing.css') }}">
       <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
    </head>
@@ -240,12 +240,12 @@
                  <div class="cartmini__widget">
                      <div class="cartmini__widget-item">
                          <div class="cartmini__thumb">
-                           <a href="{{ url_for('product_details') }}">
+                           <a href="{{ url_for('product-details') }}">
                               <img src="{{ url_for('static', filename='assets/img/product/product-1.jpg') }}" alt="">
                            </a>
                          </div>
                          <div class="cartmini__content">
-                           <h5 class="cartmini__title"><a href="{{ url_for('product_details') }}">Level Bolt Smart Lock</a></h5>
+                           <h5 class="cartmini__title"><a href="{{ url_for('product-details') }}">Level Bolt Smart Lock</a></h5>
                            <div class="cartmini__price-wrapper">
                               <span class="cartmini__price">$46.00</span>
                               <span class="cartmini__quantity">x2</span>
@@ -413,11 +413,11 @@
                                                           <li><a href="{{ url_for('shop') }}">Grid Layout</a></li>
                                                           <li><a href="{{ url_for('shop_list') }}">List Layout</a></li>
                                                           <li><a href="{{ url_for('shop_masonary') }}">Masonary Layout</a></li>
-                                                          <li><a href="{{ url_for('shop_full_width') }}">Full width Layout</a></li>
-                                                          <li><a href="{{ url_for('shop_1600') }}">1600px Layout</a></li>
+                                                          <!-- <li><a href="shop-full-width.html">Full width Layout</a></li> -->
+                                                          <!-- <li><a href="shop-1600.html">1600px Layout</a></li> -->
                                                           <li><a href="{{ url_for('shop') }}">Left Sidebar</a></li>
-                                                          <li><a href="{{ url_for('shop_right_sidebar') }}">Right Sidebar</a></li>
-                                                          <li><a href="{{ url_for('shop_no_sidebar') }}">Hidden Sidebar</a></li>
+                                                          <!-- <li><a href="shop-right-sidebar.html">Right Sidebar</a></li>
+                                                          <li><a href="shop-no-sidebar.html">Hidden Sidebar</a></li> -->
                                                       </ul>
                                                 </div>
                                              </div>
@@ -426,10 +426,10 @@
                                                       <a href="{{ url_for('shop') }}" class="shop-mega-menu-title">Features</a>
                                                       <ul>
                                                          <li><a href="{{ url_for('shop_filter_dropdown') }}">Filter Dropdown</a></li>
-                                                         <li><a href="{{ url_for('shop_filter_offcanvas') }}">Filters Offcanvas</a></li>
+                                                         <!-- <li><a href="shop-filter-offcanvas.html">Filters Offcanvas</a></li> -->
                                                          <li><a href="{{ url_for('shop') }}">Filters Sidebar</a></li>
-                                                         
-                                                         <li><a href="{{ url_for('shop_infinite_scroll') }}">Infinit scrolling</a></li>
+                                                         <!-- <li><a href="shop-load-more.html">Load More button</a></li>
+                                                         <li><a href="shop-infinite-scroll.html">Infinit scrolling</a></li> -->
                                                          <li><a href="{{ url_for('shop_list') }}">Collections list</a></li>
                                                          <li><a href="{{ url_for('shop') }}">Hidden search</a></li>
                                                          <li><a href="{{ url_for('shop') }}">Search Full screen</a></li>
@@ -475,27 +475,27 @@
                                              <a href="{{ url_for('shop') }}" class="mega-menu-title">Shop Page</a>
                                              <ul class="tp-submenu">
                                                 <li><a href="{{ url_for('shop_category') }}">Only Categories</a></li>
-                                                <li><a href="{{ url_for('shop_filter_offcanvas') }}">Shop Grid</a></li>
+                                                <!-- <li><a href="shop-filter-offcanvas.html">Shop Grid</a></li> -->
                                                 <li><a href="{{ url_for('shop') }}">Shop Grid with Sideber</a></li>
                                                 <li><a href="{{ url_for('shop_list') }}">Shop List</a></li>
                                                 <li><a href="{{ url_for('shop_category') }}">Categories</a></li>
-                                                <li><a href="{{ url_for('product_details') }}">Product Details</a></li>
+                                                <li><a href="{{ url_for('product-details') }}">Product Details</a></li>
                                                 <li><a href="{{ url_for('product_details_progress') }}">Product Details Progress</a></li>
                                              </ul>
                                           </li>
                                           <!-- third col -->
                                           <li  class="has-dropdown">
-                                             <a href="{{ url_for('product_details') }}" class="mega-menu-title">Products</a>
+                                             <a href="{{ url_for('product-details') }}" class="mega-menu-title">Products</a>
                                              <ul class="tp-submenu">
                                                 
-                                                <li><a href="{{ url_for('product_details') }}">Product Simple</a></li>
-                                                <li><a href="product-details-video.html">With Video</a></li>
+                                                <li><a href="{{ url_for('product-details') }}">Product Simple</a></li>
+                                                <!-- <li><a href="product-details-video.html">With Video</a></li>
                                                 <li><a href="product-details-countdown.html">With Countdown Timer</a></li>
                                                 <li><a href="product-details-presentation.html">Product Presentation</a></li>
                                                 <li><a href="product-details-swatches.html">Variations Swatches</a></li>
                                                 <li><a href="product-details-list.html">List View</a></li>
                                                 <li><a href="product-details-gallery.html">Details Gallery</a></li>
-                                                <li><a href="product-details-slider.html">With Slider</a></li>
+                                                <li><a href="product-details-slider.html">With Slider</a></li> -->
                                              </ul>
                                           </li>
                                           <!-- third col -->
@@ -527,8 +527,8 @@
 
                                        </ul>
                                     </li>
-                                    <li><a href="{{ url_for('coupon') }}.html">{{ url_for('coupon') }}s</a></li>
-                                    <li class="has-dropdown">
+                                    <li><a href="{{ url_for('coupon') }}">Coupons</a></li>
+                                    <!-- <li class="has-dropdown">
                                        <a href="blog.html">Blog</a>
                                        <ul class="tp-submenu">
                                           <li><a href="blog.html">Blog Standard</a></li>
@@ -537,7 +537,7 @@
                                           <li><a href="blog-details-2.html">Blog Details Full Width</a></li>
                                           <li><a href="blog-details.html">Blog Details</a></li>
                                        </ul>
-                                    </li>
+                                    </li> -->
                                     <li><a href="{{ url_for('contact') }}">Contact</a></li>
                                  </ul>
                               </nav>
@@ -793,26 +793,285 @@
       <!-- header area end -->
 
       <main>
-         <!-- error area start -->
-         <section class="tp-error-area pt-110 pb-110">
+
+         <!-- breadcrumb area start -->
+         <section class="breadcrumb__area include-bg pt-95 pb-50">
             <div class="container">
-               <div class="row justify-content-center">
-                  <div class="col-xl-6 col-lg-8 col-md-10">
-                     <div class="tp-error-content text-center">
-                        <div class="tp-error-thumb">
-                           <img src="{{ url_for('static', filename='assets/img/error/error.png') }}" alt="">
+               <div class="row">
+                  <div class="col-xxl-12">
+                     <div class="breadcrumb__content p-relative z-index-1">
+                        <h3 class="breadcrumb__title">Grab Best Offer</h3>
+                        <div class="breadcrumb__list">
+                           <span><a href="#">Home</a></span>
+                           <span>Coupon</span>
                         </div>
-
-                        <h3 class="tp-error-title">Oops! Page not found</h3>
-                        <p>Whoops, this is embarassing. Looks like the page you were looking for wasn't found.</p>
-
-                        <a href="{{ url_for('index') }}" class="tp-error-btn">Back to Home</a>
                      </div>
                   </div>
                </div>
             </div>
          </section>
-         <!-- error area end -->
+         <!-- breadcrumb area end -->
+
+         <!-- coupon area start -->
+         <div class="tp-coupon-area pb-120">
+            <div class="container">
+               <div class="row">
+                  <div class="col-xl-6">
+                     <div class="tp-coupon-item mb-30 p-relative d-md-flex justify-content-between align-items-center">
+                        <span class="tp-coupon-border"></span>
+                        <div class="tp-coupon-item-left d-sm-flex align-items-center">
+                           <div class="tp-coupon-thumb">
+                              <a href="#">
+                                 <img alt="logo" src="{{ url_for('static', filename='assets/img/product/2/prodcut-1.jpg') }}">
+                              </a>
+                           </div>
+                           <div class="tp-coupon-content">
+                              <h3 class="tp-coupon-title">August Gift Voucher</h3>
+                              <p class="tp-coupon-offer mb-15"><span>10%</span>Off</p>
+                              <div class="tp-coupon-countdown" data-countdown="" data-date="Sep 30 2024 20:20:22">
+                                 <div class="tp-coupon-countdown-inner">
+                                    <ul>
+                                       <li><span data-days="">83</span> Day</li>
+                                       <li><span data-hours="">16</span> Hrs</li>
+                                       <li><span data-minutes="">20</span> Min</li>
+                                       <li><span data-seconds="">39</span> Sec</li>
+                                    </ul>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="tp-coupon-item-right pl-20">
+                           <div class="tp-coupon-status mb-10 d-flex align-items-center">
+                              <h4>Coupon <span class="active">Active</span></h4>
+                              <div class="tp-coupon-info-details">
+                                 <span>
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                       <path fill-rule="evenodd" clip-rule="evenodd" d="M9 1.5C4.99594 1.5 1.75 4.74594 1.75 8.75C1.75 12.7541 4.99594 16 9 16C13.0041 16 16.25 12.7541 16.25 8.75C16.25 4.74594 13.0041 1.5 9 1.5ZM0.25 8.75C0.25 3.91751 4.16751 0 9 0C13.8325 0 17.75 3.91751 17.75 8.75C17.75 13.5825 13.8325 17.5 9 17.5C4.16751 17.5 0.25 13.5825 0.25 8.75ZM9 7.75C9.55229 7.75 10 8.19771 10 8.75V11.95C10 12.5023 9.55229 12.95 9 12.95C8.44771 12.95 8 12.5023 8 11.95V8.75C8 8.19771 8.44771 7.75 9 7.75ZM9 4.5498C8.44771 4.5498 8 4.99752 8 5.5498C8 6.10209 8.44771 6.5498 9 6.5498H9.008C9.56028 6.5498 10.008 6.10209 10.008 5.5498C10.008 4.99752 9.56028 4.5498 9.008 4.5498H9Z" fill="currentColor"></path>
+                                    </svg>
+                                 </span>
+                                 <div class="tp-coupon-info-tooltip transition-3">
+                                    <p>*This coupon code will apply on <span>Grocery type products</span> and when you shopping more than <span>$500</span></p>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="tp-coupon-date"><button><span>AUGUST23</span></button></div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-xl-6">
+                     <div class="tp-coupon-item mb-30 p-relative d-md-flex justify-content-between align-items-center">
+                        <span class="tp-coupon-border"></span>
+                        <div class="tp-coupon-item-left d-sm-flex align-items-center">
+                           <div class="tp-coupon-thumb">
+                              <a href="#">
+                                 <img alt="logo" src="{{ url_for('static', filename='assets/img/product/2/prodcut-2.jpg') }}">
+                              </a>
+                           </div>
+                           <div class="tp-coupon-content">
+                              <h3 class="tp-coupon-title">SUMMER Vacation</h3>
+                              <p class="tp-coupon-offer mb-15"><span>15%</span>Off</p>
+                              <div class="tp-coupon-countdown" data-countdown="" data-date="Sep 30 2024 20:20:22">
+                                 <div class="tp-coupon-countdown-inner">
+                                    <ul>
+                                       <li><span data-days="">83</span> Day</li>
+                                       <li><span data-hours="">16</span> Hrs</li>
+                                       <li><span data-minutes="">20</span> Min</li>
+                                       <li><span data-seconds="">39</span> Sec</li>
+                                    </ul>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="tp-coupon-item-right pl-20">
+                           <div class="tp-coupon-status mb-10 d-flex align-items-center">
+                              <h4>Coupon <span class="active">Active</span></h4>
+                              <div class="tp-coupon-info-details">
+                                 <span>
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                       <path fill-rule="evenodd" clip-rule="evenodd" d="M9 1.5C4.99594 1.5 1.75 4.74594 1.75 8.75C1.75 12.7541 4.99594 16 9 16C13.0041 16 16.25 12.7541 16.25 8.75C16.25 4.74594 13.0041 1.5 9 1.5ZM0.25 8.75C0.25 3.91751 4.16751 0 9 0C13.8325 0 17.75 3.91751 17.75 8.75C17.75 13.5825 13.8325 17.5 9 17.5C4.16751 17.5 0.25 13.5825 0.25 8.75ZM9 7.75C9.55229 7.75 10 8.19771 10 8.75V11.95C10 12.5023 9.55229 12.95 9 12.95C8.44771 12.95 8 12.5023 8 11.95V8.75C8 8.19771 8.44771 7.75 9 7.75ZM9 4.5498C8.44771 4.5498 8 4.99752 8 5.5498C8 6.10209 8.44771 6.5498 9 6.5498H9.008C9.56028 6.5498 10.008 6.10209 10.008 5.5498C10.008 4.99752 9.56028 4.5498 9.008 4.5498H9Z" fill="currentColor"></path>
+                                    </svg>
+                                 </span>
+                                 <div class="tp-coupon-info-tooltip transition-3">
+                                    <p>*This coupon code will apply on <span>Grocery type products</span> and when you shopping more than <span>$500</span></p>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="tp-coupon-date"><button><span>SUMMER15</span></button></div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-xl-6">
+                     <div class="tp-coupon-item mb-30 p-relative d-md-flex justify-content-between align-items-center">
+                        <span class="tp-coupon-border"></span>
+                        <div class="tp-coupon-item-left d-sm-flex align-items-center">
+                           <div class="tp-coupon-thumb">
+                              <a href="#">
+                                 <img alt="logo" src="{{ url_for('static', filename='assets/img/product/2/prodcut-3.jpg') }}">
+                              </a>
+                           </div>
+                           <div class="tp-coupon-content">
+                              <h3 class="tp-coupon-title">May Day</h3>
+                              <p class="tp-coupon-offer mb-15"><span>20%</span>Off</p>
+                              <div class="tp-coupon-countdown" data-countdown="" data-date="Sep 30 2024 20:20:22">
+                                 <div class="tp-coupon-countdown-inner">
+                                    <ul>
+                                       <li><span data-days="">83</span> Day</li>
+                                       <li><span data-hours="">16</span> Hrs</li>
+                                       <li><span data-minutes="">20</span> Min</li>
+                                       <li><span data-seconds="">39</span> Sec</li>
+                                    </ul>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="tp-coupon-item-right pl-20">
+                           <div class="tp-coupon-status mb-10 d-flex align-items-center">
+                              <h4>Coupon <span class="active">Active</span></h4>
+                              <div class="tp-coupon-info-details">
+                                 <span>
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                       <path fill-rule="evenodd" clip-rule="evenodd" d="M9 1.5C4.99594 1.5 1.75 4.74594 1.75 8.75C1.75 12.7541 4.99594 16 9 16C13.0041 16 16.25 12.7541 16.25 8.75C16.25 4.74594 13.0041 1.5 9 1.5ZM0.25 8.75C0.25 3.91751 4.16751 0 9 0C13.8325 0 17.75 3.91751 17.75 8.75C17.75 13.5825 13.8325 17.5 9 17.5C4.16751 17.5 0.25 13.5825 0.25 8.75ZM9 7.75C9.55229 7.75 10 8.19771 10 8.75V11.95C10 12.5023 9.55229 12.95 9 12.95C8.44771 12.95 8 12.5023 8 11.95V8.75C8 8.19771 8.44771 7.75 9 7.75ZM9 4.5498C8.44771 4.5498 8 4.99752 8 5.5498C8 6.10209 8.44771 6.5498 9 6.5498H9.008C9.56028 6.5498 10.008 6.10209 10.008 5.5498C10.008 4.99752 9.56028 4.5498 9.008 4.5498H9Z" fill="currentColor"></path>
+                                    </svg>
+                                 </span>
+                                 <div class="tp-coupon-info-tooltip transition-3">
+                                    <p>*This coupon code will apply on <span>Grocery type products</span> and when you shopping more than <span>$500</span></p>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="tp-coupon-date"><button><span>MAYDAY</span></button></div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-xl-6">
+                     <div class="tp-coupon-item mb-30 p-relative d-md-flex justify-content-between align-items-center">
+                        <span class="tp-coupon-border"></span>
+                        <div class="tp-coupon-item-left d-sm-flex align-items-center">
+                           <div class="tp-coupon-thumb">
+                              <a href="#">
+                                 <img alt="logo" src="{{ url_for('static', filename='assets/img/product/2/prodcut-4.jpg') }}">
+                              </a>
+                           </div>
+                           <div class="tp-coupon-content">
+                              <h3 class="tp-coupon-title">Paper On Demand</h3>
+                              <p class="tp-coupon-offer mb-15"><span>12%</span>Off</p>
+                              <div class="tp-coupon-countdown" data-countdown="" data-date="Sep 30 2024 20:20:22">
+                                 <div class="tp-coupon-countdown-inner">
+                                    <ul>
+                                       <li><span data-days="">83</span> Day</li>
+                                       <li><span data-hours="">16</span> Hrs</li>
+                                       <li><span data-minutes="">20</span> Min</li>
+                                       <li><span data-seconds="">39</span> Sec</li>
+                                    </ul>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="tp-coupon-item-right pl-20">
+                           <div class="tp-coupon-status mb-10 d-flex align-items-center">
+                              <h4>Coupon <span class="active">Active</span></h4>
+                              <div class="tp-coupon-info-details">
+                                 <span>
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                       <path fill-rule="evenodd" clip-rule="evenodd" d="M9 1.5C4.99594 1.5 1.75 4.74594 1.75 8.75C1.75 12.7541 4.99594 16 9 16C13.0041 16 16.25 12.7541 16.25 8.75C16.25 4.74594 13.0041 1.5 9 1.5ZM0.25 8.75C0.25 3.91751 4.16751 0 9 0C13.8325 0 17.75 3.91751 17.75 8.75C17.75 13.5825 13.8325 17.5 9 17.5C4.16751 17.5 0.25 13.5825 0.25 8.75ZM9 7.75C9.55229 7.75 10 8.19771 10 8.75V11.95C10 12.5023 9.55229 12.95 9 12.95C8.44771 12.95 8 12.5023 8 11.95V8.75C8 8.19771 8.44771 7.75 9 7.75ZM9 4.5498C8.44771 4.5498 8 4.99752 8 5.5498C8 6.10209 8.44771 6.5498 9 6.5498H9.008C9.56028 6.5498 10.008 6.10209 10.008 5.5498C10.008 4.99752 9.56028 4.5498 9.008 4.5498H9Z" fill="currentColor"></path>
+                                    </svg>
+                                 </span>
+                                 <div class="tp-coupon-info-tooltip transition-3">
+                                    <p>*This coupon code will apply on <span>Grocery type products</span> and when you shopping more than <span>$500</span></p>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="tp-coupon-date"><button><span>PAPER12</span></button></div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-xl-6">
+                     <div class="tp-coupon-item mb-30 p-relative d-md-flex justify-content-between align-items-center">
+                        <span class="tp-coupon-border"></span>
+                        <div class="tp-coupon-item-left d-sm-flex align-items-center">
+                           <div class="tp-coupon-thumb">
+                              <a href="#">
+                                 <img alt="logo" src="{{ url_for('static', filename='assets/img/product/2/prodcut-5.jpg') }}">
+                              </a>
+                           </div>
+                           <div class="tp-coupon-content">
+                              <h3 class="tp-coupon-title">Fifty Fifty</h3>
+                              <p class="tp-coupon-offer mb-15"><span>50%</span>Off</p>
+                              <div class="tp-coupon-countdown" data-countdown="" data-date="Sep 30 2024 20:20:22">
+                                 <div class="tp-coupon-countdown-inner">
+                                    <ul>
+                                       <li><span data-days="">83</span> Day</li>
+                                       <li><span data-hours="">16</span> Hrs</li>
+                                       <li><span data-minutes="">20</span> Min</li>
+                                       <li><span data-seconds="">39</span> Sec</li>
+                                    </ul>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="tp-coupon-item-right pl-20">
+                           <div class="tp-coupon-status mb-10 d-flex align-items-center">
+                              <h4>Coupon <span class="active">Active</span></h4>
+                              <div class="tp-coupon-info-details">
+                                 <span>
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                       <path fill-rule="evenodd" clip-rule="evenodd" d="M9 1.5C4.99594 1.5 1.75 4.74594 1.75 8.75C1.75 12.7541 4.99594 16 9 16C13.0041 16 16.25 12.7541 16.25 8.75C16.25 4.74594 13.0041 1.5 9 1.5ZM0.25 8.75C0.25 3.91751 4.16751 0 9 0C13.8325 0 17.75 3.91751 17.75 8.75C17.75 13.5825 13.8325 17.5 9 17.5C4.16751 17.5 0.25 13.5825 0.25 8.75ZM9 7.75C9.55229 7.75 10 8.19771 10 8.75V11.95C10 12.5023 9.55229 12.95 9 12.95C8.44771 12.95 8 12.5023 8 11.95V8.75C8 8.19771 8.44771 7.75 9 7.75ZM9 4.5498C8.44771 4.5498 8 4.99752 8 5.5498C8 6.10209 8.44771 6.5498 9 6.5498H9.008C9.56028 6.5498 10.008 6.10209 10.008 5.5498C10.008 4.99752 9.56028 4.5498 9.008 4.5498H9Z" fill="currentColor"></path>
+                                    </svg>
+                                 </span>
+                                 <div class="tp-coupon-info-tooltip transition-3">
+                                    <p>*This coupon code will apply on <span>Grocery type products</span> and when you shopping more than <span>$500</span></p>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="tp-coupon-date"><button><span>FIF50</span></button></div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="col-xl-6">
+                     <div class="tp-coupon-item mb-30 p-relative d-md-flex justify-content-between align-items-center">
+                        <span class="tp-coupon-border"></span>
+                        <div class="tp-coupon-item-left d-sm-flex align-items-center">
+                           <div class="tp-coupon-thumb">
+                              <a href="#">
+                                 <img alt="logo" src="{{ url_for('static', filename='assets/img/product/2/prodcut-6.jpg') }}">
+                              </a>
+                           </div>
+                           <div class="tp-coupon-content">
+                              <h3 class="tp-coupon-title">Flash Sale</h3>
+                              <p class="tp-coupon-offer mb-15"><span>30%</span>Off</p>
+                              <div class="tp-coupon-countdown" data-countdown="" data-date="Sep 30 2024 20:20:22">
+                                 <div class="tp-coupon-countdown-inner">
+                                    <ul>
+                                       <li><span data-days="">83</span> Day</li>
+                                       <li><span data-hours="">16</span> Hrs</li>
+                                       <li><span data-minutes="">20</span> Min</li>
+                                       <li><span data-seconds="">39</span> Sec</li>
+                                    </ul>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="tp-coupon-item-right pl-20">
+                           <div class="tp-coupon-status mb-10 d-flex align-items-center">
+                              <h4>Coupon <span class="active">Active</span></h4>
+                              <div class="tp-coupon-info-details">
+                                 <span>
+                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                       <path fill-rule="evenodd" clip-rule="evenodd" d="M9 1.5C4.99594 1.5 1.75 4.74594 1.75 8.75C1.75 12.7541 4.99594 16 9 16C13.0041 16 16.25 12.7541 16.25 8.75C16.25 4.74594 13.0041 1.5 9 1.5ZM0.25 8.75C0.25 3.91751 4.16751 0 9 0C13.8325 0 17.75 3.91751 17.75 8.75C17.75 13.5825 13.8325 17.5 9 17.5C4.16751 17.5 0.25 13.5825 0.25 8.75ZM9 7.75C9.55229 7.75 10 8.19771 10 8.75V11.95C10 12.5023 9.55229 12.95 9 12.95C8.44771 12.95 8 12.5023 8 11.95V8.75C8 8.19771 8.44771 7.75 9 7.75ZM9 4.5498C8.44771 4.5498 8 4.99752 8 5.5498C8 6.10209 8.44771 6.5498 9 6.5498H9.008C9.56028 6.5498 10.008 6.10209 10.008 5.5498C10.008 4.99752 9.56028 4.5498 9.008 4.5498H9Z" fill="currentColor"></path>
+                                    </svg>
+                                 </span>
+                                 <div class="tp-coupon-info-tooltip transition-3">
+                                    <p>*This coupon code will apply on <span>Grocery type products</span> and when you shopping more than <span>$500</span></p>
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="tp-coupon-date"><button><span>FLASH30</span></button></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!-- coupon area end -->
 
       </main>
       
