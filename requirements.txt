@@ -10,3 +10,4 @@ WTForms
 mysql-connector
 passlib
 python-dotenv
+pymysql
