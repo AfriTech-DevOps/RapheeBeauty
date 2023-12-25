@@ -8,18 +8,18 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <!-- Place favicon.ico in the root directory -->
-      <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo/favicon.png">
+      <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='assets/img/logo/favicon.png') }}">
 
       <!-- CSS here -->
-      <link rel="stylesheet" href="assets/css/bootstrap.css">
-      <link rel="stylesheet" href="assets/css/animate.css">
-      <link rel="stylesheet" href="assets/css/swiper-bundle.css">
-      <link rel="stylesheet" href="assets/css/slick.css">
-      <link rel="stylesheet" href="assets/css/magnific-popup.css">
-      <link rel="stylesheet" href="assets/css/font-awesome-pro.css">
-      <link rel="stylesheet" href="assets/css/flaticon_shofy.css">
-      <link rel="stylesheet" href="assets/css/spacing.css">
-      <link rel="stylesheet" href="assets/css/main.css">
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/animate.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/swiper-bundle.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/slick.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/magnific-popup.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/font-awesome-pro.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/flaticon_RapheeBeautycss') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/spacing.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
    </head>
    <body>
       <!--[if lte IE 9]>
@@ -40,7 +40,7 @@
                            <circle stroke="red" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round"></circle> 
                        </svg>
                      </div>
-                     <img src="assets/img/logo/preloader/preloader-icon.svg" alt="">
+                     <img src="{{ url_for('static', filename='assets/img/logo/preloader/preloader-icon.svg') }}" alt="">
                   </div>
                   <h3 class="tp-preloader-title">Shofy</h3>
                   <p class="tp-preloader-subtitle">Loading</p>
@@ -75,7 +75,7 @@
                <div class="offcanvas__top mb-70 d-flex justify-content-between align-items-center">
                   <div class="offcanvas__logo logo">
                      <a href="index.html">
-                        <img src="assets/img/logo/logo.svg" alt="logo">
+                        <img src="{{ url_for('static', filename='assets/img/logo/logo.svg') }}" alt="logo">
                      </a>
                   </div>
                </div>
@@ -93,7 +93,7 @@
                <div class="offcanvas__contact align-items-center d-none">
                   <div class="offcanvas__contact-icon mr-20">
                      <span>
-                        <img src="assets/img/icon/contact.png" alt="">
+                        <img src="{{ url_for('static', filename='assets/img/icon/contact.png') }}" alt="">
                      </span>
                   </div>
                   <div class="offcanvas__contact-content">
@@ -120,7 +120,7 @@
                   <div class="offcanvas__select language">
                      <div class="offcanvas__lang d-flex align-items-center justify-content-md-end">
                         <div class="offcanvas__lang-img mr-15">
-                           <img src="assets/img/icon/language-flag.png" alt="">
+                           <img src="{{ url_for('static', filename='assets/img/icon/language-flag.png') }}" alt="">
                         </div>
                         <div class="offcanvas__lang-wrapper">
                            <span class="offcanvas__lang-selected-lang tp-lang-toggle" id="tp-offcanvas-lang-toggle">English</span>
@@ -241,7 +241,7 @@
                      <div class="cartmini__widget-item">
                          <div class="cartmini__thumb">
                            <a href="product-details.html">
-                              <img src="assets/img/product/product-1.jpg" alt="">
+                              <img src="{{ url_for('static', filename='assets/img/product/product-1.jpg') }}" alt="">
                            </a>
                          </div>
                          <div class="cartmini__content">
@@ -257,7 +257,7 @@
                  <!-- for wp -->
                  <!-- if no item in cart -->
                  <div class="cartmini__empty text-center d-none">
-                     <img src="assets/img/product/cartmini/empty-cart.png" alt="">
+                     <img src="{{ url_for('static', filename='assets/img/product/cartmini/empty-cart.png') }}" alt="">
                      <p>Your Cart is empty</p>
                      <a href="shop.html" class="tp-btn">Go to Shop</a>
                  </div>
@@ -373,7 +373,7 @@
                         <div class="col-xl-2 col-lg-5 col-md-5 col-sm-4 col-6">
                            <div class="logo">
                               <a href="index.html">
-                                 <img src="assets/img/logo/logo.svg" alt="logo">
+                                 <img src="{{ url_for('static', filename='assets/img/logo/logo.svg') }}" alt="logo">
                               </a>
                            </div>
                         </div>
@@ -389,7 +389,7 @@
                                                 <div class="home-menu-item ">
                                                    <a href="index.html">
                                                       <div class="home-menu-thumb p-relative fix">
-                                                         <img src="assets/img/menu/menu-home-1.jpg" alt="">
+                                                         <img src="{{ url_for('static', filename='assets/img/menu/menu-home-1.jpg') }}" alt="">
                                                       </div>
                                                       <div class="home-menu-content">
                                                          <h5 class="home-menu-title">Electronics </h5>
@@ -401,7 +401,7 @@
                                                 <div class="home-menu-item ">
                                                    <a href="index-2.html">
                                                       <div class="home-menu-thumb p-relative fix">
-                                                         <img src="assets/img/menu/menu-home-2.jpg" alt="">
+                                                         <img src="{{ url_for('static', filename='assets/img/menu/menu-home-2.jpg') }}" alt="">
                                                       </div>
                                                       <div class="home-menu-content">
                                                          <h5 class="home-menu-title">Fashion</h5>
@@ -413,7 +413,7 @@
                                                 <div class="home-menu-item ">
                                                    <a href="index-3.html">
                                                       <div class="home-menu-thumb p-relative fix">
-                                                         <img src="assets/img/menu/menu-home-3.jpg" alt="">
+                                                         <img src="{{ url_for('static', filename='assets/img/menu/menu-home-3.jpg') }}" alt="">
                                                       </div>
                                                       <div class="home-menu-content">
                                                          <h5 class="home-menu-title">Beauty</h5>
@@ -425,7 +425,7 @@
                                                 <div class="home-menu-item ">
                                                    <a href="index-4.html">
                                                       <div class="home-menu-thumb p-relative fix">
-                                                         <img src="assets/img/menu/menu-home-4.jpg" alt="">
+                                                         <img src="{{ url_for('static', filename='assets/img/menu/menu-home-4.jpg') }}" alt="">
                                                       </div>
                                                       <div class="home-menu-content">
                                                          <h5 class="home-menu-title">Jewelry </h5>
@@ -437,7 +437,7 @@
                                                 <div class="home-menu-item ">
                                                    <a href="index-5.html">
                                                       <div class="home-menu-thumb p-relative fix">
-                                                         <img src="assets/img/menu/menu-home-5.jpg" alt="">
+                                                         <img src="{{ url_for('static', filename='assets/img/menu/menu-home-5.jpg') }}" alt="">
                                                       </div>
                                                       <div class="home-menu-content">
                                                          <h5 class="home-menu-title">Grocery</h5>
@@ -496,7 +496,7 @@
                                              </div>
                                              <div class="col-lg-3">
                                                 <div class="shop-mega-menu-img">
-                                                   <img src="assets/img/menu/product/menu-product-img-1.jpg" alt="">
+                                                   <img src="{{ url_for('static', filename='assets/img/menu/product/menu-product-img-1.jpg') }}" alt="">
                                                    <div class="shop-mega-menu-btn">
                                                       <a href="shop-category.html" class="tp-menu-showcase-btn tp-menu-showcase-btn-2">Phones</a>
                                                    </div>
@@ -504,7 +504,7 @@
                                              </div>
                                              <div class="col-lg-3">
                                                 <div class="shop-mega-menu-img">
-                                                   <img src="assets/img/menu/product/menu-product-img-2.jpg" alt="">
+                                                   <img src="{{ url_for('static', filename='assets/img/menu/product/menu-product-img-2.jpg') }}" alt="">
                                                    <div class="shop-mega-menu-btn">
                                                       <a href="shop-category.html" class="tp-menu-showcase-btn tp-menu-showcase-btn-2">Cameras</a>
                                                    </div>
@@ -618,7 +618,7 @@
                                                  <a href="shop.html" class="mega-menu-title">Featured</a>
                                                  <ul>
                                                     <li>
-                                                       <a href="shop.html"><img src="assets/img/header/menu/menu-1.jpg" alt=""></a>
+                                                       <a href="shop.html"><img src="{{ url_for('static', filename='assets/img/header/menu/menu-1.jpg') }}" alt=""></a>
                                                     </li>
                                                     <li>
                                                        <a href="shop.html">New Arrivals</a>
@@ -636,7 +636,7 @@
                                                  <a href="shop.html" class="mega-menu-title">Computer & Laptops</a>
                                                  <ul>
                                                     <li>
-                                                     <a href="shop.html"><img src="assets/img/header/menu/menu-2.jpg" alt=""></a>
+                                                     <a href="shop.html"><img src="{{ url_for('static', filename='assets/img/header/menu/menu-2.jpg') }}" alt=""></a>
                                                     </li>
                                                     <li>
                                                        <a href="shop.html">Top Brands</a>
@@ -653,7 +653,7 @@
                                                  <a href="shop.html" class="mega-menu-title">Accessories</a>
                                                  <ul>
                                                     <li>
-                                                     <a href="shop.html"><img src="assets/img/header/menu/menu-3.jpg" alt=""></a>
+                                                     <a href="shop.html"><img src="{{ url_for('static', filename='assets/img/header/menu/menu-3.jpg') }}" alt=""></a>
                                                     </li>
                                                     <li>
                                                        <a href="shop.html">Headphones</a>
@@ -851,46 +851,46 @@
                            <div class="tab-content m-img" id="productDetailsNavContent">
                               <div class="tab-pane fade show active" id="nav-1" role="tabpanel" aria-labelledby="nav-1-tab" tabindex="0">
                                  <div class="tp-product-details-nav-main-thumb">
-                                    <img src="assets/img/product/details/2/main/product-details-main-1.jpg" alt="">
+                                    <img src="{{ url_for('static', filename='assets/img/product/details/2/main/product-details-main-1.jpg') }}" alt="">
                                  </div>
                               </div>
                               <div class="tab-pane fade" id="nav-2" role="tabpanel" aria-labelledby="nav-2-tab" tabindex="0">
                                  <div class="tp-product-details-nav-main-thumb">
-                                    <img src="assets/img/product/details/2/main/product-details-main-2.jpg" alt="">
+                                    <img src="{{ url_for('static', filename='assets/img/product/details/2/main/product-details-main-2.jpg') }}" alt="">
                                  </div>
                               </div>
                               <div class="tab-pane fade" id="nav-3" role="tabpanel" aria-labelledby="nav-3-tab" tabindex="0">
                                  <div class="tp-product-details-nav-main-thumb">
-                                    <img src="assets/img/product/details/2/main/product-details-main-3.jpg" alt="">
+                                    <img src="{{ url_for('static', filename='assets/img/product/details/2/main/product-details-main-3.jpg') }}" alt="">
                                  </div>
                               </div>
                               <div class="tab-pane fade" id="nav-4" role="tabpanel" aria-labelledby="nav-4-tab" tabindex="0">
                                  <div class="tp-product-details-nav-main-thumb">
-                                    <img src="assets/img/product/details/2/main/product-details-main-4.jpg" alt="">
+                                    <img src="{{ url_for('static', filename='assets/img/product/details/2/main/product-details-main-4.jpg') }}" alt="">
                                  </div>
                               </div>
                               <div class="tab-pane fade" id="nav-5" role="tabpanel" aria-labelledby="nav-5-tab" tabindex="0">
                                  <div class="tp-product-details-nav-main-thumb">
-                                    <img src="assets/img/product/details/2/main/product-details-main-5.jpg" alt="">
+                                    <img src="{{ url_for('static', filename='assets/img/product/details/2/main/product-details-main-5.jpg') }}" alt="">
                                  </div>
                               </div>
                             </div>
                             <nav>
                               <div class="nav nav-tabs " id="productDetailsNavThumb" role="tablist">
                                  <button class="nav-link active" id="nav-1-tab" data-bs-toggle="tab" data-bs-target="#nav-1" type="button" role="tab" aria-controls="nav-1" aria-selected="true">
-                                    <img src="assets/img/product/details/2/nav/product-details-nav-1.jpg" alt="">
+                                    <img src="{{ url_for('static', filename='assets/img/product/details/2/nav/product-details-nav-1.jpg') }}" alt="">
                                  </button>
                                  <button class="nav-link" id="nav-2-tab" data-bs-toggle="tab" data-bs-target="#nav-2" type="button" role="tab" aria-controls="nav-2" aria-selected="false">
-                                    <img src="assets/img/product/details/2/nav/product-details-nav-2.jpg" alt="">
+                                    <img src="{{ url_for('static', filename='assets/img/product/details/2/nav/product-details-nav-2.jpg') }}" alt="">
                                  </button>
                                  <button class="nav-link" id="nav-3-tab" data-bs-toggle="tab" data-bs-target="#nav-3" type="button" role="tab" aria-controls="nav-3" aria-selected="false">
-                                    <img src="assets/img/product/details/2/nav/product-details-nav-3.jpg" alt="">
+                                    <img src="{{ url_for('static', filename='assets/img/product/details/2/nav/product-details-nav-3.jpg') }}" alt="">
                                  </button>
                                  <button class="nav-link" id="nav-4-tab" data-bs-toggle="tab" data-bs-target="#nav-4" type="button" role="tab" aria-controls="nav-4" aria-selected="false">
-                                    <img src="assets/img/product/details/2/nav/product-details-nav-4.jpg" alt="">
+                                    <img src="{{ url_for('static', filename='assets/img/product/details/2/nav/product-details-nav-4.jpg') }}" alt="">
                                  </button>
                                  <button class="nav-link" id="nav-5-tab" data-bs-toggle="tab" data-bs-target="#nav-5" type="button" role="tab" aria-controls="nav-5" aria-selected="false">
-                                    <img src="assets/img/product/details/2/nav/product-details-nav-5.jpg" alt="">
+                                    <img src="{{ url_for('static', filename='assets/img/product/details/2/nav/product-details-nav-5.jpg') }}" alt="">
                                  </button>
                               </div>
                            </nav>
@@ -1027,7 +1027,7 @@
 
                            <div class="tp-product-details-payment d-flex align-items-center flex-wrap justify-content-between">
                               <p><span>Guaranteed</span> <br> safe & secure checkout</p>
-                              <img src="assets/img/product/icons/payment-option.png" alt="">
+                              <img src="{{ url_for('static', filename='assets/img/product/icons/payment-option.png') }}" alt="">
                            </div>
                         </div>
                      </div>
@@ -1066,7 +1066,7 @@
                                                 </div>
                                                 <div class="col-lg-7">
                                                    <div class="tp-product-details-desc-thumb m-img">
-                                                      <img src="assets/img/product/details//2/desc/product-details-desc-1.jpg" alt="">
+                                                      <img src="{{ url_for('static', filename='assets/img/product/details//2/desc/product-details-desc-1.jpg') }}" alt="">
                                                    </div>
                                                 </div>
                                              </div>
@@ -1075,7 +1075,7 @@
                                              <div class="row">
                                                 <div class="col-lg-7">
                                                    <div class="tp-product-details-desc-thumb pr-30 m-img">
-                                                      <img src="assets/img/product/details//2/desc/product-details-desc-2.jpg" alt="">
+                                                      <img src="{{ url_for('static', filename='assets/img/product/details//2/desc/product-details-desc-2.jpg') }}" alt="">
                                                    </div>
                                                 </div>
                                                 <div class="col-lg-5">
@@ -1100,7 +1100,7 @@
                                        <div class="col-md-4 col-sm-6">
                                           <div class="tp-product-details-desc-fact text-center mb-50">
                                              <div class="tp-product-details-desc-fact-thumb m-img">
-                                                <img src="assets/img/product/details/2/desc/product-details-desc-3.jpg" alt="">
+                                                <img src="{{ url_for('static', filename='assets/img/product/details/2/desc/product-details-desc-3.jpg') }}" alt="">
                                              </div>
                                              <div class="tp-product-details-desc-fact-content">
                                                 <span>96%</span>
@@ -1111,7 +1111,7 @@
                                        <div class="col-md-4 col-sm-6">
                                           <div class="tp-product-details-desc-fact text-center mb-50">
                                              <div class="tp-product-details-desc-fact-thumb m-img">
-                                                <img src="assets/img/product/details/2/desc/product-details-desc-4.jpg" alt="">
+                                                <img src="{{ url_for('static', filename='assets/img/product/details/2/desc/product-details-desc-4.jpg') }}" alt="">
                                              </div>
                                              <div class="tp-product-details-desc-fact-content">
                                                 <span>93%</span>
@@ -1122,7 +1122,7 @@
                                        <div class="col-md-4 col-sm-6">
                                           <div class="tp-product-details-desc-fact text-center mb-50">
                                              <div class="tp-product-details-desc-fact-thumb m-img">
-                                                <img src="assets/img/product/details/2/desc/product-details-desc-5.jpg" alt="">
+                                                <img src="{{ url_for('static', filename='assets/img/product/details/2/desc/product-details-desc-5.jpg') }}" alt="">
                                              </div>
                                              <div class="tp-product-details-desc-fact-content">
                                                 <span>97%</span>
@@ -1215,7 +1215,7 @@
                                                       <div class="tp-product-details-review-avater-2 d-flex align-items-center">
                                                          <div class="tp-product-details-review-avater-thumb">
                                                             <a href="#">
-                                                               <img src="assets/img/users/user-3.jpg" alt="">
+                                                               <img src="{{ url_for('static', filename='assets/img/users/user-3.jpg') }}" alt="">
                                                             </a>
                                                          </div>
                                                          <div class="tp-product-details-review-avater-content">
@@ -1244,7 +1244,7 @@
                                                       <div class="tp-product-details-review-avater-2 d-flex align-items-center">
                                                          <div class="tp-product-details-review-avater-thumb">
                                                             <a href="#">
-                                                               <img src="assets/img/users/user-3.jpg" alt="">
+                                                               <img src="{{ url_for('static', filename='assets/img/users/user-3.jpg') }}" alt="">
                                                             </a>
                                                          </div>
                                                          <div class="tp-product-details-review-avater-content">
@@ -1357,7 +1357,7 @@
                               <div class="tp-product-item-3 tp-product-style-primary mb-50">
                                  <div class="tp-product-thumb-3 mb-15 fix p-relative z-index-1">
                                     <a href="product-details-progress.html">
-                                       <img src="assets/img/product/related/2/product-related-1.jpg" alt="">
+                                       <img src="{{ url_for('static', filename='assets/img/product/related/2/product-related-1.jpg') }}" alt="">
                                     </a>
          
                                     <!-- product badge -->
@@ -1420,7 +1420,7 @@
                               <div class="tp-product-item-3 tp-product-style-primary mb-50">
                                  <div class="tp-product-thumb-3 mb-15 fix p-relative z-index-1">
                                     <a href="product-details-progress.html">
-                                       <img src="assets/img/product/related/2/product-related-2.jpg" alt="">
+                                       <img src="{{ url_for('static', filename='assets/img/product/related/2/product-related-2.jpg') }}" alt="">
                                     </a>
 
 
@@ -1478,7 +1478,7 @@
                               <div class="tp-product-item-3 tp-product-style-primary mb-50">
                                  <div class="tp-product-thumb-3 mb-15 fix p-relative z-index-1">
                                     <a href="product-details-progress.html">
-                                       <img src="assets/img/product/related/2/product-related-3.jpg" alt="">
+                                       <img src="{{ url_for('static', filename='assets/img/product/related/2/product-related-3.jpg') }}" alt="">
                                     </a>
          
                                     <!-- product badge -->
@@ -1541,7 +1541,7 @@
                               <div class="tp-product-item-3 tp-product-style-primary mb-50">
                                  <div class="tp-product-thumb-3 mb-15 fix p-relative z-index-1">
                                     <a href="product-details-progress.html">
-                                       <img src="assets/img/product/related/2/product-related-4.jpg" alt="">
+                                       <img src="{{ url_for('static', filename='assets/img/product/related/2/product-related-4.jpg') }}" alt="">
                                     </a>
                                     <!-- product action -->
                                     <div class="tp-product-action-3 tp-product-action-4 has-shadow tp-product-action-primaryStyle">
@@ -1611,38 +1611,38 @@
                         <nav>
                            <div class="nav nav-tabs flex-sm-column " id="productDetailsNavThumb" role="tablist">
                               <button class="nav-link active" id="nav-1-tab" data-bs-toggle="tab" data-bs-target="#nav-1" type="button" role="tab" aria-controls="nav-1" aria-selected="true">
-                                 <img src="assets/img/product/details/nav/product-details-nav-1.jpg" alt="">
+                                 <img src="{{ url_for('static', filename='assets/img/product/details/nav/product-details-nav-1.jpg') }}" alt="">
                               </button>
                               <button class="nav-link" id="nav-2-tab" data-bs-toggle="tab" data-bs-target="#nav-2" type="button" role="tab" aria-controls="nav-2" aria-selected="false">
-                                 <img src="assets/img/product/details/nav/product-details-nav-2.jpg" alt="">
+                                 <img src="{{ url_for('static', filename='assets/img/product/details/nav/product-details-nav-2.jpg') }}" alt="">
                               </button>
                               <button class="nav-link" id="nav-3-tab" data-bs-toggle="tab" data-bs-target="#nav-3" type="button" role="tab" aria-controls="nav-3" aria-selected="false">
-                                 <img src="assets/img/product/details/nav/product-details-nav-3.jpg" alt="">
+                                 <img src="{{ url_for('static', filename='assets/img/product/details/nav/product-details-nav-3.jpg') }}" alt="">
                               </button>
                               <button class="nav-link" id="nav-4-tab" data-bs-toggle="tab" data-bs-target="#nav-4" type="button" role="tab" aria-controls="nav-4" aria-selected="false">
-                                 <img src="assets/img/product/details/nav/product-details-nav-4.jpg" alt="">
+                                 <img src="{{ url_for('static', filename='assets/img/product/details/nav/product-details-nav-4.jpg') }}" alt="">
                               </button>
                            </div>
                         </nav>
                         <div class="tab-content m-img" id="productDetailsNavContent">
                            <div class="tab-pane fade show active" id="nav-1" role="tabpanel" aria-labelledby="nav-1-tab" tabindex="0">
                               <div class="tp-product-details-nav-main-thumb">
-                                 <img src="assets/img/product/details/main/product-details-main-1.jpg" alt="">
+                                 <img src="{{ url_for('static', filename='assets/img/product/details/main/product-details-main-1.jpg') }}" alt="">
                               </div>
                            </div>
                            <div class="tab-pane fade" id="nav-2" role="tabpanel" aria-labelledby="nav-2-tab" tabindex="0">
                               <div class="tp-product-details-nav-main-thumb">
-                                 <img src="assets/img/product/details/main/product-details-main-2.jpg" alt="">
+                                 <img src="{{ url_for('static', filename='assets/img/product/details/main/product-details-main-2.jpg') }}" alt="">
                               </div>
                            </div>
                            <div class="tab-pane fade" id="nav-3" role="tabpanel" aria-labelledby="nav-3-tab" tabindex="0">
                               <div class="tp-product-details-nav-main-thumb">
-                                 <img src="assets/img/product/details/main/product-details-main-3.jpg" alt="">
+                                 <img src="{{ url_for('static', filename='assets/img/product/details/main/product-details-main-3.jpg') }}" alt="">
                               </div>
                            </div>
                            <div class="tab-pane fade" id="nav-4" role="tabpanel" aria-labelledby="nav-4-tab" tabindex="0">
                               <div class="tp-product-details-nav-main-thumb">
-                                 <img src="assets/img/product/details/main/product-details-main-4.jpg" alt="">
+                                 <img src="{{ url_for('static', filename='assets/img/product/details/main/product-details-main-4.jpg') }}" alt="">
                               </div>
                            </div>
                          </div>
@@ -1777,7 +1777,7 @@
                            <div class="tp-footer-widget-content">
                               <div class="tp-footer-logo">
                                  <a href="index.html">
-                                    <img src="assets/img/logo/logo.svg" alt="logo">
+                                    <img src="{{ url_for('static', filename='assets/img/logo/logo.svg') }}" alt="logo">
                                  </a>
                               </div>
                               <p class="tp-footer-desc">We are a team of designers and developers that create high quality WordPress</p>
@@ -1876,7 +1876,7 @@
                         <div class="col-md-6">
                            <div class="tp-footer-payment text-md-end">
                               <p>
-                                 <img src="assets/img/footer/footer-pay.png" alt="">
+                                 <img src="{{ url_for('static', filename='assets/img/footer/footer-pay.png') }}" alt="">
                               </p>
                            </div>
                         </div>
@@ -1891,21 +1891,21 @@
 
 
       <!-- JS here -->
-      <script src="assets/js/vendor/jquery.js"></script>
-      <script src="assets/js/vendor/waypoints.js"></script>
-      <script src="assets/js/bootstrap-bundle.js"></script>
-      <script src="assets/js/meanmenu.js"></script>
-      <script src="assets/js/swiper-bundle.js"></script>
-      <script src="assets/js/slick.js"></script>
-      <script src="assets/js/range-slider.js"></script>
-      <script src="assets/js/magnific-popup.js"></script>
-      <script src="assets/js/nice-select.js"></script>
-      <script src="assets/js/purecounter.js"></script>
-      <script src="assets/js/countdown.js"></script>
-      <script src="assets/js/wow.js"></script>
-      <script src="assets/js/isotope-pkgd.js"></script>
-      <script src="assets/js/imagesloaded-pkgd.js"></script>
-      <script src="assets/js/ajax-form.js"></script>
-      <script src="assets/js/main.js"></script>
+      <script src="{{ url_for('static', filename='assets/js/vendor/jquery.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/vendor/waypoints.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/bootstrap-bundle.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/meanmenu.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/swiper-bundle.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/slick.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/range-slider.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/magnific-popup.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/nice-select.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/purecounter.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/countdown.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/wow.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/isotope-pkgd.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/imagesloaded-pkgd.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/ajax-form.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
    </body>
 </html>

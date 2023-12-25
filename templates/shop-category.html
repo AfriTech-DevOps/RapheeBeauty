@@ -8,18 +8,18 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <!-- Place favicon.ico in the root directory -->
-      <link rel="shortcut icon" type="image/x-icon" href="assets/img/logo/favicon.png">
+      <link rel="shortcut icon" type="image/x-icon" href="{{ url_for('static', filename='assets/img/logo/favicon.png') }}">
 
       <!-- CSS here -->
-      <link rel="stylesheet" href="assets/css/bootstrap.css">
-      <link rel="stylesheet" href="assets/css/animate.css">
-      <link rel="stylesheet" href="assets/css/swiper-bundle.css">
-      <link rel="stylesheet" href="assets/css/slick.css">
-      <link rel="stylesheet" href="assets/css/magnific-popup.css">
-      <link rel="stylesheet" href="assets/css/font-awesome-pro.css">
-      <link rel="stylesheet" href="assets/css/flaticon_shofy.css">
-      <link rel="stylesheet" href="assets/css/spacing.css">
-      <link rel="stylesheet" href="assets/css/main.css">
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/animate.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/swiper-bundle.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/slick.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/magnific-popup.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/font-awesome-pro.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/flaticon_RapheeBeautycss') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/spacing.css') }}">
+      <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/main.css') }}">
    </head>
    <body>
       <!--[if lte IE 9]>
@@ -40,7 +40,7 @@
                            <circle stroke="red" cx="190" cy="190" r="180" stroke-width="6" stroke-linecap="round"></circle> 
                        </svg>
                      </div>
-                     <img src="assets/img/logo/preloader/preloader-icon.svg" alt="">
+                     <img src="{{ url_for('static', filename='assets/img/logo/preloader/preloader-icon.svg') }}" alt="">
                   </div>
                   <h3 class="tp-preloader-title">Shofy</h3>
                   <p class="tp-preloader-subtitle">Loading</p>
@@ -75,7 +75,7 @@
                <div class="offcanvas__top mb-70 d-flex justify-content-between align-items-center">
                   <div class="offcanvas__logo logo">
                      <a href="index.html">
-                        <img src="assets/img/logo/logo.svg" alt="logo">
+                        <img src="{{ url_for('static', filename='assets/img/logo/logo.svg') }}" alt="logo">
                      </a>
                   </div>
                </div>
@@ -93,7 +93,7 @@
                <div class="offcanvas__contact align-items-center d-none">
                   <div class="offcanvas__contact-icon mr-20">
                      <span>
-                        <img src="assets/img/icon/contact.png" alt="">
+                        <img src="{{ url_for('static', filename='assets/img/icon/contact.png') }}" alt="">
                      </span>
                   </div>
                   <div class="offcanvas__contact-content">
@@ -120,7 +120,7 @@
                   <div class="offcanvas__select language">
                      <div class="offcanvas__lang d-flex align-items-center justify-content-md-end">
                         <div class="offcanvas__lang-img mr-15">
-                           <img src="assets/img/icon/language-flag.png" alt="">
+                           <img src="{{ url_for('static', filename='assets/img/icon/language-flag.png') }}" alt="">
                         </div>
                         <div class="offcanvas__lang-wrapper">
                            <span class="offcanvas__lang-selected-lang tp-lang-toggle" id="tp-offcanvas-lang-toggle">English</span>
@@ -241,7 +241,7 @@
                      <div class="cartmini__widget-item">
                          <div class="cartmini__thumb">
                            <a href="product-details.html">
-                              <img src="assets/img/product/product-1.jpg" alt="">
+                              <img src="{{ url_for('static', filename='assets/img/product/product-1.jpg') }}" alt="">
                            </a>
                          </div>
                          <div class="cartmini__content">
@@ -257,7 +257,7 @@
                  <!-- for wp -->
                  <!-- if no item in cart -->
                  <div class="cartmini__empty text-center d-none">
-                     <img src="assets/img/product/cartmini/empty-cart.png" alt="">
+                     <img src="{{ url_for('static', filename='assets/img/product/cartmini/empty-cart.png') }}" alt="">
                      <p>Your Cart is empty</p>
                      <a href="shop.html" class="tp-btn">Go to Shop</a>
                  </div>
@@ -373,7 +373,7 @@
                         <div class="col-xl-2 col-lg-5 col-md-5 col-sm-4 col-6">
                            <div class="logo">
                               <a href="index.html">
-                                 <img src="assets/img/logo/logo.svg" alt="logo">
+                                 <img src="{{ url_for('static', filename='assets/img/logo/logo.svg') }}" alt="logo">
                               </a>
                            </div>
                         </div>
@@ -389,7 +389,7 @@
                                                 <div class="home-menu-item ">
                                                    <a href="index.html">
                                                       <div class="home-menu-thumb p-relative fix">
-                                                         <img src="assets/img/menu/menu-home-1.jpg" alt="">
+                                                         <img src="{{ url_for('static', filename='assets/img/menu/menu-home-1.jpg') }}" alt="">
                                                       </div>
                                                       <div class="home-menu-content">
                                                          <h5 class="home-menu-title">Electronics </h5>
@@ -401,7 +401,7 @@
                                                 <div class="home-menu-item ">
                                                    <a href="index-2.html">
                                                       <div class="home-menu-thumb p-relative fix">
-                                                         <img src="assets/img/menu/menu-home-2.jpg" alt="">
+                                                         <img src="{{ url_for('static', filename='assets/img/menu/menu-home-2.jpg') }}" alt="">
                                                       </div>
                                                       <div class="home-menu-content">
                                                          <h5 class="home-menu-title">Fashion</h5>
@@ -413,7 +413,7 @@
                                                 <div class="home-menu-item ">
                                                    <a href="index-3.html">
                                                       <div class="home-menu-thumb p-relative fix">
-                                                         <img src="assets/img/menu/menu-home-3.jpg" alt="">
+                                                         <img src="{{ url_for('static', filename='assets/img/menu/menu-home-3.jpg') }}" alt="">
                                                       </div>
                                                       <div class="home-menu-content">
                                                          <h5 class="home-menu-title">Beauty</h5>
@@ -425,7 +425,7 @@
                                                 <div class="home-menu-item ">
                                                    <a href="index-4.html">
                                                       <div class="home-menu-thumb p-relative fix">
-                                                         <img src="assets/img/menu/menu-home-4.jpg" alt="">
+                                                         <img src="{{ url_for('static', filename='assets/img/menu/menu-home-4.jpg') }}" alt="">
                                                       </div>
                                                       <div class="home-menu-content">
                                                          <h5 class="home-menu-title">Jewelry </h5>
@@ -437,7 +437,7 @@
                                                 <div class="home-menu-item ">
                                                    <a href="index-5.html">
                                                       <div class="home-menu-thumb p-relative fix">
-                                                         <img src="assets/img/menu/menu-home-5.jpg" alt="">
+                                                         <img src="{{ url_for('static', filename='assets/img/menu/menu-home-5.jpg') }}" alt="">
                                                       </div>
                                                       <div class="home-menu-content">
                                                          <h5 class="home-menu-title">Grocery</h5>
@@ -496,7 +496,7 @@
                                              </div>
                                              <div class="col-lg-3">
                                                 <div class="shop-mega-menu-img">
-                                                   <img src="assets/img/menu/product/menu-product-img-1.jpg" alt="">
+                                                   <img src="{{ url_for('static', filename='assets/img/menu/product/menu-product-img-1.jpg') }}" alt="">
                                                    <div class="shop-mega-menu-btn">
                                                       <a href="shop-category.html" class="tp-menu-showcase-btn tp-menu-showcase-btn-2">Phones</a>
                                                    </div>
@@ -504,7 +504,7 @@
                                              </div>
                                              <div class="col-lg-3">
                                                 <div class="shop-mega-menu-img">
-                                                   <img src="assets/img/menu/product/menu-product-img-2.jpg" alt="">
+                                                   <img src="{{ url_for('static', filename='assets/img/menu/product/menu-product-img-2.jpg') }}" alt="">
                                                    <div class="shop-mega-menu-btn">
                                                       <a href="shop-category.html" class="tp-menu-showcase-btn tp-menu-showcase-btn-2">Cameras</a>
                                                    </div>
@@ -618,7 +618,7 @@
                                                  <a href="shop.html" class="mega-menu-title">Featured</a>
                                                  <ul>
                                                     <li>
-                                                       <a href="shop.html"><img src="assets/img/header/menu/menu-1.jpg" alt=""></a>
+                                                       <a href="shop.html"><img src="{{ url_for('static', filename='assets/img/header/menu/menu-1.jpg') }}" alt=""></a>
                                                     </li>
                                                     <li>
                                                        <a href="shop.html">New Arrivals</a>
@@ -636,7 +636,7 @@
                                                  <a href="shop.html" class="mega-menu-title">Computer & Laptops</a>
                                                  <ul>
                                                     <li>
-                                                     <a href="shop.html"><img src="assets/img/header/menu/menu-2.jpg" alt=""></a>
+                                                     <a href="shop.html"><img src="{{ url_for('static', filename='assets/img/header/menu/menu-2.jpg') }}" alt=""></a>
                                                     </li>
                                                     <li>
                                                        <a href="shop.html">Top Brands</a>
@@ -653,7 +653,7 @@
                                                  <a href="shop.html" class="mega-menu-title">Accessories</a>
                                                  <ul>
                                                     <li>
-                                                     <a href="shop.html"><img src="assets/img/header/menu/menu-3.jpg" alt=""></a>
+                                                     <a href="shop.html"><img src="{{ url_for('static', filename='assets/img/header/menu/menu-3.jpg') }}" alt=""></a>
                                                     </li>
                                                     <li>
                                                        <a href="shop.html">Headphones</a>
@@ -867,7 +867,7 @@
                <div class="row">
                   <div class="col-xl-8 col-lg-7">
                      <div class="tp-banner-item tp-banner-height has-square p-relative mb-30 z-index-1 fix">
-                        <div class="tp-banner-thumb include-bg transition-3" data-background="assets/img/product/banner/product-banner-1.jpg"></div>
+                        <div class="tp-banner-thumb include-bg transition-3" data-background="{{ url_for('static', filename='assets/img/product/banner/product-banner-1.jpg') }}"></div>
                         <div class="tp-banner-content">
                            <span>Sale 20% off all store</span>
                            <h3 class="tp-banner-title">
@@ -886,7 +886,7 @@
                   </div>
                   <div class="col-xl-4 col-lg-5">
                      <div class="tp-banner-item tp-banner-item-sm has-square tp-banner-height p-relative mb-30 z-index-1 fix">
-                        <div class="tp-banner-thumb include-bg transition-3" data-background="assets/img/product/banner/product-banner-2.jpg"></div>
+                        <div class="tp-banner-thumb include-bg transition-3" data-background="{{ url_for('static', filename='assets/img/product/banner/product-banner-2.jpg') }}"></div>
                         <div class="tp-banner-content">
                            <h3 class="tp-banner-title">
                               <a href="product-details.html">HyperX Cloud II <br> Wireless</a>
@@ -914,7 +914,7 @@
                <div class="row">
                   <div class="col-lg-4 col-sm-6">
                      <div class="tp-category-main-box mb-25 p-relative fix" data-bg-color="#F3F5F7">
-                        <div class="tp-category-main-thumb include-bg transition-3" data-background="assets/img/category/main/category-main-1.jpg"></div>
+                        <div class="tp-category-main-thumb include-bg transition-3" data-background="{{ url_for('static', filename='assets/img/category/main/category-main-1.jpg') }}"></div>
                         <div class="tp-category-main-content">
                            <h3 class="tp-category-main-title">
                               <a href="shop.html">Headphones</a>
@@ -925,7 +925,7 @@
                   </div>
                   <div class="col-lg-4 col-sm-6">
                      <div class="tp-category-main-box mb-25 p-relative fix" data-bg-color="#F3F5F7">
-                        <div class="tp-category-main-thumb include-bg transition-3" data-background="assets/img/category/main/category-main-2.jpg"></div>
+                        <div class="tp-category-main-thumb include-bg transition-3" data-background="{{ url_for('static', filename='assets/img/category/main/category-main-2.jpg') }}"></div>
                         <div class="tp-category-main-content">
                            <h3 class="tp-category-main-title">
                               <a href="shop.html">Smart Watches</a>
@@ -936,7 +936,7 @@
                   </div>
                   <div class="col-lg-4 col-sm-6">
                      <div class="tp-category-main-box mb-25 p-relative fix" data-bg-color="#F3F5F7">
-                        <div class="tp-category-main-thumb include-bg transition-3" data-background="assets/img/category/main/category-main-3.jpg"></div>
+                        <div class="tp-category-main-thumb include-bg transition-3" data-background="{{ url_for('static', filename='assets/img/category/main/category-main-3.jpg') }}"></div>
                         <div class="tp-category-main-content">
                            <h3 class="tp-category-main-title">
                               <a href="shop.html">Laptops</a>
@@ -947,7 +947,7 @@
                   </div>
                   <div class="col-lg-4 col-sm-6">
                      <div class="tp-category-main-box mb-25 p-relative fix" data-bg-color="#F3F5F7">
-                        <div class="tp-category-main-thumb include-bg transition-3" data-background="assets/img/category/main/category-main-4.jpg"></div>
+                        <div class="tp-category-main-thumb include-bg transition-3" data-background="{{ url_for('static', filename='assets/img/category/main/category-main-4.jpg') }}"></div>
                         <div class="tp-category-main-content">
                            <h3 class="tp-category-main-title">
                               <a href="shop.html">Tablets</a>
@@ -958,7 +958,7 @@
                   </div>
                   <div class="col-lg-4 col-sm-6">
                      <div class="tp-category-main-box mb-25 p-relative fix" data-bg-color="#F3F5F7">
-                        <div class="tp-category-main-thumb include-bg transition-3" data-background="assets/img/category/main/category-main-5.jpg"></div>
+                        <div class="tp-category-main-thumb include-bg transition-3" data-background="{{ url_for('static', filename='assets/img/category/main/category-main-5.jpg') }}"></div>
                         <div class="tp-category-main-content">
                            <h3 class="tp-category-main-title">
                               <a href="shop.html">Desktop Computer</a>
@@ -969,7 +969,7 @@
                   </div>
                   <div class="col-lg-4 col-sm-6">
                      <div class="tp-category-main-box mb-25 p-relative fix" data-bg-color="#F3F5F7">
-                        <div class="tp-category-main-thumb include-bg transition-3" data-background="assets/img/category/main/category-main-6.jpg"></div>
+                        <div class="tp-category-main-thumb include-bg transition-3" data-background="{{ url_for('static', filename='assets/img/category/main/category-main-6.jpg') }}"></div>
                         <div class="tp-category-main-content">
                            <h3 class="tp-category-main-title">
                               <a href="shop.html">Bluetooth Earphones</a>
@@ -980,7 +980,7 @@
                   </div>
                   <div class="col-lg-4 col-sm-6">
                      <div class="tp-category-main-box mb-25 p-relative fix" data-bg-color="#F3F5F7">
-                        <div class="tp-category-main-thumb include-bg transition-3" data-background="assets/img/category/main/category-main-7.jpg"></div>
+                        <div class="tp-category-main-thumb include-bg transition-3" data-background="{{ url_for('static', filename='assets/img/category/main/category-main-7.jpg') }}"></div>
                         <div class="tp-category-main-content">
                            <h3 class="tp-category-main-title">
                               <a href="shop.html">Wireless Headphones</a>
@@ -991,7 +991,7 @@
                   </div>
                   <div class="col-lg-4 col-sm-6">
                      <div class="tp-category-main-box mb-25 p-relative fix" data-bg-color="#F3F5F7">
-                        <div class="tp-category-main-thumb include-bg transition-3" data-background="assets/img/category/main/category-main-8.jpg"></div>
+                        <div class="tp-category-main-thumb include-bg transition-3" data-background="{{ url_for('static', filename='assets/img/category/main/category-main-8.jpg') }}"></div>
                         <div class="tp-category-main-content">
                            <h3 class="tp-category-main-title">
                               <a href="shop.html">Gaming Console</a>
@@ -1002,7 +1002,7 @@
                   </div>
                   <div class="col-lg-4 col-sm-6">
                      <div class="tp-category-main-box mb-25 p-relative fix" data-bg-color="#F3F5F7">
-                        <div class="tp-category-main-thumb include-bg transition-3" data-background="assets/img/category/main/category-main-9.jpg"></div>
+                        <div class="tp-category-main-thumb include-bg transition-3" data-background="{{ url_for('static', filename='assets/img/category/main/category-main-9.jpg') }}"></div>
                         <div class="tp-category-main-content">
                            <h3 class="tp-category-main-title">
                               <a href="shop.html">CPU Coolers</a>
@@ -1013,7 +1013,7 @@
                   </div>
                   <div class="col-lg-4 col-sm-6">
                      <div class="tp-category-main-box mb-25 p-relative fix" data-bg-color="#F3F5F7">
-                        <div class="tp-category-main-thumb include-bg transition-3" data-background="assets/img/category/main/category-main-10.jpg"></div>
+                        <div class="tp-category-main-thumb include-bg transition-3" data-background="{{ url_for('static', filename='assets/img/category/main/category-main-10.jpg') }}"></div>
                         <div class="tp-category-main-content">
                            <h3 class="tp-category-main-title">
                               <a href="shop.html">Smart Phones</a>
@@ -1024,7 +1024,7 @@
                   </div>
                   <div class="col-lg-4 col-sm-6">
                      <div class="tp-category-main-box mb-25 p-relative fix" data-bg-color="#F3F5F7">
-                        <div class="tp-category-main-thumb include-bg transition-3" data-background="assets/img/category/main/category-main-11.jpg"></div>
+                        <div class="tp-category-main-thumb include-bg transition-3" data-background="{{ url_for('static', filename='assets/img/category/main/category-main-11.jpg') }}"></div>
                         <div class="tp-category-main-content">
                            <h3 class="tp-category-main-title">
                               <a href="shop.html">Tablets</a>
@@ -1035,7 +1035,7 @@
                   </div>
                   <div class="col-lg-4 col-sm-6">
                      <div class="tp-category-main-box mb-25 p-relative fix" data-bg-color="#F3F5F7">
-                        <div class="tp-category-main-thumb include-bg transition-3" data-background="assets/img/category/main/category-main-12.jpg"></div>
+                        <div class="tp-category-main-thumb include-bg transition-3" data-background="{{ url_for('static', filename='assets/img/category/main/category-main-12.jpg') }}"></div>
                         <div class="tp-category-main-content">
                            <h3 class="tp-category-main-title">
                               <a href="shop.html">Playstation</a>
@@ -1072,13 +1072,13 @@
          <!-- subscribe area start -->
          <section class="tp-subscribe-area tp-subscribe-square pt-70 pb-65 theme-bg p-relative z-index-1">
             <div class="tp-subscribe-shape">
-               <img class="tp-subscribe-shape-1" src="assets/img/subscribe/subscribe-shape-1.png" alt="">
-               <img class="tp-subscribe-shape-2" src="assets/img/subscribe/subscribe-shape-2.png" alt="">
-               <img class="tp-subscribe-shape-3" src="assets/img/subscribe/subscribe-shape-3.png" alt="">
-               <img class="tp-subscribe-shape-4" src="assets/img/subscribe/subscribe-shape-4.png" alt="">
+               <img class="tp-subscribe-shape-1" src="{{ url_for('static', filename='assets/img/subscribe/subscribe-shape-1.png') }}" alt="">
+               <img class="tp-subscribe-shape-2" src="{{ url_for('static', filename='assets/img/subscribe/subscribe-shape-2.png') }}" alt="">
+               <img class="tp-subscribe-shape-3" src="{{ url_for('static', filename='assets/img/subscribe/subscribe-shape-3.png') }}" alt="">
+               <img class="tp-subscribe-shape-4" src="{{ url_for('static', filename='assets/img/subscribe/subscribe-shape-4.png') }}" alt="">
                <!-- plane shape -->
                <div class="tp-subscribe-plane">
-                  <img class="tp-subscribe-plane-shape" src="assets/img/subscribe/plane.png" alt="">
+                  <img class="tp-subscribe-plane-shape" src="{{ url_for('static', filename='assets/img/subscribe/plane.png') }}" alt="">
                   <svg width="399" height="110" class="d-none d-sm-block" viewBox="0 0 399 110" fill="none" xmlns="http://www.w3.org/2000/svg">
                      <path d="M0.499634 1.00049C8.5 20.0005 54.2733 13.6435 60.5 40.0005C65.6128 61.6426 26.4546 130.331 15 90.0005C-9 5.5 176.5 127.5 218.5 106.5C301.051 65.2247 202 -57.9188 344.5 40.0003C364 53.3997 384 22 399 22" stroke="white" stroke-opacity="0.5" stroke-dasharray="3 3"/>
                   </svg>
@@ -1123,7 +1123,7 @@
                            <div class="tp-footer-widget-content">
                               <div class="tp-footer-logo">
                                  <a href="index.html">
-                                    <img src="assets/img/logo/logo.svg" alt="logo">
+                                    <img src="{{ url_for('static', filename='assets/img/logo/logo.svg') }}" alt="logo">
                                  </a>
                               </div>
                               <p class="tp-footer-desc">We are a team of designers and developers that create high quality WordPress</p>
@@ -1222,7 +1222,7 @@
                         <div class="col-md-6">
                            <div class="tp-footer-payment text-md-end">
                               <p>
-                                 <img src="assets/img/footer/footer-pay-2.png" alt="">
+                                 <img src="{{ url_for('static', filename='assets/img/footer/footer-pay-2.png') }}" alt="">
                               </p>
                            </div>
                         </div>
@@ -1237,21 +1237,21 @@
 
 
       <!-- JS here -->
-      <script src="assets/js/vendor/jquery.js"></script>
-      <script src="assets/js/vendor/waypoints.js"></script>
-      <script src="assets/js/bootstrap-bundle.js"></script>
-      <script src="assets/js/meanmenu.js"></script>
-      <script src="assets/js/swiper-bundle.js"></script>
-      <script src="assets/js/slick.js"></script>
-      <script src="assets/js/range-slider.js"></script>
-      <script src="assets/js/magnific-popup.js"></script>
-      <script src="assets/js/nice-select.js"></script>
-      <script src="assets/js/purecounter.js"></script>
-      <script src="assets/js/countdown.js"></script>
-      <script src="assets/js/wow.js"></script>
-      <script src="assets/js/isotope-pkgd.js"></script>
-      <script src="assets/js/imagesloaded-pkgd.js"></script>
-      <script src="assets/js/ajax-form.js"></script>
-      <script src="assets/js/main.js"></script>
+      <script src="{{ url_for('static', filename='assets/js/vendor/jquery.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/vendor/waypoints.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/bootstrap-bundle.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/meanmenu.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/swiper-bundle.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/slick.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/range-slider.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/magnific-popup.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/nice-select.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/purecounter.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/countdown.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/wow.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/isotope-pkgd.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/imagesloaded-pkgd.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/ajax-form.js') }}"></script>
+      <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
    </body>
 </html>
