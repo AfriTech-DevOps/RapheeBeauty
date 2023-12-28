@@ -3,6 +3,8 @@ flask-wtf
 flask-mysqldb
 flask-sqlalchemy
 flask-login
+flask-admin
+flask-migrate
 flask-cors
 mysql-connector-python
 gunicorn
