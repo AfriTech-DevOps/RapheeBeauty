@@ -2,10 +2,15 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
+from models import *
 from flask_cors import CORS
+from flask_migrate import Migrate
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 import os
 import random
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
@@ -24,6 +29,8 @@ app.config['FLASK_ENV'] = 'development'
 app.config['DEBUG'] = True
 app.config['TESTING'] = True
 app.config['FLASK_APP'] = 'app.py'
+app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{os.getenv('MYSQL_USER')}:{os.getenv('MYSQL_PASSWORD')}@{os.getenv('MYSQL_HOST')}:3306/{os.getenv('MYSQL_DATABASE')}"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
 headers = {
@@ -41,28 +48,35 @@ headers = {
     "Session-Cookie-Name": app.config['SESSION_COOKIE_NAME']
 }
 
-
-
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = 'login'
-
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@localhost:3306/rapheebeauty'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
 db = SQLAlchemy(app)
+# db.init_app(app)
+migrate = Migrate(app, db)
+# db.init_app(app)
 
-class User(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    fname = db.Column(db.String(100))
-    lname = db.Column(db.String(100))
-    email = db.Column(db.String(100))
-    password = db.Column(db.String(100))
+with app.app_context():
+        
+    db.create_all()
+    print('Database created!')
+       
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
+
+
+
+# class User(UserMixin, db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     fname = db.Column(db.String(100))
+#     lname = db.Column(db.String(100))
+#     email = db.Column(db.String(100))
+#     password = db.Column(db.String(100))
+
+# @login_manager.user_loader
+# def load_user(user_id):
+#     from models import User
+#     return User.query.get(int(user_id))
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return make_response(render_template('404.html'), headers)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -86,16 +100,15 @@ def login():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        fname = request.form.get('fname')
-        lname = request.form.get('lname')
+        full_name = request.form.get('name')
         email = request.form.get('email').lower()
-        password = request.form.get('password')
+        password = request.form.get('tp_password')
         user = User.query.filter_by(email=email).first()
         if user:
             flash('Email already exists.', 'danger')
             return redirect(url_for('register'))
         else:
-            new_user = User(fname=fname, lname=lname, email=email, password=generate_password_hash(password, method='sha256'))
+            new_user = User(full_name=full_name, email=email, password=generate_password_hash(password, method='sha256'), is_superuser=False)
             db.session.add(new_user)
             db.session.commit()
             flash('Account created successfully.', 'success')
@@ -225,9 +238,9 @@ def shop_right_sidebar():
 def shop_masonary():
     return make_response(render_template('shop-masonary.html'), headers)
 
-@app.route('/404')
-def error_page():
-    return make_response(render_template('404.html'), headers)
+# @app.route('/404')
+# def error_page():
+#     return make_response(render_template('404.html'), headers)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
