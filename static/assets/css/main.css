@@ -289,7 +289,8 @@ body {
   font-family: var(--tp-ff-body);
   font-size: 14px;
   font-weight: normal;
-  color: var(--tp-text-body);
+  /* color: var(--tp-text-body); */
+  background-color: #fbe3e8;
   line-height: 26px;
 }
 

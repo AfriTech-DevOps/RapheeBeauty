@@ -338,98 +338,98 @@
 		var settings = $('body');
 		let dark;
 		$x == true ? dark = 'd-block' : dark = 'd-none';
-		var settings_html = `<div class="tp-theme-settings-area transition-3">
-		<div class="tp-theme-wrapper">
-		   <div class="tp-theme-header text-center">
-			  <h4 class="tp-theme-header-title">Harry Theme Settings</h4>
-		   </div>
+	// 	var settings_html = `<div class="tp-theme-settings-area transition-3">
+	// 	<div class="tp-theme-wrapper">
+	// 	   <div class="tp-theme-header text-center">
+	// 		  <h4 class="tp-theme-header-title">Harry Theme Settings</h4>
+	// 	   </div>
 
-		   <!-- THEME TOGGLER -->
-		   <div class="tp-theme-toggle mb-20 ${dark}">
-			  <label class="tp-theme-toggle-main" for="tp-theme-toggler">
-				 <span class="tp-theme-toggle-dark"><i class="fa-light fa-moon"></i> Dark</span>
-					<input type="checkbox" id="tp-theme-toggler">
-					<i class="tp-theme-toggle-slide"></i>
-				 <span class="tp-theme-toggle-light active"><i class="fa-light fa-sun-bright"></i> Light</span>
-			  </label>
-		   </div>
+	// 	   <!-- THEME TOGGLER -->
+	// 	   <div class="tp-theme-toggle mb-20 ${dark}">
+	// 		  <label class="tp-theme-toggle-main" for="tp-theme-toggler">
+	// 			 <span class="tp-theme-toggle-dark"><i class="fa-light fa-moon"></i> Dark</span>
+	// 				<input type="checkbox" id="tp-theme-toggler">
+	// 				<i class="tp-theme-toggle-slide"></i>
+	// 			 <span class="tp-theme-toggle-light active"><i class="fa-light fa-sun-bright"></i> Light</span>
+	// 		  </label>
+	// 	   </div>
 
-		   <!--  RTL SETTINGS -->
-		   <div class="tp-theme-dir mb-20">
-			  <label class="tp-theme-dir-main" for="tp-dir-toggler">
-				 <span class="tp-theme-dir-rtl"> RTL</span>
-					<input type="checkbox" id="tp-dir-toggler">
-					<i class="tp-theme-dir-slide"></i>
-				 <span class="tp-theme-dir-ltr active"> LTR</span>
-			  </label>
-		   </div>
+	// 	   <!--  RTL SETTINGS -->
+	// 	   <div class="tp-theme-dir mb-20">
+	// 		  <label class="tp-theme-dir-main" for="tp-dir-toggler">
+	// 			 <span class="tp-theme-dir-rtl"> RTL</span>
+	// 				<input type="checkbox" id="tp-dir-toggler">
+	// 				<i class="tp-theme-dir-slide"></i>
+	// 			 <span class="tp-theme-dir-ltr active"> LTR</span>
+	// 		  </label>
+	// 	   </div>
 
-		   <!-- COLOR SETTINGS -->
-		   <div class="tp-theme-settings">
-			  <div class="tp-theme-settings-wrapper">
-				 <div class="tp-theme-settings-open">
-					<button class="tp-theme-settings-open-btn">
-					   <span class="tp-theme-settings-gear">
-						  <i class="fa-light fa-gear"></i>
-					   </span>
-					   <span class="tp-theme-settings-close">
-						  <i class="fa-regular fa-xmark"></i>
-					   </span>
-					</button>
-				 </div>
-				 <div class="row row-cols-4 gy-2 gx-2">
-					<div class="col">
-					   <div class="tp-theme-color-item tp-color-active">
-						  <button class="tp-theme-color-btn tp-color-settings-btn d-none" data-color-default="#0989FF" type="button" data-color="#0989FF"></button>
-						  <button class="tp-theme-color-btn tp-color-settings-btn" type="button" data-color="#0989FF"></button>
-					   </div>
-					</div>
-					<div class="col">
-					   <div class="tp-theme-color-item tp-color-active">
-						  <button class="tp-theme-color-btn tp-color-settings-btn" type="button" data-color="#821F40"></button>
-					   </div>
-					</div>
-					<div class="col">
-					   <div class="tp-theme-color-item tp-color-active">
-						  <button class="tp-theme-color-btn tp-color-settings-btn" type="button" data-color="#BD844C"></button>
-					   </div>
-					</div>
-					<div class="col">
-					   <div class="tp-theme-color-item tp-color-active">
-						  <button class="tp-theme-color-btn tp-color-settings-btn" type="button" data-color="#678E61"></button>
-					   </div>
-					</div>
-					<div class="col">
-					   <div class="tp-theme-color-item tp-color-active">
-						  <button class="tp-theme-color-btn tp-color-settings-btn" type="button" data-color="#FD4B6B"></button>
-					   </div>
-					</div>
-					<div class="col">
-					   <div class="tp-theme-color-item tp-color-active">
-						  <button class="tp-theme-color-btn tp-color-settings-btn" type="button" data-color="#AB9774"></button>
-					   </div>
-					</div>
-					<div class="col">
-                        <div class="tp-theme-color-item tp-color-active">
-                           <button class="tp-theme-color-btn tp-color-settings-btn" type="button" data-color="#FF6736"></button>
-                        </div>
-                     </div>
-					<div class="col">
-					   <div class="tp-theme-color-item tp-color-active">
-						  <button class="tp-theme-color-btn tp-color-settings-btn" type="button" data-color="#FFD43A"></button>
-					   </div>
-					</div>
-				 </div>
-			  </div>
-			  <div class="tp-theme-color-input">
-				 <h6>Choose Custom Color</h6>
-				 <input type="color" id="tp-color-setings-input" value="#F50963">
-				 <label id="tp-theme-color-label" for="tp-color-setings-input"></label>
-			  </div>
-		   </div>
-		</div>
-	 </div>`;
-	 settings.append(settings_html);
+	// 	   <!-- COLOR SETTINGS -->
+	// 	   <div class="tp-theme-settings">
+	// 		  <div class="tp-theme-settings-wrapper">
+	// 			 <div class="tp-theme-settings-open">
+	// 				<button class="tp-theme-settings-open-btn">
+	// 				   <span class="tp-theme-settings-gear">
+	// 					  <i class="fa-light fa-gear"></i>
+	// 				   </span>
+	// 				   <span class="tp-theme-settings-close">
+	// 					  <i class="fa-regular fa-xmark"></i>
+	// 				   </span>
+	// 				</button>
+	// 			 </div>
+	// 			 <div class="row row-cols-4 gy-2 gx-2">
+	// 				<div class="col">
+	// 				   <div class="tp-theme-color-item tp-color-active">
+	// 					  <button class="tp-theme-color-btn tp-color-settings-btn d-none" data-color-default="#0989FF" type="button" data-color="#0989FF"></button>
+	// 					  <button class="tp-theme-color-btn tp-color-settings-btn" type="button" data-color="#0989FF"></button>
+	// 				   </div>
+	// 				</div>
+	// 				<div class="col">
+	// 				   <div class="tp-theme-color-item tp-color-active">
+	// 					  <button class="tp-theme-color-btn tp-color-settings-btn" type="button" data-color="#821F40"></button>
+	// 				   </div>
+	// 				</div>
+	// 				<div class="col">
+	// 				   <div class="tp-theme-color-item tp-color-active">
+	// 					  <button class="tp-theme-color-btn tp-color-settings-btn" type="button" data-color="#BD844C"></button>
+	// 				   </div>
+	// 				</div>
+	// 				<div class="col">
+	// 				   <div class="tp-theme-color-item tp-color-active">
+	// 					  <button class="tp-theme-color-btn tp-color-settings-btn" type="button" data-color="#678E61"></button>
+	// 				   </div>
+	// 				</div>
+	// 				<div class="col">
+	// 				   <div class="tp-theme-color-item tp-color-active">
+	// 					  <button class="tp-theme-color-btn tp-color-settings-btn" type="button" data-color="#FD4B6B"></button>
+	// 				   </div>
+	// 				</div>
+	// 				<div class="col">
+	// 				   <div class="tp-theme-color-item tp-color-active">
+	// 					  <button class="tp-theme-color-btn tp-color-settings-btn" type="button" data-color="#AB9774"></button>
+	// 				   </div>
+	// 				</div>
+	// 				<div class="col">
+    //                     <div class="tp-theme-color-item tp-color-active">
+    //                        <button class="tp-theme-color-btn tp-color-settings-btn" type="button" data-color="#FF6736"></button>
+    //                     </div>
+    //                  </div>
+	// 				<div class="col">
+	// 				   <div class="tp-theme-color-item tp-color-active">
+	// 					  <button class="tp-theme-color-btn tp-color-settings-btn" type="button" data-color="#FFD43A"></button>
+	// 				   </div>
+	// 				</div>
+	// 			 </div>
+	// 		  </div>
+	// 		  <div class="tp-theme-color-input">
+	// 			 <h6>Choose Custom Color</h6>
+	// 			 <input type="color" id="tp-color-setings-input" value="#F50963">
+	// 			 <label id="tp-theme-color-label" for="tp-color-setings-input"></label>
+	// 		  </div>
+	// 	   </div>
+	// 	</div>
+	//  </div>`;
+	//  settings.append(settings_html);
 	}
 	tp_settings_append(false); // if want to enable dark light mode then send "true";
 
