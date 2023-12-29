@@ -126,6 +126,7 @@ def login():
                 session['current_user'] = customer[1]
                 session['is_superuser'] = customer[4]
                 session['cookie'] = token
+                headers['SESSIONID'] = f"{session['cookie']}-{session['id']}-{session['email']}"
                 return redirect(url_for('profile'))
             else:
                 flash('Invalid Credentials.', 'danger')
@@ -156,14 +157,44 @@ def logout():
     flash('Logged out successfully.', 'success')
     return redirect(url_for('login'))
 
+
+@app.route('/home')
 @app.route('/' , methods=['GET', 'POST'])
 def index():
-    product_cats = ['Select Category', 'Fragrances', 'Skincare', 'Makeup', 'Haircare', 'Bodycare', 'Accessories', 'Gifts', 'Brands']
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    random_products_query = """SELECT * FROM products ORDER BY RANDOM() LIMIT 8"""
+    cursor.execute(random_products_query)
+    random_products = cursor.fetchall()
+
+
+    product_cats = ['Select Category', 'Fragrances', 'Skincare', 'Makeup', 'Haircare', 'Bodycare']
     product_cats_form = ProductCat()
     selected_cat = ''
+
+
+    fragrance_count_query = """SELECT COUNT(*) FROM products WHERE category='fragrance'"""
+    skincare_count_query = """SELECT COUNT(*) FROM products WHERE category='skincare'"""
+    makeup_count_query = """SELECT COUNT(*) FROM products WHERE category='makeup'"""
+    haircare_count_query = """SELECT COUNT(*) FROM products WHERE category='hair'"""
+    bodycare_count_query = """SELECT COUNT(*) FROM products WHERE category='bodycare'"""
+
+    fragrance_count = cursor.execute(fragrance_count_query).fetchone()[0]
+    skincare_count = cursor.execute(skincare_count_query).fetchone()[0]
+    makeup_count = cursor.execute(makeup_count_query).fetchone()[0]
+    haircare_count = cursor.execute(haircare_count_query).fetchone()[0]
+    bodycare_count = cursor.execute(bodycare_count_query).fetchone()[0]
+
+
+
+
     if selected_cat == 'Select Category' or selected_cat == 'Fragrances' or selected_cat == 'Skincare' or selected_cat == 'Makeup' or selected_cat == 'Haircare' or selected_cat == 'Bodycare' or selected_cat == 'Accessories' or selected_cat == 'Gifts' or selected_cat == 'Brands':
-        return make_response(render_template('index.html', product_cats_form=product_cats_form, product_cats=product_cats, selected_cat=selected_cat), headers)
-    return make_response(render_template('index.html', product_cats_form=product_cats_form, product_cats=product_cats), headers)
+        return make_response(render_template('index.html', product_cats_form=product_cats_form, product_cats=product_cats, selected_cat=selected_cat, 
+                                             random_products=random_products, fragrance_count=fragrance_count, skincare_count=skincare_count, makeup_count=makeup_count,
+                                             haircare_count=haircare_count, bodycare_count=bodycare_count), headers)
+    return make_response(render_template('index.html', product_cats_form=product_cats_form, product_cats=product_cats, random_products=random_products, fragrance_count=fragrance_count, 
+                                         skincare_count=skincare_count, makeup_count=makeup_count,
+                                             haircare_count=haircare_count, bodycare_count=bodycare_count), headers)
 
 @app.route('/contact')
 def contact():
@@ -171,10 +202,32 @@ def contact():
 
 @app.route('/shop')
 def shop():
-    return make_response(render_template('shop.html'), headers)
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    fragrance_count_query = """SELECT COUNT(*) FROM products WHERE category='fragrance'"""
+    skincare_count_query = """SELECT COUNT(*) FROM products WHERE category='skincare'"""
+    makeup_count_query = """SELECT COUNT(*) FROM products WHERE category='makeup'"""
+    haircare_count_query = """SELECT COUNT(*) FROM products WHERE category='hair'"""
+    bodycare_count_query = """SELECT COUNT(*) FROM products WHERE category='bodycare'"""
+
+    fragrance_count = cursor.execute(fragrance_count_query).fetchone()[0]
+    skincare_count = cursor.execute(skincare_count_query).fetchone()[0]
+    makeup_count = cursor.execute(makeup_count_query).fetchone()[0]
+    haircare_count = cursor.execute(haircare_count_query).fetchone()[0]
+    bodycare_count = cursor.execute(bodycare_count_query).fetchone()[0]
+
+    all_products_query = """SELECT * FROM products ORDER BY RANDOM()"""
+    products = cursor.execute(all_products_query).fetchall()
+    print(products)
+
+    return make_response(render_template('shop.html', fragrance_count=fragrance_count, skincare_count=skincare_count, makeup_count=makeup_count,
+                                             haircare_count=haircare_count, bodycare_count=bodycare_count, products=products), headers)
 
 @app.route('/shop_list')
 def shop_list():
+    
+
     return make_response(render_template('shop-list.html'), headers)
 
 @app.route('/about')
@@ -208,7 +261,7 @@ def checkout():
 
 @app.route('/product_details')
 def product_details():
-    return make_response(render_template('product_details.html'), headers)
+    return make_response(render_template('product-details.html'), headers)
 
 @app.route('/product_details_countdown')
 def product_details_countdown():
@@ -243,6 +296,7 @@ def forgot():
     return make_response(render_template('forgot.html'), headers)
 
 @app.route('/orders')
+@login_required
 def order():
     return make_response(render_template('order.html'), headers)
 
