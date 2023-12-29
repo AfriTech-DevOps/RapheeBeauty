@@ -208,7 +208,7 @@ def checkout():
 
 @app.route('/product_details')
 def product_details():
-    return make_response(render_template('product_details.html'), headers)
+    return make_response(render_template('product-details.html'), headers)
 
 @app.route('/product_details_countdown')
 def product_details_countdown():

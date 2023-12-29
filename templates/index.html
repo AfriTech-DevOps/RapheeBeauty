@@ -684,7 +684,7 @@
                                           </div>
                                        </div>
                                     </li>
-                                    <li  class="has-dropdown has-mega-menu">
+                                    <!-- <li  class="has-dropdown has-mega-menu">
                                        <a href="{{ url_for('shop') }}">Shop</a>
                                        <div class="shop-mega-menu tp-submenu tp-mega-menu">
                                           <div class="row">
@@ -748,7 +748,7 @@
                                              </div>
                                           </div>
                                        </div>
-                                   </li>
+                                   </li> -->
                                     <li class="has-dropdown has-mega-menu ">
                                        
                                        <a href="{{ url_for('shop') }}">Products</a>
@@ -782,7 +782,7 @@
                                              </ul>
                                           </li>
                                           <!-- third col -->
-                                          <li  class="has-dropdown">
+                                          <!-- <li  class="has-dropdown">
                                              <a href="{{ url_for('shop') }}" class="mega-menu-title">eCommerce</a>
                                              <ul class="tp-submenu">
                                                 <li><a href="{{ url_for('cart') }}">Shopping Cart</a></li>
@@ -792,36 +792,36 @@
                                                 <li><a href="{{ url_for('checkout') }}">Checkout</a></li>
                                                 <li><a href="{{ url_for('profile') }}">My account</a></li>
                                              </ul>
-                                          </li>
+                                          </li> -->
 
                                           <!-- second col -->
-                                          <li  class="has-dropdown">
-                                             <a href="{{ url_for('shop') }}" class="mega-menu-title">More Pages</a>
-                                             <ul class="tp-submenu">
-                                                
-                                               
-                                                <li><a href="{{ url_for('about') }}">About</a></li>
-                                                <li><a href="{{ url_for('login') }}">Login</a></li>
-                                                <li><a href="{{ url_for('register') }}">Register</a></li>
-                                                <li><a href="{{ url_for('forgot') }}">Forgot Password</a></li>
-                                                <li><a href="{{ url_for('error_page') }}">404 Error</a></li>
-                                             </ul>
-                                          </li>
+                                          
 
                                        </ul>
                                     </li>
-                                    <li><a href="{{ url_for('coupon') }}">coupons</a></li>
-                                    <li class="has-dropdown">
-                                       <a href="blog.html">Blog</a>
-                                       <ul class="tp-submenu">
-                                          <li><a href="blog.html">Blog Standard</a></li>
-                                          <li><a href="blog-grid.html">Blog Grid</a></li>
-                                          <li><a href="blog-list.html">Blog List</a></li>
-                                          <li><a href="blog-details-2.html">Blog Details Full Width</a></li>
-                                          <li><a href="blog-details.html">Blog Details</a></li>
-                                       </ul>
-                                    </li>
+                                    <li><a href="{{ url_for('coupon') }}">Coupons</a></li>
+                                    
                                     <li><a href="{{ url_for('contact') }}">Contact</a></li>
+
+<li  class="has-dropdown has-mega-menu">
+                                       <a href="#">My Account</a>
+                                       <div class="shop-mega-menu tp-submenu tp-mega-menu">
+                                          <div class="row">
+                                             <div class="col-lg-2">
+                                                <div class="shop-mega-menu-list">
+                                                      <ul>
+                                                         <li><a href="{{ url_for('cart') }}">Shopping Cart</a></li>
+                                                         <li><a href="{{ url_for('order') }}">Track Your Order</a></li>
+                                                         <li><a href="{{ url_for('compare') }}">Compare</a></li>
+                                                         <li><a href="{{ url_for('wishlist') }}">Wishlist</a></li>
+                                                         <li><a href="{{ url_for('checkout') }}">Checkout</a></li>
+                                                         <li><a href="{{ url_for('profile') }}">My account</a></li>
+                                                      </ul>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </li>
                                  </ul>
                               </nav>
                            </div>
@@ -1012,18 +1012,29 @@
 
                                  </ul>
                               </li>
-                              <li><a href="{{ url_for('coupon') }}">coupons</a></li>
-                              <li class="has-dropdown">
-                                 <a href="blog.html">Blog</a>
-                                 <ul class="tp-submenu">
-                                    <li><a href="blog.html">Blog Standard</a></li>
-                                    <li><a href="blog-grid.html">Blog Grid</a></li>
-                                    <li><a href="blog-list.html">Blog List</a></li>
-                                    <li><a href="blog-details-2.html">Blog Details Full Width</a></li>
-                                    <li><a href="blog-details.html">Blog Details</a></li>
-                                 </ul>
-                              </li>
+                              <li><a href="{{ url_for('coupon') }}">Coupons</a></li>
+                              
                               <li><a href="{{ url_for('contact') }}">Contact</a></li>
+
+<li  class="has-dropdown has-mega-menu">
+                                       <a href="#">My Account</a>
+                                       <div class="shop-mega-menu tp-submenu tp-mega-menu">
+                                          <div class="row">
+                                             <div class="col-lg-2">
+                                                <div class="shop-mega-menu-list">
+                                                      <ul>
+                                                         <li><a href="{{ url_for('cart') }}">Shopping Cart</a></li>
+                                                         <li><a href="{{ url_for('order') }}">Track Your Order</a></li>
+                                                         <li><a href="{{ url_for('compare') }}">Compare</a></li>
+                                                         <li><a href="{{ url_for('wishlist') }}">Wishlist</a></li>
+                                                         <li><a href="{{ url_for('checkout') }}">Checkout</a></li>
+                                                         <li><a href="{{ url_for('profile') }}">My account</a></li>
+                                                      </ul>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </li>
                            </ul>
                         </nav>
                      </div>
@@ -5163,152 +5174,7 @@
          </section>
          <!-- product sm area end -->
 
-         <!-- blog area start -->
-         <section class="tp-blog-area pt-50 pb-75">
-            <div class="container">
-               <div class="row align-items-end">
-                  <div class="col-xl-4 col-md-6">
-                     <div class="tp-section-title-wrapper mb-50">
-                        <h3 class="tp-section-title">Latest news & articles
 
-                           <svg width="114" height="35" viewBox="0 0 114 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M112 23.275C1.84952 -10.6834 -7.36586 1.48086 7.50443 32.9053" stroke="currentColor" stroke-width="4" stroke-miterlimit="3.8637" stroke-linecap="round"/>
-                           </svg>
-                        </h3>
-                     </div>
-                  </div>
-                  <div class="col-xl-8 col-md-6">
-                     <div class="tp-blog-more-wrapper d-flex justify-content-md-end">
-                        <div class="tp-blog-more mb-50 text-md-end">
-                           <a href="blog-grid.html" class="tp-btn tp-btn-2 tp-btn-blue">View All Blog 
-                              <svg width="17" height="14" viewBox="0 0 17 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                 <path d="M16 6.99976L1 6.99976" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                 <path d="M9.9502 0.975414L16.0002 6.99941L9.9502 13.0244" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                              </svg>
-                           </a>
-                           <span class="tp-blog-more-border"></span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="row">
-                  <div class="col-xl-12">
-                     <div class="tp-blog-main-slider">
-                        <div class="tp-blog-main-slider-active swiper-container">
-                           <div class="swiper-wrapper">
-                              <div class="tp-blog-item mb-30 swiper-slide">
-                                 <div class="tp-blog-thumb p-relative fix">
-                                    <a href="blog-details.html">
-                                       <img src="{{ url_for('static', filename='assets/img/blog/blog-1.jpg') }}" alt="">
-                                    </a>
-                                    <div class="tp-blog-meta tp-blog-meta-date">
-                                       <span>14 July, 2022</span>
-                                    </div>
-                                 </div>
-                                 <div class="tp-blog-content">
-                                    <h3 class="tp-blog-title">
-                                       <a href="blog-details.html">The Modern Art Clay Ceramics.</a>
-                                    </h3>
-            
-                                    <div class="tp-blog-tag">
-                                       <span><i class="fa-light fa-tag"></i></span>
-                                       <a href="#">Tablet,</a>
-                                       <a href="#">News</a>
-                                    </div>
-            
-                                    <p>The world is an amazing place providing an incredible assortment of interesting locations across.</p>
-            
-                                    <div class="tp-blog-btn">
-                                       <a href="blog-details.html" class="tp-btn-2 tp-btn-border-2">
-                                          Read More 
-                                          <span>
-                                             <svg width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M16 7.5L1 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M9.9502 1.47541L16.0002 7.49941L9.9502 13.5244" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                             </svg>                                       
-                                          </span>
-                                       </a>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="tp-blog-item mb-30 swiper-slide">
-                                 <div class="tp-blog-thumb p-relative fix">
-                                    <a href="blog-details.html">
-                                       <img src="{{ url_for('static', filename='assets/img/blog/blog-2.jpg') }}" alt="">
-                                    </a>
-                                    <div class="tp-blog-meta tp-blog-meta-date">
-                                       <span>10 Nov, 2022</span>
-                                    </div>
-                                 </div>
-                                 <div class="tp-blog-content">
-                                    <h3 class="tp-blog-title">
-                                       <a href="blog-details.html">How clothes are linked to climate</a>
-                                    </h3>
-         
-                                    <div class="tp-blog-tag">
-                                       <span><i class="fa-light fa-tag"></i></span>
-                                       <a href="#">Monitor,</a>
-                                       <a href="#">Technology</a>
-                                    </div>
-         
-                                    <p>The world is an amazing place providing an incredible assortment of interesting locations across.</p>
-         
-                                    <div class="tp-blog-btn">
-                                       <a href="blog-details.html" class="tp-btn-2 tp-btn-border-2">
-                                          Read More 
-                                          <span>
-                                             <svg width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M16 7.5L1 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M9.9502 1.47541L16.0002 7.49941L9.9502 13.5244" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                             </svg>                                       
-                                          </span>
-                                       </a>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="tp-blog-item mb-30 swiper-slide">
-                                 <div class="tp-blog-thumb p-relative fix">
-                                    <a href="blog-details.html">
-                                       <img src="{{ url_for('static', filename='assets/img/blog/blog-3.jpg') }}" alt="">
-                                    </a>
-                                    <div class="tp-blog-meta tp-blog-meta-date">
-                                       <span>20 June, 2023</span>
-                                    </div>
-                                 </div>
-                                 <div class="tp-blog-content">
-                                    <h3 class="tp-blog-title">
-                                       <a href="blog-details.html">The Sound Of Fashion: Malcolm</a>
-                                    </h3>
-         
-                                    <div class="tp-blog-tag">
-                                       <span><i class="fa-light fa-tag"></i></span>
-                                       <a href="#">Microphone,</a>
-                                       <a href="#">Computer</a>
-                                    </div>
-         
-                                    <p>The world is an amazing place providing an incredible assortment of interesting locations across.</p>
-         
-                                    <div class="tp-blog-btn">
-                                       <a href="blog-details.html" class="tp-btn-2 tp-btn-border-2">
-                                          Read More 
-                                          <span>
-                                             <svg width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M16 7.5L1 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                                <path d="M9.9502 1.47541L16.0002 7.49941L9.9502 13.5244" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                             </svg>                                       
-                                          </span>
-                                       </a>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </section>
-         <!-- blog area end -->
 
          <!-- instagram area start -->
          <div class="tp-instagram-area pb-70">
@@ -5609,10 +5475,10 @@
                            <div class="tp-footer-widget-content">
                               <ul>
                                  <li><a href="#">Our Story</a></li>
-                                 <li><a href="#">Careers</a></li>
+                                 <!-- <li><a href="#">Careers</a></li> -->
                                  <li><a href="#">Privacy Policy</a></li>
                                  <li><a href="#">Terms & Conditions</a></li>
-                                 <li><a href="#">Latest News</a></li>
+                                 <!-- <li><a href="#">Latest News</a></li> -->
                                  <li><a href="#">Contact Us</a></li>
                               </ul>
                            </div>
