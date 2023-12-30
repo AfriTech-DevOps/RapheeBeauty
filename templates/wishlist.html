@@ -285,7 +285,7 @@
                   <div class="row align-items-center">
                      <div class="col-md-6">
                         <div class="tp-header-info d-flex align-items-center">
-                           <div class="tp-header-info-item">
+                           <!-- <div class="tp-header-info-item">
                               <a href="#">
                                  <span>
                                     <svg width="8" height="15" viewBox="0 0 8 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -293,7 +293,7 @@
                                     </svg>                                    
                                  </span> 7500k Followers
                               </a>
-                           </div>
+                           </div> --> 
                            <div class="tp-header-info-item">
                               <a href="tel:402-763-282-46">
                                  <span>
@@ -383,7 +383,7 @@
                                  <ul>
                                     <li class="has-dropdown has-mega-menu">
                                        <a href="{{ url_for('index') }}">Home</a>
-                                       <div class="home-menu tp-submenu tp-mega-menu">
+                                       <!-- <div class="home-menu tp-submenu tp-mega-menu">
                                           <div class="row row-cols-1 row-cols-lg-4 row-cols-xl-5">
                                              <div class="col">
                                                 <div class="home-menu-item ">
@@ -399,7 +399,7 @@
                                              </div>
                                              
                                           </div>
-                                       </div>
+                                       </div>-->
                                     </li>
                                     <li  class="has-dropdown has-mega-menu">
                                        <a href="{{ url_for('shop') }}">Shop</a>
@@ -731,16 +731,16 @@
                         <div class="col-xl-5 col-lg-7 col-md-7 col-sm-8 col-6">
                            <div class="tp-header-bottom-right d-flex align-items-center justify-content-end pl-30">
                               <div class="tp-header-search-2 d-none d-sm-block">
-                                 <form action="#">
-                                    <input type="text" placeholder="Search for Products...">
-                                    <button type="submit">
-                                       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                          <path d="M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                          <path d="M18.9999 19L14.6499 14.65" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                       </svg>                                       
-                                    </button>
-                                 </form>
-                              </div>
+   <form action="{{ url_for('search') }}" method="get">
+      <input type="text" id="query" name="query" placeholder="Search for Products...">
+      <button type="submit">
+         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 17C13.4183 17 17 13.4183 17 9C17 4.58172 13.4183 1 9 1C4.58172 1 1 4.58172 1 9C1 13.4183 4.58172 17 9 17Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M18.9999 19L14.6499 14.65" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+         </svg>                                       
+      </button>
+   </form>
+</div>
                               <div class="tp-header-action d-flex align-items-center ml-30">
                                  <div class="tp-header-action-item d-none d-lg-block">
                                     <a href="{{ url_for('compare') }}"  class="tp-header-action-btn">
@@ -819,166 +819,67 @@
                   <div class="col-xl-12">
                      <div class="tp-cart-list mb-45 mr-30">
                         <table class="table">
-                           <thead>
-                             <tr>
-                               <th colspan="2" class="tp-cart-header-product">Product</th>
-                               <th class="tp-cart-header-price">Price</th>
-                               <th class="tp-cart-header-quantity">Quantity</th>
-                               <th>Action</th>
-                               <th></th>
-                             </tr>
-                           </thead>
-                           <tbody>
-                              <tr>
-                                 <!-- img -->
-                                 <td class="tp-cart-img"><a href="{{ url_for('product_details') }}"> <img src="{{ url_for('static', filename='assets/img/product/cart/product-cart-1.jpg') }}" alt=""></a></td>
-                                 <!-- title -->
-                                 <td class="tp-cart-title"><a href="{{ url_for('product_details') }}">Legendary Whitetails Wmen's.</a></td>
-                                 <!-- price -->
-                                 <td class="tp-cart-price"><span>$76.00</span></td>
-                                 <!-- quantity -->
-                                 <td class="tp-cart-quantity">
-                                    <div class="tp-product-quantity mt-10 mb-10">
-                                       <span class="tp-cart-minus">
-                                          <svg width="10" height="2" viewBox="0 0 10 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                             <path d="M1 1H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                          </svg>                                                             
-                                       </span>
-                                       <input class="tp-cart-input" type="text" value="1">
-                                       <span class="tp-cart-plus">
-                                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                             <path d="M5 1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                             <path d="M1 5H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                          </svg>
-                                       </span>
-                                    </div>
-                                 </td>
-
-                                 <td class="tp-cart-add-to-cart">
-                                    <button type="submit" class="tp-btn tp-btn-2 tp-btn-blue">Add To Cart</button>
-                                 </td>
+                           {% if wishlist %}
+                              <thead>
+                                 <tr>
+                                    <th colspan="2" class="tp-cart-header-product">Product</th>
+                                    <th class="tp-cart-header-price">Price</th>
+                                    <th class="tp-cart-header-quantity">Quantity</th>
+                                    <th>Action</th>
+                                    <th></th>
+                                 </tr>
+                              </thead>
+                              <tbody>
                                  
-                                 <!-- action -->
-                                 <td class="tp-cart-action">
-                                    <button class="tp-cart-action-btn">
-                                       <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                          <path fill-rule="evenodd" clip-rule="evenodd" d="M9.53033 1.53033C9.82322 1.23744 9.82322 0.762563 9.53033 0.46967C9.23744 0.176777 8.76256 0.176777 8.46967 0.46967L5 3.93934L1.53033 0.46967C1.23744 0.176777 0.762563 0.176777 0.46967 0.46967C0.176777 0.762563 0.176777 1.23744 0.46967 1.53033L3.93934 5L0.46967 8.46967C0.176777 8.76256 0.176777 9.23744 0.46967 9.53033C0.762563 9.82322 1.23744 9.82322 1.53033 9.53033L5 6.06066L8.46967 9.53033C8.76256 9.82322 9.23744 9.82322 9.53033 9.53033C9.82322 9.23744 9.82322 8.76256 9.53033 8.46967L6.06066 5L9.53033 1.53033Z" fill="currentColor"/>
-                                       </svg>
-                                       <span>Remove</span>
-                                    </button>
-                                 </td>
-                              </tr>
+                              {% for product in products %}
+                                 <tr>
+                                    <!-- img -->
+                                    <td class="tp-cart-img"><a href="{{ url_for('product_details') }}"> <img src="{{ product[4] }}" alt=""></a></td>
+                                    <!-- title -->
+                                    <td class="tp-cart-title"><a href="{{ url_for('product_details') }}">{{ product[1] }}</a></td>
+                                    <!-- price -->
+                                    <td class="tp-cart-price"><span>{{ product[2] }}</span></td>
+                                    <!-- quantity -->
+                                    <form action="{{ url_for('add_wishlist_to_cart', product_id=product[0]) }}" method="post">
+                                       <td class="tp-cart-quantity">
+                                          <div class="tp-product-quantity mt-10 mb-10">
+                                             <span class="tp-cart-minus">
+                                                <svg width="10" height="2" viewBox="0 0 10 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                   <path d="M1 1H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>                                                             
+                                             </span>
+                                             <input class="tp-cart-input" type="text" id="qty" name="qty" value="1">
+                                             <span class="tp-cart-plus">
+                                                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                   <path d="M5 1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                   <path d="M1 5H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                             </span>
+                                          </div>
+                                       </td>
+
+                                       <td class="tp-cart-add-to-cart">
+                                          <button type="submit" class="tp-btn tp-btn-2 tp-btn-blue">Add To Cart</button>
+                                       </td>
+                                    </form>
+                                    <!-- action -->
+                                    <td class="tp-cart-action">
+                                       <a href="{{ url_for('remove_from_wishlist', product_id=product[0]) }}"
+                                          <button class="tp-cart-action-btn">
+                                             <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.53033 1.53033C9.82322 1.23744 9.82322 0.762563 9.53033 0.46967C9.23744 0.176777 8.76256 0.176777 8.46967 0.46967L5 3.93934L1.53033 0.46967C1.23744 0.176777 0.762563 0.176777 0.46967 0.46967C0.176777 0.762563 0.176777 1.23744 0.46967 1.53033L3.93934 5L0.46967 8.46967C0.176777 8.76256 0.176777 9.23744 0.46967 9.53033C0.762563 9.82322 1.23744 9.82322 1.53033 9.53033L5 6.06066L8.46967 9.53033C8.76256 9.82322 9.23744 9.82322 9.53033 9.53033C9.82322 9.23744 9.82322 8.76256 9.53033 8.46967L6.06066 5L9.53033 1.53033Z" fill="currentColor"/>
+                                             </svg>
+                                             <span>Remove</span>
+                                          </button>
+                                       </a>
+                                    </td>
+                                 </tr>
+                              {% endfor %}
+                           {% else %}
                               <tr>
-                                 <!-- img -->
-                                 <td class="tp-cart-img"><a href="{{ url_for('product_details') }}"> <img src="{{ url_for('static', filename='assets/img/product/cart/product-cart-2.jpg') }}" alt=""></a></td>
-                                 <!-- title -->
-                                 <td class="tp-cart-title"><a href="{{ url_for('product_details') }}">Tommy Hilfiger Women’s Jaden</a></td>
-                                 <!-- price -->
-                                 <td class="tp-cart-price"><span>$44.00</span></td>
-                                 <!-- quantity -->
-                                 <td class="tp-cart-quantity">
-                                    <div class="tp-product-quantity mt-10 mb-10">
-                                       <span class="tp-cart-minus">
-                                          <svg width="10" height="2" viewBox="0 0 10 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                             <path d="M1 1H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                          </svg>                                                             
-                                       </span>
-                                       <input class="tp-cart-input" type="text" value="1">
-                                       <span class="tp-cart-plus">
-                                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                             <path d="M5 1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                             <path d="M1 5H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                          </svg>
-                                       </span>
-                                    </div>
-                                 </td>
-                                 <td class="tp-cart-add-to-cart">
-                                    <button type="submit" class="tp-btn tp-btn-2 tp-btn-blue">Add To Cart</button>
-                                 </td>
-                                 <!-- action -->
-                                 <td class="tp-cart-action">
-                                    <button class="tp-cart-action-btn">
-                                       <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                          <path fill-rule="evenodd" clip-rule="evenodd" d="M9.53033 1.53033C9.82322 1.23744 9.82322 0.762563 9.53033 0.46967C9.23744 0.176777 8.76256 0.176777 8.46967 0.46967L5 3.93934L1.53033 0.46967C1.23744 0.176777 0.762563 0.176777 0.46967 0.46967C0.176777 0.762563 0.176777 1.23744 0.46967 1.53033L3.93934 5L0.46967 8.46967C0.176777 8.76256 0.176777 9.23744 0.46967 9.53033C0.762563 9.82322 1.23744 9.82322 1.53033 9.53033L5 6.06066L8.46967 9.53033C8.76256 9.82322 9.23744 9.82322 9.53033 9.53033C9.82322 9.23744 9.82322 8.76256 9.53033 8.46967L6.06066 5L9.53033 1.53033Z" fill="currentColor"/>
-                                       </svg>
-                                       <span>Remove</span>
-                                    </button>
-                                 </td>
+                                 <td colspan="6" class="text-center">No items in wishlist</td>
                               </tr>
-                              <tr>
-                                 <!-- img -->
-                                 <td class="tp-cart-img"><a href="{{ url_for('product_details') }}"> <img src="{{ url_for('static', filename='assets/img/product/cart/product-cart-3.jpg') }}" alt=""></a></td>
-                                 <!-- title -->
-                                 <td class="tp-cart-title"><a href="{{ url_for('product_details') }}">Simple Modern School Boys</a></td>
-                                 <!-- price -->
-                                 <td class="tp-cart-price"><span>$62.00</span></td>
-                                 <!-- quantity -->
-                                 <td class="tp-cart-quantity">
-                                    <div class="tp-product-quantity mt-10 mb-10">
-                                       <span class="tp-cart-minus">
-                                          <svg width="10" height="2" viewBox="0 0 10 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                             <path d="M1 1H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                          </svg>                                                             
-                                       </span>
-                                       <input class="tp-cart-input" type="text" value="1">
-                                       <span class="tp-cart-plus">
-                                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                             <path d="M5 1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                             <path d="M1 5H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                          </svg>
-                                       </span>
-                                    </div>
-                                 </td>
-                                 <td class="tp-cart-add-to-cart">
-                                    <button type="submit" class="tp-btn tp-btn-2 tp-btn-blue">Add To Cart</button>
-                                 </td>
-                                 <!-- action -->
-                                 <td class="tp-cart-action">
-                                    <button class="tp-cart-action-btn">
-                                       <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                          <path fill-rule="evenodd" clip-rule="evenodd" d="M9.53033 1.53033C9.82322 1.23744 9.82322 0.762563 9.53033 0.46967C9.23744 0.176777 8.76256 0.176777 8.46967 0.46967L5 3.93934L1.53033 0.46967C1.23744 0.176777 0.762563 0.176777 0.46967 0.46967C0.176777 0.762563 0.176777 1.23744 0.46967 1.53033L3.93934 5L0.46967 8.46967C0.176777 8.76256 0.176777 9.23744 0.46967 9.53033C0.762563 9.82322 1.23744 9.82322 1.53033 9.53033L5 6.06066L8.46967 9.53033C8.76256 9.82322 9.23744 9.82322 9.53033 9.53033C9.82322 9.23744 9.82322 8.76256 9.53033 8.46967L6.06066 5L9.53033 1.53033Z" fill="currentColor"/>
-                                       </svg>
-                                       <span>Remove</span>
-                                    </button>
-                                 </td>
-                              </tr>
-                              <tr>
-                                 <!-- img -->
-                                 <td class="tp-cart-img"><a href="{{ url_for('product_details') }}"> <img src="{{ url_for('static', filename='assets/img/product/cart/product-cart-4.jpg') }}" alt=""></a></td>
-                                 <!-- title -->
-                                 <td class="tp-cart-title"><a href="{{ url_for('product_details') }}">Calvin Klein Gabrianna Novelty</a></td>
-                                 <!-- price -->
-                                 <td class="tp-cart-price"><span>$93.00</span></td>
-                                 <!-- quantity -->
-                                 <td class="tp-cart-quantity">
-                                    <div class="tp-product-quantity mt-10 mb-10">
-                                       <span class="tp-cart-minus">
-                                          <svg width="10" height="2" viewBox="0 0 10 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                             <path d="M1 1H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                          </svg>                                                             
-                                       </span>
-                                       <input class="tp-cart-input" type="text" value="1">
-                                       <span class="tp-cart-plus">
-                                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                             <path d="M5 1V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                             <path d="M1 5H9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                          </svg>
-                                       </span>
-                                    </div>
-                                 </td>
-                                 <td class="tp-cart-add-to-cart">
-                                    <button type="submit" class="tp-btn tp-btn-2 tp-btn-blue">Add To Cart</button>
-                                 </td>
-                                 <!-- action -->
-                                 <td class="tp-cart-action">
-                                    <button class="tp-cart-action-btn">
-                                       <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                          <path fill-rule="evenodd" clip-rule="evenodd" d="M9.53033 1.53033C9.82322 1.23744 9.82322 0.762563 9.53033 0.46967C9.23744 0.176777 8.76256 0.176777 8.46967 0.46967L5 3.93934L1.53033 0.46967C1.23744 0.176777 0.762563 0.176777 0.46967 0.46967C0.176777 0.762563 0.176777 1.23744 0.46967 1.53033L3.93934 5L0.46967 8.46967C0.176777 8.76256 0.176777 9.23744 0.46967 9.53033C0.762563 9.82322 1.23744 9.82322 1.53033 9.53033L5 6.06066L8.46967 9.53033C8.76256 9.82322 9.23744 9.82322 9.53033 9.53033C9.82322 9.23744 9.82322 8.76256 9.53033 8.46967L6.06066 5L9.53033 1.53033Z" fill="currentColor"/>
-                                       </svg>
-                                       <span>Remove</span>
-                                    </button>
-                                 </td>
-                              </tr>
+                           {% endif %}
                            </tbody>
                          </table>
                      </div>
