@@ -34,6 +34,31 @@ def create_product_table(conn):
     cursor.execute(query)
     print("Product table has been created successfully")
 
+def create_cart_table(conn):
+    cursor = conn.cursor()
+    query = """CREATE TABLE IF NOT EXISTS cart (
+    cart_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    product_id INTEGER,
+    customer_id INTEGER,
+    quantity INTEGER,
+    FOREIGN KEY(product_id) REFERENCES products(product_id),
+    FOREIGN KEY(customer_id) REFERENCES customer(id)
+    );"""
+    cursor.execute(query)
+    print("Cart table has been created successfully")
+
+
+def create_wishlist_table(conn):
+    cursor = conn.cursor()
+    query = """CREATE TABLE IF NOT EXISTS wishlist (
+    wishlist_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    product_id INTEGER,
+    customer_id INTEGER,
+    FOREIGN KEY(product_id) REFERENCES products(product_id),
+    FOREIGN KEY(customer_id) REFERENCES customer(id)
+    );"""
+    cursor.execute(query)
+    print("Wishlist table has been created successfully")
 
 def insert_customer_data(conn, full_name, email, password, is_superuser):
     query = """INSERT INTO customer(full_name, email, password, is_superuser) VALUES (?,?,?,?)"""
@@ -50,6 +75,8 @@ def insert_product_data(conn, product_name, sales_price, discount_price, images,
     conn.commit()
     print("Product data inserted successfully")
 
+
+
 # def get_customer_by_email(conn, email):
 #     cursor = conn.cursor()
 #     query = """SELECT * FROM customer"""
@@ -59,26 +86,8 @@ def insert_product_data(conn, product_name, sales_price, discount_price, images,
 #         print(row)
     
 
-class DatabaseQuery:
-    def __init__(self, conn, query, params=None):
-        self.conn = conn
-        self.query = query
-        self.params = params
-    
-    def get_product_counts_by_category(self):
-        cursor = self.conn.cursor()
-        cursor.execute(self.query)
-        result = cursor.fetchone()
-        return result
-    
-    def get_all_products(self):
-        cursor = self.conn.cursor()
-        cursor.execute(self.query)
-        result = cursor.fetchall()
-        return result
-    
-    def get_product_by_id(self, product_id):
-        cursor = self.conn.cursor()
-        cursor.execute(self.query, (product_id,))
-        result = cursor.fetchone()
-        return result
+def get_product_by_category(conn, category):
+    cursor = conn.cursor()
+    cursor.execute(f"SELECT * FROM products WHERE category = '{category}'")
+    result = cursor.fetchall()
+    return result
