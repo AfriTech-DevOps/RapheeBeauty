@@ -1,10 +1,12 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, make_response, blueprints, jsonify, Response, send_file, g
+from flask import Flask, render_template, request, redirect, url_for, flash, make_response, blueprints, jsonify, Response, send_file, g, session
+from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 # from werkzeug.security import generate_password_hash, check_password_hash
 from passlib.hash import sha256_crypt
 from werkzeug.utils import secure_filename
 from flask_wtf import FlaskForm
-from wtforms import SelectField
+from wtforms import SelectField, StringField, PasswordField, BooleanField, SubmitField, TextAreaField, IntegerField, FileField, RadioField, SelectMultipleField, widgets
+from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
 from flask_cors import CORS
 from flask_migrate import Migrate
 # from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
@@ -16,31 +18,48 @@ import database
 import os
 import random
 from dotenv import load_dotenv
+import secrets
+import redis
+from prometheus_client import Counter, generate_latest, CONTENT_TYPE_LATEST
 
 load_dotenv()
 
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_DIR = os.path.join(CURRENT_DIR, 'static')
+IMAGE_DIR = os.path.join(STATIC_DIR, 'assets/uploads/images')
+
+if not os.path.exists(IMAGE_DIR):
+    os.makedirs(IMAGE_DIR)
+
 app = Flask(__name__)
-CORS(app, origins=['http://localhost:5000', 'https://rapheebeauty.com', 'https://www.rapheebeauty.com', 
-                   'https://rapheebeauty.herokuapp.com', 'https://www.rapheebeauty.herokuapp.com',
-                   'https://rapheebeauty.netlify.app', 'https://www.rapheebeauty.netlify.app'], supports_credentials=True)
-token = ''.join(random.sample('abcdefghijklmnopqrstuvwxyz1234567890', 32))
+CORS(app)
+# Session(app)
+# sess = Session()
+# token = ''.join(random.sample('abcdefghijklmnopqrstuvwxyz1234567890', 32))
+token = secrets.token_hex(64)
 app.secret_key = token
-# app.config['SECRET_KEY'] = token
-app.config['SESSION_COOKIE_NAME'] = 'session'
-app.config['SESSION_COOKIE_HTTPONLY'] = False
-app.config['SESSION_COOKIE_SAMESITE'] = 'None'
-app.config['SESSION_COOKIE_SECURE'] = True
-app.config['SESSION_COOKIE_DOMAIN'] = '.rapheebeauty.com'
-app.config['PERMANENT_SESSION_LIFETIME'] = 3600
-app.config['SESSION_REFRESH_EACH_REQUEST'] = True
-app.config['SESSION_COOKIE_PATH'] = '/'
+app.config['SESSION_TYPE'] = 'redis'
+app.config['SESSION_REDIS'] = redis.from_url(os.getenv('REDIS_URL'))
+app.config['SESSION_PERMANENT'] = False
+app.config['SESSION_USE_SIGNER'] = False
+# app.config['SECRET_KEY'] = secrets.token_hex(32)
+# app.config['SESSION_COOKIE_HTTPONLY'] = False
+# app.config['SESSION_COOKIE_SAMESITE'] = 'None'
+# app.config['SESSION_COOKIE_SECURE'] = True
+# app.config['SESSION_COOKIE_DOMAIN'] = '.rapheebeauty.com'
+# app.config['PERMANENT_SESSION_LIFETIME'] = 3600
+# app.config['SESSION_REFRESH_EACH_REQUEST'] = True
+# app.config['SESSION_COOKIE_PATH'] = '/'
 app.config['FLASK_ENV'] = 'development'
 app.config['DEBUG'] = True
 app.config['TESTING'] = True
 app.config['FLASK_APP'] = 'app.py'
+app.config['UPLOAD_FOLDER'] = IMAGE_DIR
+ALLOWED_EXTENSIONS = {'png', 'svg', 'jpg'}
 # app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{os.getenv('MYSQL_USER')}:{os.getenv('MYSQL_PASSWORD')}@{os.getenv('MYSQL_HOST')}:3306/{os.getenv('MYSQL_DATABASE')}"
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-session = {}
+
+server_session = Session(app)
+# session = {}
 
 config = {
     'host': os.getenv('MYSQL_HOST'),
@@ -61,8 +80,11 @@ config = {
 
 
 def get_db_connection():
-    conn = mysql.connect(**config)
-    return conn
+    try:
+        conn = mysql.connect(**config)
+        return conn
+    except Error as e:
+        return "<html><body><h1>500 Internal Server Error</h1></body></html>"
 
 
 database.create_user_table(get_db_connection())
@@ -83,27 +105,52 @@ headers = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
-    "Authorization": "Bearer " + token,
-    "Session-Cookie-Domain": app.config['SESSION_COOKIE_DOMAIN'],
-    "Session-Cookie-Path": app.config['SESSION_COOKIE_PATH'],
-    "Session-Cookie-Secure": app.config['SESSION_COOKIE_SECURE'],
-    "Session-Cookie-HttpOnly": app.config['SESSION_COOKIE_HTTPONLY'],
-    "Session-Cookie-SameSite": app.config['SESSION_COOKIE_SAMESITE'],
-    "Session-Cookie-Name": app.config['SESSION_COOKIE_NAME']
+    "Authorization": "Bearer " + token
+    # "Session-Cookie-Domain": app.config['SESSION_COOKIE_DOMAIN'],
+    # "Session-Cookie-Path": app.config['SESSION_COOKIE_PATH'],
+    # "Session-Cookie-Secure": app.config['SESSION_COOKIE_SECURE'],
+    # "Session-Cookie-HttpOnly": app.config['SESSION_COOKIE_HTTPONLY'],
+    # "Session-Cookie-SameSite": app.config['SESSION_COOKIE_SAMESITE'],
+    # "Session-Cookie-Name": app.config['SESSION_COOKIE_NAME']
 }
+
+requests_total = Counter('http_requests_total', 'Total HTTP Requests (count)', ['method', 'endpoint'])
 
 class ProductCat(FlaskForm):
     product_cats = SelectField('Gender', choices=['Select Category', 'Fragrance', 'Skincare', 'Makeup', 'Hair', 'Bodycare'])
 
+class AddProduct(FlaskForm):
+    product_name = StringField('Product Name', validators=[DataRequired(), Length(min=2, max=50)])
+    product_price = StringField('Product Price', validators=[DataRequired()])
+    product_discount_price = StringField('Product Discount Price', validators=[DataRequired()])
+    product_image = FileField('Product Image', validators=[DataRequired()])
+    product_category = SelectField('Product Category', choices=['Fragrance', 'Skincare', 'Makeup', 'Hair', 'Bodycare'])
+    product_reviews = StringField('Product Reviews', validators=[DataRequired()])
+    submit = SubmitField('Add Product')
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def login_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
-        if 'logged_in' in session and session['logged_in']:
+        if 'logged_in' in session and session['logged_in'] and session['current_user']:
             print("User is logged in")
             return f(*args, **kwargs)
         else:
             flash("You need to login for access")
+            return redirect(url_for('login'))
+    return wrap
+
+def admin_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'is_superuser' in session and session['is_superuser']:
+            print("User is admin")
+            return f(*args, **kwargs)
+        else:
+            flash("You need to login as admin for access")
             return redirect(url_for('login'))
     return wrap
 
@@ -114,6 +161,7 @@ def login_required(f):
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    requests_total.labels('GET', '/login').inc()
     conn = get_db_connection()
     cursor = conn.cursor()
     if request.method == 'POST':
@@ -124,22 +172,34 @@ def login():
             customer = cursor.fetchone()
             print(customer)
             if customer and sha256_crypt.verify(password, customer[3]):
-                flash('Logged in successfully.', 'success')
+                print("Password matched")
                 session['logged_in'] = True
-                session['email'] = email
+                session['email'] = customer[2]
                 session['id'] = customer[0]
-                session['current_user'] = customer[1]
+                session['current_user'] = customer[1]  # Set current_user here
                 session['is_superuser'] = customer[4]
                 session['cookie'] = token
                 headers['SESSIONID'] = f"{session['cookie']}-{session['id']}-{session['email']}"
-                return redirect(url_for('profile'))
+                if not session['is_superuser']:
+                    return redirect(url_for('profile'))
+                else:
+                    return redirect(url_for('admin_items'))
             else:
                 flash('Invalid Credentials.', 'danger')
-                return redirect(url_for('login'))
-    return make_response(render_template('login.html'), headers)
+                return redirect(request.referrer)
+    else:
+        if 'logged_in' in session and session['logged_in']:
+            if not session['is_superuser']:
+                return redirect(url_for('profile'))
+            else:
+                return redirect(url_for('admin_items'))
+        return make_response(render_template('login.html'), headers)
+
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    requests_total.labels('GET', '/register').inc()
     conn = get_db_connection()
     if request.method == 'POST':
         full_name = request.form.get('name')
@@ -158,14 +218,133 @@ def register():
 @app.route('/logout')
 @login_required
 def logout():
-    session.clear()
+    requests_total.labels('GET', '/logout').inc()
+    session.pop('logged_in', None)
+    session.pop('email', None)
+    session.pop('id', None)
+    session.pop('current_user', None)
+    session.pop('is_superuser', None)
+    session.pop('cookie', None)
+
+    r = redis.StrictRedis(host=os.getenv('LOCALHOST'), port=os.getenv('REDIS_PORT'), db=os.getenv('REDIS_DB'))
+    print(f"session:{str(session.sid)}")
+    r.delete(session.sid)
+    print("Session deleted from redis")
+
     flash('Logged out successfully.', 'success')
-    return redirect(url_for('login'))
+    return redirect(request.referrer)
 
 
+@app.route('/admin')
+# @login_required
+def admin():
+    requests_total.labels('GET', '/admin').inc()
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM products")
+    products = cursor.fetchall()
+
+    return make_response(render_template('admin.html', products=products), headers)
+
+@admin_required
+@app.route('/admin_items', methods=['GET', 'POST'])
+def admin_items():
+    requests_total.labels('GET', '/admin_items').inc()
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+
+    page = request.args.get('page', 1, type=int)
+    per_page = 10
+    cursor.execute("SELECT COUNT(*) FROM products")
+    total_count = cursor.fetchone()[0]
+
+    num_pages = total_count // per_page + (total_count % per_page > 0)
+    offset = (page - 1) * per_page
+
+    cursor.execute(f"SELECT * FROM products LIMIT {per_page} OFFSET {offset}")
+    products = cursor.fetchall()
+    
+    return make_response(render_template('admin_items.html', products=products, page=page, per_page=per_page, num_pages=num_pages), headers)
+
+@admin_required
+@app.route('/admin_add_item', methods=['GET', 'POST'])
+def admin_add_item():
+    requests_total.labels('GET', '/admin_add_item').inc()
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    form = AddProduct()
+
+
+    if request.method == 'POST':
+        product_name = form.product_name.data
+        product_price = form.product_price.data
+        product_discount_price = form.product_discount_price.data
+        product_image = request.files['product_img']
+        product_category = form.product_category.data
+        product_reviews = form.product_reviews.data
+        print(product_name, product_price, product_discount_price, product_image, product_category, product_reviews)
+        
+
+        with app.app_context():
+            if product_image == '':
+                flash('Please upload an image.', 'danger')
+                return redirect(url_for('admin_add_item'))
+            
+            if product_image and allowed_file(product_image.filename):
+                filename = secure_filename(product_image.filename)
+                product_image.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+                image = url_for('static', filename=f"assets/uploads/images/{filename}")
+                print(image)
+
+            database.insert_product_data(conn, product_name, product_price, product_discount_price, image, product_category, product_reviews)
+            flash('Product added successfully.', 'success')
+            return redirect(url_for('admin_items'))
+    else:
+        return make_response(render_template('admin_add_item.html', form=form), headers)
+
+@admin_required
+@app.route('/admin_edit_item/<int:product_id>', methods=['GET', 'POST'])
+def admin_edit_item(product_id):
+    requests_total.labels('GET', '/admin_edit_item').inc()
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute(f"SELECT * FROM products WHERE product_id={product_id}")
+    product = cursor.fetchone()
+    print(product)
+    form = AddProduct()
+    if request.method == 'POST':
+        product_name = form.product_name.data
+        product_price = form.product_price.data
+        product_discount_price = form.product_discount_price.data
+        product_image = form.product_image.data
+        product_category = form.product_category.data
+        product_reviews = form.product_reviews.data
+        print(product_name, product_price, product_discount_price, product_image, product_category, product_reviews)
+        with app.app_context():
+            database.update_product_data(conn, product_id, product_name, product_price, product_discount_price, product_image, product_category, product_reviews)
+            flash('Product updated successfully.', 'success')
+            return redirect(url_for('admin_items'))
+    else:
+        return make_response(render_template('admin_edit_item.html', product=product), headers)
+@admin_required
+@app.route('/admin_delete_item/<int:product_id>', methods=['GET', 'POST'])
+def admin_delete_item(product_id):
+    requests_total.labels('GET', '/admin_delete_item').inc()
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute(f"DELETE FROM products WHERE product_id={product_id}")
+    conn.commit()
+    flash('Product deleted successfully.', 'success')
+    return redirect(url_for('admin_items'))
+
+# @app.route('/items')
+# def admin_items():
+#     return make_response(render_template('admin_items.html'), headers)
 @app.route('/home')
 @app.route('/' , methods=['GET', 'POST'])
 def index():
+    requests_total.labels('GET', '/').inc()
     conn = get_db_connection()
     cursor = conn.cursor()
     random_products_query = """SELECT * FROM products ORDER BY RAND() LIMIT 8"""
@@ -232,6 +411,7 @@ def index():
 
 @app.route('/contact')
 def contact():
+    requests_total.labels('GET', '/contact').inc()
     if 'email' not in session:
         conn = get_db_connection()
         cursor = conn.cursor()
@@ -243,6 +423,7 @@ def contact():
 
 @app.route('/shop')
 def shop():
+    requests_total.labels('GET', '/shop').inc()
     categories = ['fragrance', 'skincare', 'makeup', 'hair', 'bodycare']
     page = request.args.get('page', 1, type=int)
     per_page = 10
@@ -298,6 +479,7 @@ def shop():
 
 @app.route('/category/<string:category>')
 def category(category):
+    requests_total.labels('GET', '/category').inc()
     conn = get_db_connection()
     cursor = conn.cursor()
     
@@ -321,6 +503,7 @@ def category(category):
 
 @app.route('/search', methods=['GET', 'POST'])
 def search():
+    requests_total.labels('GET', '/search').inc()
     query = request.args.get('query', '')
     category = request.args.get('product_cats', '').lower()
     conn = get_db_connection()
@@ -385,17 +568,19 @@ def search():
     
 @app.route('/shop_list')
 def shop_list():
-    
+    requests_total.labels('GET', '/shop_list').inc()
 
     return make_response(render_template('shop-list.html'), headers)
 
 @app.route('/about')
 def about():
+    requests_total.labels('GET', '/about').inc()
     return make_response(render_template('about.html'), headers)
 
 @login_required
 @app.route('/wishlist')
 def wishlist():
+    requests_total.labels('GET', '/wishlist').inc()
     conn = get_db_connection()
     cursor = conn.cursor()
     if 'email' not in session:
@@ -427,20 +612,25 @@ def wishlist():
     
 
 # @login_required
-@app.route('/profile', methods=['GET', 'POST'])
+@app.route('/profile')
 @login_required
 def profile():
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    user = session['current_user']
-    wishlist_query = """SELECT COUNT(*) FROM wishlist"""
-    cursor.execute(wishlist_query)
-    wishlist_count = cursor.fetchone()[0]
-    with app.app_context():
-        return make_response(render_template('profile.html', user=user, wishlist_count=wishlist_count), headers)
-
+    try:
+        requests_total.labels('GET', '/profile').inc()
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        user = session['current_user']
+        wishlist_query = """SELECT COUNT(*) FROM wishlist"""
+        cursor.execute(wishlist_query)
+        wishlist_count = cursor.fetchone()[0]
+        with app.app_context():
+            return make_response(render_template('profile.html', user=user, wishlist_count=wishlist_count), headers)
+    except Exception as e:
+        print(e)
+        return redirect(url_for('login'))
 @app.route('/cart')
 def cart():
+    requests_total.labels('GET', '/cart').inc()
     conn = get_db_connection()
     cursor = conn.cursor()
     if 'email' not in session:
@@ -493,55 +683,68 @@ def cart():
 
 @app.route('/coupon')
 def coupon():
+    requests_total.labels('GET', '/coupon').inc()
     return make_response(render_template('coupon.html'), headers)
 
 @app.route('/checkout')
 def checkout():
+    requests_total.labels('GET', '/checkout').inc()
     return make_response(render_template('checkout.html'), headers)
 
 @app.route('/product_details')
 def product_details():
+    requests_total.labels('GET', '/product_details').inc()
     return make_response(render_template('product-details.html'), headers)
 
 @app.route('/product_details_countdown')
 def product_details_countdown():
+    requests_total.labels('GET', '/product_details_countdown').inc()
     return make_response(render_template('product-details-countdown.html'), headers)
 
 @app.route('/product_details_gallery')
 def product_details_gallery():
+    requests_total.labels('GET', '/product_details_gallery').inc()
     return make_response(render_template('product-details-gallery.html'), headers)
 
 @app.route('/product_details_progress')
 def product_details_progress():
+    requests_total.labels('GET', '/product_details_progress').inc()
     return make_response(render_template('product-details-progress.html'), headers)
 
 @app.route('/product_details_swatches')
 def product_details_swatches():
+    requests_total.labels('GET', '/product_details_swatches').inc()
     return make_response(render_template('product-details-swatches.html'), headers)
 
 @app.route('/product_details_list')
 def product_details_list():
+    requests_total.labels('GET', '/product_details_list').inc()
     return make_response(render_template('product-details-list.html'), headers)
 
 @app.route('/compare')
 def compare():
+    requests_total.labels('GET', '/compare').inc()
     return make_response(render_template('compare.html'), headers)
 
 @app.route('/404')
 def error():
+    requests_total.labels('GET', '/404').inc()
     return make_response(render_template('404.html'), headers)
 
 @app.route('/forgot_password')
 def forgot():
+    requests_total.labels('GET', '/forgot_password').inc()
     return make_response(render_template('forgot.html'), headers)
 
 @app.route('/orders')
 @login_required
 def order():
+    requests_total.labels('GET', '/orders').inc()
     return make_response(render_template('order.html'), headers)
 
 @app.route('/shop_category')
 def shop_category():
+    requests_total.labels('GET', '/shop_category').inc()
     conn = get_db_connection()
     cursor = conn.cursor()
 
@@ -569,6 +772,7 @@ def shop_category():
 
 @app.route('/addToCart/<int:product_id>')
 def add_to_cart(product_id):
+    requests_total.labels('GET', '/addToCart').inc()
     conn = get_db_connection()
     cursor = conn.cursor()
     quantity = 1
@@ -584,6 +788,10 @@ def add_to_cart(product_id):
         existing_cart_item = cursor.fetchone()
         print(existing_cart_item)
 
+        if 'ShoppingCart' not in session:
+            session['ShoppingCart'] = []
+        
+
         if existing_cart_item:
             new_quantity = existing_cart_item[3] + quantity
             cart_id = existing_cart_item[0]
@@ -596,6 +804,11 @@ def add_to_cart(product_id):
                 conn.rollback()
                 msg = "Error occured while updating cart"
         else:
+            session['ShoppingCart'].append({
+                'product_id': product_id,
+                'quantity': quantity
+            })
+
             try:
                 cursor.execute(f"INSERT INTO cart (product_id, customer_id, quantity) VALUES ({product_id}, {customer_id}, {quantity})")
                 conn.commit()
@@ -608,6 +821,7 @@ def add_to_cart(product_id):
 
 @app.route('/updateCart/<int:product_id>', methods=['GET', 'POST'])
 def update_cart(product_id):
+    requests_total.labels('GET', '/updateCart').inc()
     conn = get_db_connection()
     cursor = conn.cursor()
     qty = request.form.get('qty')
@@ -635,6 +849,7 @@ def update_cart(product_id):
 
 @app.route('/removeFromCart/<int:product_id>')
 def remove_from_cart(product_id):
+    requests_total.labels('GET', '/removeFromCart').inc()
     conn = get_db_connection()
     cursor = conn.cursor()
     if 'email' not in session:
@@ -657,6 +872,7 @@ def remove_from_cart(product_id):
 
 @app.route('/addToWishlist/<int:product_id>')
 def add_to_wishlist(product_id):
+    requests_total.labels('GET', '/addToWishlist').inc()
     conn = get_db_connection()
     cursor = conn.cursor()
     if 'email' not in session:
@@ -678,6 +894,7 @@ def add_to_wishlist(product_id):
 
 @app.route('/removeFromWishlist/<int:product_id>')
 def remove_from_wishlist(product_id):
+    requests_total.labels('GET', '/removeFromWishlist').inc()
     conn = get_db_connection()
     cursor = conn.cursor()
     qty = request.form.get('qty')
@@ -699,6 +916,7 @@ def remove_from_wishlist(product_id):
 
 @app.route('/addWishlistToCart/<int:product_id>', methods=['GET', 'POST'])
 def add_wishlist_to_cart(product_id):
+    requests_total.labels('GET', '/addWishlistToCart').inc()
     conn = get_db_connection()
     cursor = conn.cursor()
     # qty = request.form.get('qty')
@@ -746,43 +964,58 @@ def add_wishlist_to_cart(product_id):
 
 @app.route('/shop_1600')
 def shop_1600():
+    requests_total.labels('GET', '/shop_1600').inc()
     return make_response(render_template('shop-1600.html'), headers)
 
 @app.route('/shop_filter_dropdown')
 def shop_filter_dropdown():
+    requests_total.labels('GET', '/shop_filter_dropdown').inc()
     return make_response(render_template('shop-filter-dropdown.html'), headers)
 
 @app.route('/shop_filter_offcanvas')
 def shop_filter_offcanvas():
+    requests_total.labels('GET', '/shop_filter_offcanvas').inc()
     return make_response(render_template('shop-filter-offcanvas.html'), headers)
 
 @app.route('/shop_full_width')
 def shop_full_width():
+    requests_total.labels('GET', '/shop_full_width').inc()
     return make_response(render_template('shop-full-width.html'), headers)
 
 @app.route('/shop_infinite_scroll')
 def shop_infinite_scroll():
+    requests_total.labels('GET', '/shop_infinite_scroll').inc()
     return make_response(render_template('shop-infinite-scroll.html'), headers)
 
 @app.route('/shop_no_sidebar')
 def shop_no_sidebar():
+    requests_total.labels('GET', '/shop_no_sidebar').inc()
     return make_response(render_template('shop-no-sidebar.html'), headers)
 
 @app.route('/shop_right_sidebar')
 def shop_right_sidebar():
+    requests_total.labels('GET', '/shop_right_sidebar').inc()
     return make_response(render_template('shop-right-sidebar.html'), headers)
 
 @app.route('/shop_masonary')
 def shop_masonary():
+    requests_total.labels('GET', '/shop_masonary').inc()
     return make_response(render_template('shop-masonary.html'), headers)
 
 @app.route('/404')
 def error_page():
+    requests_total.labels('GET', '/404').inc()
     return make_response(render_template('404.html'), headers)
 
 @app.route('/product_not_found')
 def product_not_found():
+    requests_total.labels('GET', '/product_not_found').inc()
     return make_response(render_template('product-not-found.html'), headers)
+
+@app.route('/metrics')
+def metrics():
+    requests_total.labels('GET', '/metrics').inc()
+    return Response(generate_latest(), CONTENT_TYPE_LATEST)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

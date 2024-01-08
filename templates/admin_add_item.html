@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Admin Add items - RapheeBeauty
+{% endblock %}
+
+{% block content %}
+
+<div class="profile__info-content">
+    <div class="row justify-content-center">
+        <div class="col-xxl-6 col-md-6">
+            <form action="{{ url_for('admin_add_item')}}" method="post" enctype="multipart/form-data">
+                <div class="tp-login-option">
+                    <h3 class="profile__info-title">Add new product</h3>
+                    <div class="profile__input-box">
+                        <label for="product_name">Product Name</label>
+                        <div class="profile__input-box">
+                            {{ form.product_name }}
+                        </div>
+                        <div class="profile__input-box">
+                            <label for="product_price">Product Price</label>
+                            {{ form.product_price }}
+                        </div>
+                        <div class="profile__input-box">
+                            <label for="product_discount_price">Product Discount Price</label>
+                            {{ form.product_discount_price }}
+                        </div>
+                        <div class="profile__input-box">
+                            <label for="product_img">Product Image Link</label>
+                            <input type="file" name="product_img" id="product_img" class="form-control" required>
+                        </div>
+                        <div class="profile__input-box">
+                            <label for="product_category">Product Category</label>
+                            {{ form.product_category }}
+                        </div>
+                        <div class="profile__input-box">
+                            <label for="product_review">Product Review</label>
+                            {{ form.product_reviews }}
+                        </div>
+                        <div class="tp-login-bottom" style="padding-bottom: 20px;">
+                            {{ form.submit(class='tp-logout-btn w-100') }}
+                        </div>
+                    </div>
+                </div>
+            </form>
+            
+            
+        </div>
+    </div>
+</div>
+    <!-- <div class="tab-pane fade" id="nav-information" role="tabpanel" aria-labelledby="nav-information-tab">
+        <div class="profile__info">
+            
+            
+            </div>
+        </div>
+    </div> -->
+
+{% endblock %}

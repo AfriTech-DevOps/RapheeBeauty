@@ -1,4 +1,5 @@
 flask
+flask-session
 flask-wtf
 flask-mysqldb
 flask-sqlalchemy
@@ -13,3 +14,5 @@ mysql-connector
 passlib
 python-dotenv
 pymysql
+redis
+prometheus_client
