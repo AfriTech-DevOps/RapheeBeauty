@@ -53,7 +53,7 @@ jobs:
       - name: "Run Tests"
         run: |
           pip install -r requirements.txt -r requirements.txt --no-cache-dir
-          pytest -v --cov=app --cov-report=xml --cov-report=html --cov-report=term --junitxml=report.xml
+          pytest -v
     
   build-image-dev:
     name: "Build Docker Image for Dev"
