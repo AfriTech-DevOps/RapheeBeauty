@@ -1,0 +1,167 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Admin items - RapheeBeauty
+{% endblock %}
+
+{% block content %}
+    {% with msgs = get_flashed_messages(with_categories=True) %}
+        {% for c, msg in msgs %}
+            {% if c == 'error' %}
+                <div class="flash-error">{{ msg }}</div><br>
+            {% else %}
+                <div class="success">{{ msg }}</div><br>
+            {% endif %}
+        {% endfor %}
+    {% endwith %}
+
+    {% if not products %}
+        <div class="flash-error">No items have been registered yet.</div>
+		<div class="tp-shop-pagination mt-20 justify-content-center" style="margin-bottom: 120px; justify-content: center;"></div>
+			<div class="tp-pagination">
+				<nav>
+					<ul>
+						<li>
+							<a href="{{ url_for('admin_items', page=num_pages) }}" style="width: 150px; justify-content: center; margin-bottom: 20px;" class="next page-numbers">
+								Go to last page
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+    {% else %}
+        <div class="add-new btn-success btn">
+            <a href="{{ url_for('admin_add_item') }}" class="text-light">Add new product</a>
+        </div>
+        <table class="table table-striped product-listview-loadmore">
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Img Link</th>
+                    <th>Details</th>
+                    <th>Operations</th>
+                </tr>
+            </thead>
+            <tbody class="product-list">
+                {% for product in products %}
+                    <tr class="item">
+                        <td>{{ product[0] }}</td>
+                        <td>{{ product[1] }}</td>
+                        <td>{{ product[2] }}</td>
+                        <td>{{ product[5] }}</td>
+                        <td>{{ product[4] }}...</td>
+                        <td>{{ product.details | safe }}...</td> <!-- Assuming 'details' is a key in product dict -->
+                        <td>
+                            <a href="{{ url_for('admin_edit_item', product_id=product[0]) }}">&#9998;</a>
+                            <a href="{{ url_for('admin_delete_item', product_id=product[0]) }}">&#10060;</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+		{% if products %}
+			<div class="tp-shop-pagination mt-20 justify-content-center" style="margin-bottom: 20px;">
+				<div class="tp-pagination">
+				<nav>
+					<ul>
+						<li>
+							<a href="{{ url_for('admin_items', page=page + 1) }}" class="tp-pagination-prev prev page-numbers">
+							<svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M1.00017 6.77879L14 6.77879" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M6.24316 11.9999L0.999899 6.77922L6.24316 1.55762" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+							</a>
+						</li>
+								{% set start_page = (page - 3) if (page - 3) > 0 else 1 %}
+								{% set end_page = (page + 3) if (page + 3) < num_pages else num_pages %}
+
+								{% for pg in range(start_page, end_page + 1) %}
+								{% if pg == page %}
+								<span class="page-numbers current" aria-current="page">{{ pg }}</span>
+								{% else %}
+								<a href="{{ url_for('admin_items', page=pg) }}" class="page-numbers">{{ pg }}</a>
+								{% endif %}
+							</li>
+						{% endfor %}
+						<li>
+							<a href="{{ url_for('admin_items', page=page + 1) }}" class="next page-numbers">
+							<svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M13.9998 6.77883L1 6.77883" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+								<path d="M8.75684 1.55767L14.0001 6.7784L8.75684 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>                                     
+							</a>
+						</li>
+					</ul>
+					</nav>
+				</div>
+			</div>
+		{% endif %}
+
+    {% endif %}
+
+    <!-- JavaScript for Load More functionality -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        // Load more functionality
+        $(document).ready(function() {
+            $(".load-more-btn").on('click', function() {
+                var page = $(this).data('page');
+                $.ajax({
+                    url: '/admin_items?page=' + page,
+                    type: 'GET',
+                    success: function(data) {
+                        if (data.trim() != '') {
+                            $(".product-list").append(data);
+                            $(".product-list .item").first().remove(); // Remove the first item
+                            $(".load-more-btn").data('page', page + 1);
+                        } else {
+                            $(".load-more-btn").remove(); // No more products to load
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+	<style>
+		/* Style for pagination container */
+		.tp-shop-pagination {
+			text-align: center;
+		}
+	
+		/* Style for pagination numbers */
+		.tp-pagination ul {
+			display: inline-block;
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+	
+		.tp-pagination li {
+			display: inline-block;
+			margin: 0;
+			padding: 0;
+		}
+	
+		.page-numbers {
+			display: inline-block;
+			margin: 0 5px;
+			padding: 5px 10px;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			text-decoration: none;
+			color: #333;
+		}
+	
+		.current {
+			background-color: #007bff;
+			color: #fff;
+			border: 1px solid #007bff;
+		}
+	</style>
+	
+	
+{% endblock %}

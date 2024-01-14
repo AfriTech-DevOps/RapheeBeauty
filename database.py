@@ -101,7 +101,7 @@ def create_wishlist_table(conn):
         print(e)
 
 def insert_customer_data(conn, full_name, email, password, is_superuser):
-    query = """INSERT INTO customer(full_name, email, password, is_superuser) VALUES (?,?,?,?)"""
+    query = """INSERT INTO customer(full_name, email, password, is_superuser) VALUES (%s,%s,%s,%s)"""
     cursor = conn.cursor()
     cursor.execute(query, (full_name,email,password,is_superuser))
     conn.commit()
@@ -109,7 +109,7 @@ def insert_customer_data(conn, full_name, email, password, is_superuser):
 
 
 def insert_product_data(conn, product_name, sales_price, discount_price, images, category, reviews):
-    query = """INSERT INTO products(product_name, sales_price, discount_price, images, category, reviews) VALUES (?,?,?,?,?,?)"""
+    query = """INSERT INTO products(product_name, sales_price, discount_price, images, category, reviews) VALUES (%s,%s,%s,%s,%s,%s)"""
     cursor = conn.cursor()
     cursor.execute(query, (product_name, sales_price, discount_price, images, category, reviews))
     conn.commit()

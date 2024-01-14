@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rapheebeauty-ingress
+  namespace: rapheebeauty-ns
+  annotations:
+    kubernetes.io/ingress.class: ingress-nginx
+spec:
+  rules:
+    - host: developersfrat.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: rapheebeauty-svc
+                port:
+                  number: 8000
+          # - path: /*
+          #   pathType: Prefix
+          #   backend:
+          #     service:
+          #       name: rapheebeauty-svc
+          #       port:
+          #         number: 8000

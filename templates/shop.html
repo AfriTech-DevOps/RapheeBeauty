@@ -28,10 +28,9 @@
 
 
       <!-- pre loader area start -->
-      <div id="loading">
+     <!-- div id="loading">
          <div id="loading-center">
             <div id="loading-center-absolute">
-               <!-- loading content here -->
                <div class="tp-preloader-content">
                   <div class="tp-preloader-logo">
                      <div class="tp-preloader-circle">
@@ -47,7 +46,7 @@
                </div>
             </div>
          </div>  
-      </div>
+      </div> -->
       <!-- pre loader area end -->
 
       <!-- back to top start -->
@@ -1773,39 +1772,41 @@
                         <div class="infinite-pagination d-none">
                            <a href="{{ url_for('shop') }}" class="infinite-next-link">Next</a>
                         </div>
-                        <div class="tp-shop-pagination mt-20">
+                        <div class="tp-shop-pagination mt-20 justify-content-center" style="margin-bottom: 20px;">
                            <div class="tp-pagination">
                               <nav>
-                                 <ul>
-                                    <li>
-                                       <a href="{{ url_for('shop', page=page - 1) }}" class="tp-pagination-prev prev page-numbers">
-                                          <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                             <path d="M1.00017 6.77879L14 6.77879" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                             <path d="M6.24316 11.9999L0.999899 6.77922L6.24316 1.55762" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                          </svg>
-                                       </a>
-                                    </li>
-                                    {% for pg in range(1, num_pages + 1) %}
-                                       <li>
-                                          {% if pg == page %}
-                                             <span class="page-numbers current" aria-current="page">{{ pg }}</span>
+                                <ul>
+                                  <li>
+                                    <a href="{{ url_for('shop', page=page + 1) }}" class="tp-pagination-prev prev page-numbers">
+                                       <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                         <path d="M1.00017 6.77879L14 6.77879" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                         <path d="M6.24316 11.9999L0.999899 6.77922L6.24316 1.55762" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                       </svg>
+                                    </a>
+                                  </li>
+                                       {% set start_page = (page - 3) if (page - 3) > 0 else 1 %}
+                                       {% set end_page = (page + 3) if (page + 3) < num_pages else num_pages %}
+                  
+                                       {% for pg in range(start_page, end_page + 1) %}
+                                       {% if pg == page %}
+                                         <span class="page-numbers current" aria-current="page">{{ pg }}</span>
                                           {% else %}
-                                             <a href="{{ url_for('shop', page=pg) }}" class="page-numbers">{{ pg }}</a>
+                                         <a href="{{ url_for('shop', page=pg) }}" class="page-numbers">{{ pg }}</a>
                                           {% endif %}
-                                       </li>
-                                    {% endfor %}
-                                    <li>
-                                       <a href="{{ url_for('shop', page=page + 1) }}" class="next page-numbers">
-                                          <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                             <path d="M13.9998 6.77883L1 6.77883" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                             <path d="M8.75684 1.55767L14.0001 6.7784L8.75684 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                          </svg>                                     
-                                       </a>
                                     </li>
-                                 </ul>
-                               </nav>
+                                  {% endfor %}
+                                  <li>
+                                    <a href="{{ url_for('shop', page=page + 1) }}" class="next page-numbers">
+                                       <svg width="15" height="13" viewBox="0 0 15 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                         <path d="M13.9998 6.77883L1 6.77883" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                         <path d="M8.75684 1.55767L14.0001 6.7784L8.75684 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                       </svg>                                     
+                                    </a>
+                                  </li>
+                                </ul>
+                              </nav>
                            </div>
-                        </div>
+                         </div>
                      </div>
                   </div>
                </div>
@@ -2118,4 +2119,41 @@
       <script src="{{ url_for('static', filename='assets/js/ajax-form.js') }}"></script>
       <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
    </body>
+   <style>
+      /* Style for pagination container */
+      .tp-shop-pagination {
+          text-align: center;
+      }
+  
+      /* Style for pagination numbers */
+      .tp-pagination ul {
+          display: inline-block;
+          list-style: none;
+          padding: 0;
+          margin: 0;
+      }
+  
+      .tp-pagination li {
+          display: inline-block;
+          margin: 0;
+          padding: 0;
+      }
+  
+      .page-numbers {
+          display: inline-block;
+          margin: 0 5px;
+          padding: 5px 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          text-decoration: none;
+          color: #333;
+      }
+  
+      .current {
+          background-color: #007bff;
+          color: #fff;
+          border: 1px solid #007bff;
+      }
+  </style>
+  
 </html>
