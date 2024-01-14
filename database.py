@@ -14,6 +14,15 @@ def check_if_table_exists(conn, table_name):
         return True
     else:
         return False
+    
+
+def create_database(conn):
+    try:
+        cursor = conn.cursor()
+        cursor.execute("CREATE DATABASE IF NOT EXISTS rapheebeauty")
+        print("Database has been created successfully")
+    except Exception as e:
+        print(e)
 
 
 def create_user_table(conn):
@@ -116,15 +125,13 @@ def insert_product_data(conn, product_name, sales_price, discount_price, images,
     print("Product data inserted successfully")
 
 
-
-# def get_customer_by_email(conn, email):
-#     cursor = conn.cursor()
-#     query = """SELECT * FROM customer"""
-#     cursor.execute(query)
-#     result = cursor.fetchall()
-#     for row in result:
-#         print(row)
+def get_customer_by_email(conn, email):
+    cursor = conn.cursor()
+    query = f"""SELECT * FROM customer where email='{email}'"""
+    cursor.execute(query)
+    result = cursor.fetchone()
     
+    return result
 
 def get_product_by_category(conn, category):
     cursor = conn.cursor()
