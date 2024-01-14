@@ -31,6 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions: read-all
     needs: check-branch
+    if: github.event_name == 'push' ||  (github.ref_name == 'refs/heads/dev') || (github.ref_name == 'refs/heads/qa') || (github.ref_name == 'refs/heads/prod')
     steps:
       - name: Check out code
         uses: actions/checkout@v2
