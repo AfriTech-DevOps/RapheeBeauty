@@ -86,7 +86,7 @@ def get_db_connection():
     except Error as e:
         return "<html><body><h1>500 Internal Server Error</h1></body></html>"
 
-
+database.create_database(get_db_connection())
 database.create_user_table(get_db_connection())
 database.create_cart_table(get_db_connection())
 database.create_wishlist_table(get_db_connection())
@@ -170,7 +170,7 @@ def login():
         with app.app_context():
             cursor.execute(f"SELECT * FROM customer WHERE email = '{email}'")
             customer = cursor.fetchone()
-            print(customer)
+            # print(customer)
             if customer and sha256_crypt.verify(password, customer[3]):
                 print("Password matched")
                 session['logged_in'] = True
@@ -207,6 +207,10 @@ def register():
         password = request.form.get('tp_password')
 
         print(f"full_name: {full_name}, email: {email}, password: {password}")
+        get_customer = database.get_customer_by_email(conn, email)
+        if get_customer:
+            flash('Customer already exists.', 'danger')
+            return redirect(url_for('register'))
         with app.app_context():
             database.insert_customer_data(conn, full_name, email, sha256_crypt.encrypt(password), False)
             return redirect(url_for('login'))
@@ -394,32 +398,46 @@ def index():
             'images': images
         })
 
+    if 'logged_in' not in session:
+        wishlist_count = 0
+        cart_count = 0
+    else:
+        wishlist_query = f"""SELECT COUNT(*) FROM wishlist where customer_id = {session['id']}"""
+        cursor.execute(wishlist_query)
+        wishlist_count = cursor.fetchone()[0]
 
-    wishlist_query = """SELECT COUNT(*) FROM wishlist"""
-    cursor.execute(wishlist_query)
-    wishlist_count = cursor.fetchone()[0]
+        cart_query = f"""SELECT COUNT(*) FROM cart where customer_id = {session['id']}"""
+        cursor.execute(cart_query)
+        cart_count = cursor.fetchone()[0]
 
 
 
     if selected_cat == 'Select Category' or selected_cat == 'Fragrances' or selected_cat == 'Skincare' or selected_cat == 'Makeup' or selected_cat == 'Haircare' or selected_cat == 'Bodycare' or selected_cat == 'Accessories' or selected_cat == 'Gifts' or selected_cat == 'Brands':
         return make_response(render_template('index.html', product_cats_form=product_cats_form, product_cats=product_cats, selected_cat=selected_cat, 
                                              random_products=random_products, fragrance_count=fragrance_count, skincare_count=skincare_count, makeup_count=makeup_count,
-                                             haircare_count=haircare_count, bodycare_count=bodycare_count, categories=categories, wishlist_count=wishlist_count), headers)
+                                             haircare_count=haircare_count, bodycare_count=bodycare_count, categories=categories, wishlist_count=wishlist_count, cart_count=cart_count), headers)
     return make_response(render_template('index.html', product_cats_form=product_cats_form, product_cats=product_cats, random_products=random_products, fragrance_count=fragrance_count, 
                                          skincare_count=skincare_count, makeup_count=makeup_count,
-                                             haircare_count=haircare_count, bodycare_count=bodycare_count, categories=categories, wishlist_count=wishlist_count), headers)
+                                             haircare_count=haircare_count, bodycare_count=bodycare_count, categories=categories, wishlist_count=wishlist_count, cart_count=cart_count), headers)
 
 @app.route('/contact')
 def contact():
     requests_total.labels('GET', '/contact').inc()
-    if 'email' not in session:
-        conn = get_db_connection()
-        cursor = conn.cursor()
-        wishlist_query = """SELECT COUNT(*) FROM wishlist"""
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    if 'logged_in' not in session:
+        wishlist_count = 0
+        cart_count = 0
+    else:
+        wishlist_query = f"""SELECT COUNT(*) FROM wishlist where customer_id = {session['id']}"""
         cursor.execute(wishlist_query)
         wishlist_count = cursor.fetchone()[0]
 
-    return make_response(render_template('contact.html', wishlist_count=wishlist_count), headers)
+        cart_query = f"""SELECT COUNT(*) FROM cart where customer_id = {session['id']}"""
+        cursor.execute(cart_query)
+        cart_count = cursor.fetchone()[0]
+
+    return make_response(render_template('contact.html', wishlist_count=wishlist_count, cart_count=cart_count), headers)
 
 @app.route('/shop')
 def shop():
@@ -461,20 +479,22 @@ def shop():
     products = cursor.fetchall()
     # print(products)
 
-    if 'email' not in session:
-        wishlist_query = """SELECT COUNT(*) FROM wishlist"""
+    if 'logged_in' not in session:
+        wishlist_count = 0
+        cart_count = 0
+    else:
+        wishlist_query = f"""SELECT COUNT(*) FROM wishlist where customer_id = {session['id']}"""
         cursor.execute(wishlist_query)
         wishlist_count = cursor.fetchone()[0]
-    else:
-        cursor.execute(f"Select id from customer where email='{session['email']}'")
-        customer_id = cursor.fetchone()[0]
-        cursor.execute(f"SELECT COUNT(*) FROM wishlist WHERE customer_id={customer_id}")
-        wishlist_count = cursor.fetchone()[0]
+
+        cart_query = f"""SELECT COUNT(*) FROM cart where customer_id = {session['id']}"""
+        cursor.execute(cart_query)
+        cart_count = cursor.fetchone()[0]
 
     conn.close()
     return make_response(render_template('shop.html', fragrance_count=fragrance_count, skincare_count=skincare_count, makeup_count=makeup_count,
                                              haircare_count=haircare_count, bodycare_count=bodycare_count, products=products, page=page, num_pages=num_pages, 
-                                             per_page=per_page, categories=categories, wishlist_count=wishlist_count), headers)
+                                             per_page=per_page, categories=categories, wishlist_count=wishlist_count, cart_count=cart_count), headers)
 
 
 @app.route('/category/<string:category>')
@@ -557,13 +577,21 @@ def search():
             conn.close()
             return redirect(url_for('product_not_found'))
     
-    wishlist_query = """SELECT COUNT(*) FROM wishlist"""
-    cursor.execute(wishlist_query)
-    wishlist_count = cursor.fetchone()[0]
+    if 'logged_in' not in session:
+        wishlist_count = 0
+        cart_count = 0
+    else:
+        wishlist_query = f"""SELECT COUNT(*) FROM wishlist where customer_id = {session['id']}"""
+        cursor.execute(wishlist_query)
+        wishlist_count = cursor.fetchone()[0]
+
+        cart_query = f"""SELECT COUNT(*) FROM cart where customer_id = {session['id']}"""
+        cursor.execute(cart_query)
+        cart_count = cursor.fetchone()[0]
 
          
     return make_response(render_template('shop-list.html', query=query, category=category, categories=categories, fragrance_count=fragrance_count, skincare_count=skincare_count, makeup_count=makeup_count,
-                                             haircare_count=haircare_count, bodycare_count=bodycare_count, products=products, page=page, num_pages=num_pages, per_page=per_page, wishlist_count=wishlist_count), headers)
+                                             haircare_count=haircare_count, bodycare_count=bodycare_count, products=products, page=page, num_pages=num_pages, per_page=per_page, wishlist_count=wishlist_count, cart_count=cart_count), headers)
 
     
 @app.route('/shop_list')
@@ -575,7 +603,20 @@ def shop_list():
 @app.route('/about')
 def about():
     requests_total.labels('GET', '/about').inc()
-    return make_response(render_template('about.html'), headers)
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    if 'logged_in' not in session:
+        wishlist_count = 0
+        cart_count = 0
+    else:
+        wishlist_query = f"""SELECT COUNT(*) FROM wishlist where customer_id = {session['id']}"""
+        cursor.execute(wishlist_query)
+        wishlist_count = cursor.fetchone()[0]
+
+        cart_query = f"""SELECT COUNT(*) FROM cart where customer_id = {session['id']}"""
+        cursor.execute(cart_query)
+        cart_count = cursor.fetchone()[0]
+    return make_response(render_template('about.html', wishlist_count=wishlist_count, cart_count=cart_count), headers)
 
 @login_required
 @app.route('/wishlist')
@@ -583,7 +624,7 @@ def wishlist():
     requests_total.labels('GET', '/wishlist').inc()
     conn = get_db_connection()
     cursor = conn.cursor()
-    if 'email' not in session:
+    if 'logged_in' not in session:
         return redirect(url_for('login'))
     try:
         cursor.execute(f"Select id from customer where email='{session['email']}'")
@@ -623,8 +664,11 @@ def profile():
         wishlist_query = """SELECT COUNT(*) FROM wishlist"""
         cursor.execute(wishlist_query)
         wishlist_count = cursor.fetchone()[0]
+        cart_query = """SELECT COUNT(*) FROM cart"""
+        cursor.execute(cart_query)
+        cart_count = cursor.fetchone()[0]
         with app.app_context():
-            return make_response(render_template('profile.html', user=user, wishlist_count=wishlist_count), headers)
+            return make_response(render_template('profile.html', user=user, wishlist_count=wishlist_count, cart_count=cart_count), headers)
     except Exception as e:
         print(e)
         return redirect(url_for('login'))
@@ -677,14 +721,32 @@ def cart():
         wishlist_query = """SELECT COUNT(*) FROM wishlist"""
         cursor.execute(wishlist_query)
         wishlist_count = cursor.fetchone()[0]
+
+        cart_query = """SELECT COUNT(*) FROM cart"""
+        cursor.execute(cart_query)
+        cart_count = cursor.fetchone()[0]
         
-        return make_response(render_template('cart.html', products=products, total=total, subtotal=subtotal, wishlist_count=wishlist_count), headers)
+        return make_response(render_template('cart.html', products=products, total=total, subtotal=subtotal, wishlist_count=wishlist_count, cart_count=cart_count), headers)
 
 
 @app.route('/coupon')
 def coupon():
     requests_total.labels('GET', '/coupon').inc()
-    return make_response(render_template('coupon.html'), headers)
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    if 'logged_in' not in session:
+        wishlist_count = 0
+        cart_count = 0
+    else:
+        wishlist_query = f"""SELECT COUNT(*) FROM wishlist where customer_id = {session['id']}"""
+        cursor.execute(wishlist_query)
+        wishlist_count = cursor.fetchone()[0]
+
+        cart_query = f"""SELECT COUNT(*) FROM cart where customer_id = {session['id']}"""
+        cursor.execute(cart_query)
+        cart_count = cursor.fetchone()[0]
+    return make_response(render_template('coupon.html', wishlist_count=wishlist_count, cart_count=cart_count), headers)
 
 @app.route('/checkout')
 def checkout():
@@ -724,7 +786,20 @@ def product_details_list():
 @app.route('/compare')
 def compare():
     requests_total.labels('GET', '/compare').inc()
-    return make_response(render_template('compare.html'), headers)
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    if 'logged_in' not in session:
+        wishlist_count = 0
+        cart_count = 0
+    else:
+        wishlist_query = f"""SELECT COUNT(*) FROM wishlist where customer_id = {session['id']}"""
+        cursor.execute(wishlist_query)
+        wishlist_count = cursor.fetchone()[0]
+
+        cart_query = f"""SELECT COUNT(*) FROM cart where customer_id = {session['id']}"""
+        cursor.execute(cart_query)
+    return make_response(render_template('compare.html', wishlist_count=wishlist_count, cart_count=cart_count), headers)
 
 @app.route('/404')
 def error():
@@ -763,14 +838,22 @@ def shop_category():
          })
     # print(product_cat)
 
-    wishlist_query = """SELECT COUNT(*) FROM wishlist"""
-    cursor.execute(wishlist_query)
-    wishlist_count = cursor.fetchone()[0]
+    if 'logged_in' not in session:
+        wishlist_count = 0
+        cart_count = 0
+    else:
+        wishlist_query = f"""SELECT COUNT(*) FROM wishlist where customer_id = {session['id']}"""
+        cursor.execute(wishlist_query)
+        wishlist_count = cursor.fetchone()[0]
 
-    return make_response(render_template('shop-category.html', product_cat=product_cat, wishlist_count=wishlist_count), headers)
+        cart_query = f"""SELECT COUNT(*) FROM cart where customer_id = {session['id']}"""
+        cursor.execute(cart_query)
+        cart_count = cursor.fetchone()[0]
+
+    return make_response(render_template('shop-category.html', product_cat=product_cat, wishlist_count=wishlist_count, cart_count=cart_count), headers)
 
 
-@app.route('/addToCart/<int:product_id>')
+@app.route('/addToCart/<int:product_id>', methods=['GET', 'POST'])
 def add_to_cart(product_id):
     requests_total.labels('GET', '/addToCart').inc()
     conn = get_db_connection()
@@ -870,7 +953,7 @@ def remove_from_cart(product_id):
         conn.close()
     return redirect(url_for('cart'))
 
-@app.route('/addToWishlist/<int:product_id>')
+@app.route('/addToWishlist/<int:product_id>', methods=['GET', 'POST'])
 def add_to_wishlist(product_id):
     requests_total.labels('GET', '/addToWishlist').inc()
     conn = get_db_connection()

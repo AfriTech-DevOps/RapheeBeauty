@@ -1,23 +1,31 @@
-# Stage 1: Build the application
+# Development Stage
+FROM python:3.9 AS development
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+# Run tests
+RUN pytest -v
+
+# Production Stage
 FROM python:3.9
 
 WORKDIR /app
 
-# Copy only requirements to cache them in Docker layer
-COPY requirements.txt .
+COPY --from=development /app .
 
-# Install dependencies
-RUN pip install --upgrade pip && \
+RUN python -m pip install --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
-# Copy the application code
-COPY . .
 
-# Expose the port Gunicorn will listen on
 EXPOSE 8000
 
-# Define environment variables
 ENV PORT=8000
 
-# Use Gunicorn with explicit path to the executable to serve the application
-CMD ["/usr/local/bin/gunicorn", "--bind", "0.0.0.0", "-w", "4", "app:app"]
+CMD ["python", "-m", "gunicorn", "--bind", "0.0.0.0:8000", "-w", "4", "app:app"]

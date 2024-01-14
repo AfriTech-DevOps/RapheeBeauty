@@ -16,3 +16,4 @@ python-dotenv
 pymysql
 redis
 prometheus_client
+pytest
