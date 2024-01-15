@@ -39,7 +39,8 @@ CORS(app)
 token = secrets.token_hex(64)
 app.secret_key = token
 app.config['SESSION_TYPE'] = 'redis'
-app.config['SESSION_REDIS'] = redis.from_url(os.getenv('REDIS_URL'))
+# app.config['SESSION_REDIS'] = redis.from_url(os.getenv('REDIS_URL'))
+app.config['SESSION_REDIS'] = redis.from_url('redis://216.80.104.71:6379')
 app.config['SESSION_PERMANENT'] = False
 app.config['SESSION_USE_SIGNER'] = False
 # app.config['SECRET_KEY'] = secrets.token_hex(32)
