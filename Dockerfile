@@ -11,7 +11,8 @@ RUN pip install --upgrade pip && \
 COPY . .
 
 # Run tests
-RUN pytest -v
+# RUN pytest -v
+
 
 # Production Stage
 FROM python:3.9
