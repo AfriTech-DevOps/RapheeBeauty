@@ -89,7 +89,7 @@ pipeline {
         stage('Deployment') {
             steps {
                 script {
-                    if params.DEPLOYMENT == 'DockerContainer' {
+                    if (params.DEPLOYMENT == 'DockerContainer') {
                         def containerName = "raphee-beauty-${env.BRANCH_NAME}"
                         def isRunning = sh(script: "docker ps -a | grep ${containerName}", returnStatus: true)
                         if (isRunning == 0) {
