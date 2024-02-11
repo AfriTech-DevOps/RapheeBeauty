@@ -98,9 +98,7 @@ pipeline {
                         if (env.BRANCH_NAME == 'prod') { 
                             sh "sed -i 's/CMD \\[\"python\", \"app.py\"\\]/CMD \\[\"waitress-serve\", \"--listen=*:5000\", \"app:app\"\\]/' Dockerfile"
                             sh "docker run -d -p 5530:5000 --name ${containerName} idrisniyi94/raphee-beauty:${env.BRANCH_NAME}-${env.BUILD_ID}"
-                        else {
-                            sh "docker run -d -p 5530:5000 --name ${containerName} idrisniyi94/raphee-beauty:${env.BRANCH_NAME}-${env.BUILD_ID}"
-                        }
+                        sh "docker run -d -p 5530:5000 --name ${containerName} idrisniyi94/raphee-beauty:${env.BRANCH_NAME}-${env.BUILD_ID}"
                     } else {
                         dir('./k8s') {
                             kubeconfig(credentialsId: '500a0599-809f-4de0-a060-0fdbb6583332', serverUrl: '') {
