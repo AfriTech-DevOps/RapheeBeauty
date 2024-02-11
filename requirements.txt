@@ -17,3 +17,5 @@ pymysql
 redis
 prometheus_client
 pytest
+pytest-cov
+waitress

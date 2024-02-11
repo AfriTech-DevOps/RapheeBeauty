@@ -372,7 +372,7 @@
                                     <a href="{{ url_for('cart') }}">Cart</a>
                                  </li>
                                  <li>
-                                    <a href="{{ url_for('login') }}">Logout</a>
+                                    <a href="{{ url_for('logout') }}">Logout</a>
                                  </li>
                               </ul>
                            </div>
@@ -400,144 +400,9 @@
                         <div class="main-menu menu-style-2">
                            <nav class="tp-main-menu-content">
                               <ul>
-                                 <li class="has-dropdown has-mega-menu">
-                                    <a href="{{ url_for('index') }}">Home</a>
-                                    <!-- <div class="home-menu tp-submenu tp-mega-menu">
-                                          <div class="row row-cols-1 row-cols-lg-4 row-cols-xl-5">
-                                             <div class="col">
-                                                <div class="home-menu-item ">
-                                                   <a href="{{ url_for('index') }}">
-                                                      <div class="home-menu-thumb p-relative fix">
-                                                         <img src="{{ url_for('static', filename='assets/img/menu/menu-home-1.jpg') }}" alt="">
-                                                      </div>
-                                                      <div class="home-menu-content">
-                                                         <h5 class="home-menu-title">Electronics </h5>
-                                                      </div>
-                                                   </a>
-                                                </div>
-                                             </div>
-                                             
-                                          </div>
-                                       </div>-->
-                                 </li>
-                                 <!-- <li  class="has-dropdown has-mega-menu">
-                                       <a href="{{ url_for('shop') }}">Shop</a>
-                                       <div class="shop-mega-menu tp-submenu tp-mega-menu">
-                                          <div class="row">
-                                             <div class="col-lg-2">
-                                                <div class="shop-mega-menu-list">
-                                                      <a href="{{ url_for('shop') }}" class="shop-mega-menu-title">Shop Pages</a>
-                                                      <ul>
-                                                          <li><a href="{{ url_for('shop_category') }}">Grid Category</a></li>
-                                                          <li><a href="{{ url_for('shop') }}">Grid Layout</a></li>
-                                                          <li><a href="{{ url_for('shop_list') }}">List Layout</a></li>
-                                                          <li><a href="{{ url_for('shop_masonary') }}">Masonary Layout</a></li>
-                                                          <li><a href="{{ url_for('shop_full_width') }}">Full width Layout</a></li>
-                                                          <li><a href="{{ url_for('shop_1600') }}">1600px Layout</a></li>
-                                                          <li><a href="{{ url_for('shop') }}">Left Sidebar</a></li>
-                                                          <li><a href="{{ url_for('shop_right_sidebar') }}">Right Sidebar</a></li>
-                                                          <li><a href="{{ url_for('shop_no_sidebar') }}">Hidden Sidebar</a></li>
-                                                      </ul>
-                                                </div>
-                                             </div>
-                                             <div class="col-lg-2">
-                                                <div class="shop-mega-menu-list">
-                                                      <a href="{{ url_for('shop') }}" class="shop-mega-menu-title">Features</a>
-                                                      <ul>
-                                                         <li><a href="{{ url_for('shop_filter_dropdown') }}">Filter Dropdown</a></li>
-                                                         <li><a href="{{ url_for('shop_filter_offcanvas') }}">Filters Offcanvas</a></li>
-                                                         <li><a href="{{ url_for('shop') }}">Filters Sidebar</a></li>
-                                                         
-                                                         <li><a href="{{ url_for('shop_infinite_scroll') }}">Infinit scrolling</a></li>
-                                                         <li><a href="{{ url_for('shop_list') }}">Collections list</a></li>
-                                                         <li><a href="{{ url_for('shop') }}">Hidden search</a></li>
-                                                         <li><a href="{{ url_for('shop') }}">Search Full screen</a></li>
-                                                      </ul>
-                                                </div>
-                                             </div>
-                                             <div class="col-lg-2">
-                                                <div class="shop-mega-menu-list">
-                                                      <a href="{{ url_for('shop') }}" class="shop-mega-menu-title">Hover Style</a>
-                                                      <ul>
-                                                         <li><a href="{{ url_for('shop') }}">Hover Style 1</a></li>
-                                                         <li><a href="{{ url_for('shop') }}">Hover Style 2</a></li>
-                                                         <li><a href="{{ url_for('shop') }}">Hover Style 3</a></li>
-                                                         <li><a href="{{ url_for('shop') }}">Hover Style 4</a></li>
-                                                      </ul>
-                                                </div>
-                                             </div>
-                                             <div class="col-lg-3">
-                                                <div class="shop-mega-menu-img">
-                                                   <img src="{{ url_for('static', filename='assets/img/menu/product/menu-product-img-1.jpg') }}" alt="">
-                                                   <div class="shop-mega-menu-btn">
-                                                      <a href="{{ url_for('shop_category') }}" class="tp-menu-showcase-btn tp-menu-showcase-btn-2">Phones</a>
-                                                   </div>
-                                                </div>
-                                             </div>
-                                             <div class="col-lg-3">
-                                                <div class="shop-mega-menu-img">
-                                                   <img src="{{ url_for('static', filename='assets/img/menu/product/menu-product-img-2.jpg') }}" alt="">
-                                                   <div class="shop-mega-menu-btn">
-                                                      <a href="{{ url_for('shop_category') }}" class="tp-menu-showcase-btn tp-menu-showcase-btn-2">Cameras</a>
-                                                   </div>
-                                                </div>
-                                             </div>
-                                          </div>
-                                       </div>
-                                   </li> -->
-                                 <li class="has-dropdown has-mega-menu ">
-
-                                    <a href="{{ url_for('shop') }}">Products</a>
-                                    <ul class="tp-submenu tp-mega-menu mega-menu-style-2">
-                                       <!-- first col -->
-                                       <li class="has-dropdown">
-                                          <a href="{{ url_for('shop') }}" class="mega-menu-title">Shop Page</a>
-                                          <ul class="tp-submenu">
-                                             <li><a href="{{ url_for('shop_category') }}">Only Categories</a></li>
-                                             <li><a href="{{ url_for('shop_filter_offcanvas') }}">Shop Grid</a></li>
-                                             <li><a href="{{ url_for('shop') }}">Shop Grid with Sideber</a></li>
-                                             <li><a href="{{ url_for('shop_list') }}">Shop List</a></li>
-                                             <li><a href="{{ url_for('shop_category') }}">Categories</a></li>
-                                             <li><a href="{{ url_for('product_details') }}">Product Details</a></li>
-                                             <li><a href="{{ url_for('product_details_progress') }}">Product Details
-                                                   Progress</a></li>
-                                          </ul>
-                                       </li>
-                                       <!-- third col -->
-                                       <li class="has-dropdown">
-                                          <a href="{{ url_for('product_details') }}"
-                                             class="mega-menu-title">Products</a>
-                                          <ul class="tp-submenu">
-
-                                             <li><a href="{{ url_for('product_details') }}">Product Simple</a></li>
-                                             <li><a href="product-details-video.html">With Video</a></li>
-                                             <li><a href="product-details-countdown.html">With Countdown Timer</a></li>
-                                             <li><a href="product-details-presentation.html">Product Presentation</a>
-                                             </li>
-                                             <li><a href="product-details-swatches.html">Variations Swatches</a></li>
-                                             <li><a href="product-details-list.html">List View</a></li>
-                                             <li><a href="product-details-gallery.html">Details Gallery</a></li>
-                                             <li><a href="product-details-slider.html">With Slider</a></li>
-                                          </ul>
-                                       </li>
-                                       <!-- third col -->
-                                       <!-- <li  class="has-dropdown">
-                                             <a href="{{ url_for('shop') }}" class="mega-menu-title">eCommerce</a>
-                                             <ul class="tp-submenu">
-                                                <li><a href="{{ url_for('cart') }}">Shopping Cart</a></li>
-                                                <li><a href="{{ url_for('order') }}">Track Your Order</a></li>
-                                                <li><a href="{{ url_for('compare') }}">Compare</a></li>
-                                                <li><a href="{{ url_for('wishlist') }}">Wishlist</a></li>
-                                                <li><a href="{{ url_for('checkout') }}">Checkout</a></li>
-                                                <li><a href="{{ url_for('profile') }}">My account</a></li>
-                                             </ul>
-                                          </li> -->
-
-                                       <!-- second col -->
-
-
-                                    </ul>
-                                 </li>
+                                 <li><a href="{{ url_for('index') }}">Home</a></li>
+                                 
+                                 <li><a href="{{ url_for('shop') }}">Products</a></li>
                                  <li><a href="{{ url_for('coupon') }}">Coupons</a></li>
 
                                  <li><a href="{{ url_for('contact') }}">Contact</a></li>

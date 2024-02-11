@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, make_response, blueprints, jsonify, Response, send_file, g, session
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
-# from werkzeug.security import generate_password_hash, check_password_hash
 from passlib.hash import sha256_crypt
 from werkzeug.utils import secure_filename
 from flask_wtf import FlaskForm
@@ -9,7 +8,6 @@ from wtforms import SelectField, StringField, PasswordField, BooleanField, Submi
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
 from flask_cors import CORS
 from flask_migrate import Migrate
-# from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from functools import wraps
 import mysql.connector as mysql
 from mysql.connector import Error
@@ -33,34 +31,20 @@ if not os.path.exists(IMAGE_DIR):
 
 app = Flask(__name__)
 CORS(app)
-# Session(app)
-# sess = Session()
-# token = ''.join(random.sample('abcdefghijklmnopqrstuvwxyz1234567890', 32))
 token = secrets.token_hex(64)
 app.secret_key = token
 app.config['SESSION_TYPE'] = 'redis'
-# app.config['SESSION_REDIS'] = redis.from_url(os.getenv('REDIS_URL'))
 app.config['SESSION_REDIS'] = redis.from_url('redis://216.80.104.71:6379')
 app.config['SESSION_PERMANENT'] = False
 app.config['SESSION_USE_SIGNER'] = False
-# app.config['SECRET_KEY'] = secrets.token_hex(32)
-# app.config['SESSION_COOKIE_HTTPONLY'] = False
-# app.config['SESSION_COOKIE_SAMESITE'] = 'None'
-# app.config['SESSION_COOKIE_SECURE'] = True
-# app.config['SESSION_COOKIE_DOMAIN'] = '.rapheebeauty.com'
-# app.config['PERMANENT_SESSION_LIFETIME'] = 3600
-# app.config['SESSION_REFRESH_EACH_REQUEST'] = True
-# app.config['SESSION_COOKIE_PATH'] = '/'
 app.config['FLASK_ENV'] = 'development'
 app.config['DEBUG'] = True
 app.config['TESTING'] = True
 app.config['FLASK_APP'] = 'app.py'
 app.config['UPLOAD_FOLDER'] = IMAGE_DIR
 ALLOWED_EXTENSIONS = {'png', 'svg', 'jpg'}
-# app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{os.getenv('MYSQL_USER')}:{os.getenv('MYSQL_PASSWORD')}@{os.getenv('MYSQL_HOST')}:3306/{os.getenv('MYSQL_DATABASE')}"
 
 server_session = Session(app)
-# session = {}
 
 config = {
     'host': os.getenv('MYSQL_HOST'),
@@ -70,14 +54,6 @@ config = {
     'database': os.getenv('MYSQL_DATABASE')
 }
 
-
-# def get_db_connection():
-#     conn = sql.connect('rapheeBeauty-database.db', check_same_thread=False)
-#     return conn
-#     # with app.app_context():
-#     #     if 'db_connection' not in g:
-#     #         g.db_connection = mysql.connect(**config)
-#     #     return g.db_connection
 
 
 def get_db_connection():
@@ -91,14 +67,7 @@ database.create_database(get_db_connection())
 database.create_user_table(get_db_connection())
 database.create_cart_table(get_db_connection())
 database.create_wishlist_table(get_db_connection())
-# try:
-#     with mysql.connect(**config) as conn:
-#         cursor = conn.cursor()
-#         if conn.is_connected():
-#             print("Connected to MySQL database")
-#             database.create_user_table(conn)
-# except Error as e:
-#     print(e)
+
 
 headers = {
     'Content-Type': 'text/html',
@@ -107,13 +76,12 @@ headers = {
     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
     "Access-Control-Allow-Headers": "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
     "Authorization": "Bearer " + token
-    # "Session-Cookie-Domain": app.config['SESSION_COOKIE_DOMAIN'],
-    # "Session-Cookie-Path": app.config['SESSION_COOKIE_PATH'],
-    # "Session-Cookie-Secure": app.config['SESSION_COOKIE_SECURE'],
-    # "Session-Cookie-HttpOnly": app.config['SESSION_COOKIE_HTTPONLY'],
-    # "Session-Cookie-SameSite": app.config['SESSION_COOKIE_SAMESITE'],
-    # "Session-Cookie-Name": app.config['SESSION_COOKIE_NAME']
 }
+
+mysql_categories_count_query = """SELECT COUNT(*) FROM products WHERE category='{}'"""
+mysql_products_count_query = """SELECT COUNT(*) FROM products"""
+cart_success_msg = "Added to cart successfully"
+error_msg = "An error occurred"
 
 requests_total = Counter('http_requests_total', 'Total HTTP Requests (count)', ['method', 'endpoint'])
 
@@ -155,10 +123,7 @@ def admin_required(f):
             return redirect(url_for('login'))
     return wrap
 
-# @app.errorhandler(404)
-# @app.route('/error')
-# def error_page():
-#     return make_response(render_template('404.html'), headers)
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -237,7 +202,7 @@ def logout():
     print("Session deleted from redis")
 
     flash('Logged out successfully.', 'success')
-    return redirect(request.referrer)
+    return redirect('login')
 
 
 @app.route('/admin')
@@ -261,7 +226,7 @@ def admin_items():
 
     page = request.args.get('page', 1, type=int)
     per_page = 10
-    cursor.execute("SELECT COUNT(*) FROM products")
+    cursor.execute(mysql_products_count_query)
     total_count = cursor.fetchone()[0]
 
     num_pages = total_count // per_page + (total_count % per_page > 0)
@@ -363,11 +328,11 @@ def index():
     selected_cat = ''
 
 
-    fragrance_count_query = """SELECT COUNT(*) FROM products WHERE category='fragrance'"""
-    skincare_count_query = """SELECT COUNT(*) FROM products WHERE category='skincare'"""
-    makeup_count_query = """SELECT COUNT(*) FROM products WHERE category='makeup'"""
-    haircare_count_query = """SELECT COUNT(*) FROM products WHERE category='hair'"""
-    bodycare_count_query = """SELECT COUNT(*) FROM products WHERE category='bodycare'"""
+    fragrance_count_query = mysql_categories_count_query.format('fragrance')
+    skincare_count_query = mysql_categories_count_query.format('skincare')
+    makeup_count_query = mysql_categories_count_query.format('makeup')
+    haircare_count_query = mysql_categories_count_query.format('hair')
+    bodycare_count_query = mysql_categories_count_query.format('bodycare')
 
     cursor.execute(fragrance_count_query)
     data = cursor.fetchall()[0]
@@ -426,6 +391,8 @@ def contact():
     requests_total.labels('GET', '/contact').inc()
     conn = get_db_connection()
     cursor = conn.cursor()
+    product_categories = ['fragrance', 'skincare', 'makeup', 'hair', 'bodycare']
+    product_cats_form = ProductCat()
     if 'logged_in' not in session:
         wishlist_count = 0
         cart_count = 0
@@ -438,7 +405,7 @@ def contact():
         cursor.execute(cart_query)
         cart_count = cursor.fetchone()[0]
 
-    return make_response(render_template('contact.html', wishlist_count=wishlist_count, cart_count=cart_count), headers)
+    return make_response(render_template('contact.html', wishlist_count=wishlist_count, cart_count=cart_count, product_categories=product_categories, product_cats_form=product_cats_form), headers)
 
 @app.route('/shop')
 def shop():
@@ -449,14 +416,11 @@ def shop():
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    fragrance_count_query = """SELECT COUNT(*) FROM products WHERE category='fragrance'"""
-    skincare_count_query = """SELECT COUNT(*) FROM products WHERE category='skincare'"""
-    makeup_count_query = """SELECT COUNT(*) FROM products WHERE category='makeup'"""
-    haircare_count_query = """SELECT COUNT(*) FROM products WHERE category='hair'"""
-    bodycare_count_query = """SELECT COUNT(*) FROM products WHERE category='bodycare'"""
-
-    
-    
+    fragrance_count_query = mysql_categories_count_query.format('fragrance')
+    skincare_count_query = mysql_categories_count_query.format('skincare')
+    makeup_count_query = mysql_categories_count_query.format('makeup')
+    haircare_count_query = mysql_categories_count_query.format('hair')
+    bodycare_count_query = mysql_categories_count_query.format('bodycare')
 
     cursor.execute(fragrance_count_query)
     fragrance_count = cursor.fetchone()[0]
@@ -469,13 +433,12 @@ def shop():
     cursor.execute(bodycare_count_query)
     bodycare_count = cursor.fetchone()[0]
 
-    cursor.execute("SELECT COUNT(*) FROM products")
+    cursor.execute(mysql_products_count_query)
     total_count = cursor.fetchone()[0]
 
     num_pages = total_count // per_page + (total_count % per_page > 0)
     offset = (page - 1) * per_page
 
-    # all_products_query = """SELECT * FROM products LIMIT ? ORDER BY RAND()"""
     cursor.execute(f"SELECT * FROM products ORDER BY RAND() LIMIT {per_page} OFFSET {offset}")
     products = cursor.fetchall()
     # print(products)
@@ -534,11 +497,11 @@ def search():
     per_page = 10
 
 
-    fragrance_count_query = """SELECT COUNT(*) FROM products WHERE category='fragrance'"""
-    skincare_count_query = """SELECT COUNT(*) FROM products WHERE category='skincare'"""
-    makeup_count_query = """SELECT COUNT(*) FROM products WHERE category='makeup'"""
-    haircare_count_query = """SELECT COUNT(*) FROM products WHERE category='hair'"""
-    bodycare_count_query = """SELECT COUNT(*) FROM products WHERE category='bodycare'"""
+    fragrance_count_query = mysql_categories_count_query.format('fragrance')
+    skincare_count_query = mysql_categories_count_query.format('skincare')
+    makeup_count_query = mysql_categories_count_query.format('makeup')
+    haircare_count_query = mysql_categories_count_query.format('hair')
+    bodycare_count_query = mysql_categories_count_query.format('bodycare')
 
     cursor.execute(fragrance_count_query)
     fragrance_count = cursor.fetchone()[0]
@@ -551,13 +514,12 @@ def search():
     cursor.execute(bodycare_count_query)
     bodycare_count = cursor.fetchone()[0]
 
-    cursor.execute("SELECT COUNT(*) FROM products")
+    cursor.execute(mysql_products_count_query)
     total_count = cursor.fetchone()[0]
 
     num_pages = total_count // per_page + (total_count % per_page > 0)
     offset = (page - 1) * per_page
 
-    # all_products_query = """SELECT * FROM products LIMIT ? ORDER BY RAND()"""
     cursor.execute(f"SELECT * FROM products ORDER BY RAND() LIMIT {per_page} OFFSET {offset}")
     products = cursor.fetchall()
     # print(products)
@@ -632,10 +594,6 @@ def wishlist():
         customer_id = cursor.fetchone()[0]
         cursor.execute(f"SELECT * FROM wishlist WHERE customer_id='{customer_id}'")
         wishlist = cursor.fetchall()
-        # print(wishlist)
-
-        # if not wishlist:
-        #     return make_response(render_template('wishlist.html', products=[]), headers)
         
         products = []
         for item in wishlist:
@@ -668,6 +626,9 @@ def profile():
         cart_query = """SELECT COUNT(*) FROM cart"""
         cursor.execute(cart_query)
         cart_count = cursor.fetchone()[0]
+        if 'logged_in' not in session:
+            pass
+            
         with app.app_context():
             return make_response(render_template('profile.html', user=user, wishlist_count=wishlist_count, cart_count=cart_count), headers)
     except Exception as e:
@@ -716,7 +677,7 @@ def cart():
                 total += item_subtotal
                 subtotal += item_subtotal
             else:
-                pass
+                continue
         # print(products)
 
         wishlist_query = """SELECT COUNT(*) FROM wishlist"""
@@ -863,7 +824,6 @@ def add_to_cart(product_id):
     if 'email' not in session:
         return redirect(url_for('login'))
     else:
-        # product_id = request.args.get('product_id')
         cursor.execute(f"Select id from customer where email='{session['email']}'")
         customer_id = cursor.fetchone()[0]
         
@@ -883,7 +843,7 @@ def add_to_cart(product_id):
             try:
                 cursor.execute(f"UPDATE cart set quantity={new_quantity} where cart_id={cart_id}")
                 conn.commit()
-                msg = "Added to cart successfully"
+                msg = cart_success_msg
             except Error:
                 conn.rollback()
                 msg = "Error occured while updating cart"
@@ -896,7 +856,7 @@ def add_to_cart(product_id):
             try:
                 cursor.execute(f"INSERT INTO cart (product_id, customer_id, quantity) VALUES ({product_id}, {customer_id}, {quantity})")
                 conn.commit()
-                msg = "Added to cart successfully"
+                msg = cart_success_msg
             except Error:
                 conn.rollback()
                 msg = "Error occured while adding to cart"
@@ -914,7 +874,6 @@ def update_cart(product_id):
         flash('Invalid quantity')
         return redirect(url_for('cart'))
     qty = int(qty)
-    # product_id = request.args.get('product_id')
     print(qty, product_id)
     if 'email' not in session:
         return redirect(url_for('login'))
@@ -927,7 +886,7 @@ def update_cart(product_id):
             conn.commit()
             msg = "Updated cart successfully"
         else:
-            msg = "Error occured"
+            msg = error_msg
         conn.close()
     return redirect(url_for('cart'))
 
@@ -950,7 +909,7 @@ def remove_from_cart(product_id):
                 conn.commit()
             msg = "Removed from cart successfully"
         else:
-            msg = "Error occured"
+            msg = error_msg
         conn.close()
     return redirect(url_for('cart'))
 
@@ -962,7 +921,6 @@ def add_to_wishlist(product_id):
     if 'email' not in session:
         return redirect(url_for('login'))
     else:
-        # product_id = request.args.get('product_id')
         cursor.execute(f"Select id from customer where email='{session['email']}'")
         customer_id = cursor.fetchone()[0]
         try:
@@ -971,7 +929,7 @@ def add_to_wishlist(product_id):
             msg = "Added to wishlist successfully"
         except Error:
             conn.rollback()
-            msg = "Error occured"
+            msg = error_msg
         finally:
             conn.close()
     return redirect(url_for('wishlist'))
@@ -994,7 +952,7 @@ def remove_from_wishlist(product_id):
             conn.commit()
             msg = "Removed from wishlist successfully"
         else:
-            msg = "Error occured"
+            msg = error_msg
         conn.close()
     return redirect(url_for('wishlist'))
 
@@ -1003,7 +961,6 @@ def add_wishlist_to_cart(product_id):
     requests_total.labels('GET', '/addWishlistToCart').inc()
     conn = get_db_connection()
     cursor = conn.cursor()
-    # qty = request.form.get('qty')
 
     if request.method == 'POST':
         qty = request.form.get('qty')
@@ -1029,18 +986,18 @@ def add_wishlist_to_cart(product_id):
                 try:
                     cursor.execute(f"UPDATE cart set quantity={new_quantity} where cart_id={cart_id}")
                     conn.commit()
-                    msg = "Added to cart successfully"
+                    msg = cart_success_msg
                 except Error:
                     conn.rollback()
-                    msg = "Error occured"
+                    msg = error_msg
             else:
                 try:
                     cursor.execute(f"INSERT INTO cart (product_id, customer_id, quantity) VALUES ({product_id}, {customer_id}, {qty})")
                     conn.commit()
-                    msg = "Added to cart successfully"
+                    msg = cart_success_msg
                 except Error:
                     conn.rollback()
-                    msg = "Error occured"
+                    msg = error_msg
         return redirect(url_for('cart'))
             
     else:
