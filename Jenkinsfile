@@ -8,6 +8,10 @@ pipeline {
         SLACK_WEBHOOK = credentials('11563aa0-e08f-4a9b-baa2-ac70c795ada9')
     }
 
+    parameters {
+        choice(name: 'DEPLOYMENT', choices: ['DockerContainer', 'Kubernetes'], description: 'Select deployment type')
+    }
+
     stages {
         stage('Clean Workspace') {
             steps {
