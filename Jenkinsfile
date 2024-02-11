@@ -106,12 +106,23 @@ pipeline {
                 dir('./k8s') {
                     kubeconfig(credentialsId: '500a0599-809f-4de0-a060-0fdbb6583332', serverUrl: '') {
                         def targetEnvironment = determineTargetEnvironment()
-                        sh "kubectl delete -f ${targetEnvironment}-deployment.yaml"
-                        sh "sed -i 's/raphee-beauty:.*/raphee-beauty:${targetEnvironment}-${env.BUILD_ID}/' ${targetEnvironment}-deployment.yaml"
-                        sh "kubectl apply -f ${targetEnvironment}-deployment.yaml"
-                        sh "kubectl apply -f ${targetEnvironment}-service.yaml"
+                        def deploymentName = "${targetEnvironment}-raphee-beauty-deployment"
+
+                        // Check if the deployment exists
+                        def deploymentExists = sh(script: "kubectl get deployment ${deploymentName}", returnStatus: true)
+
+                        if (deploymentExists == 0) {
+                            // Deployment exists, proceed with deletion and re-apply
+                            sh "kubectl delete -f ${targetEnvironment}-deployment.yaml"
+                            sh "sed -i 's/raphee-beauty:.*/raphee-beauty:${targetEnvironment}-${env.BUILD_ID}/' ${targetEnvironment}-deployment.yaml"
+                            sh "kubectl apply -f ${targetEnvironment}-deployment.yaml"
+                            sh "kubectl apply -f ${targetEnvironment}-service.yaml"
+                        } else {
+                            echo "Deployment does not exist. Skipping deletion and re-apply."
+                        }
                     }
                 }
+
             }
         }
     }
