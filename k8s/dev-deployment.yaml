@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dev-raphee-beauty-deployment
+  namespace: dev-namespace
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: dev-raphee-beauty-deployment
+  template:
+    metadata:
+      labels:
+        app: dev-raphee-beauty-deployment
+    spec:
+      containers:
+      - name: dev-raphee-beauty-deployment
+        image: idrisniyi94/raphee-beauty:dev
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 5000
