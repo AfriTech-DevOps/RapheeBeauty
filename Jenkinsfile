@@ -42,7 +42,7 @@ pipeline {
 
         stage('Trivy File Scan') {
             steps {
-                sh "trivy fs . > trivy-${env.BRANCH_NAME}-result.txt"
+                sh "trivy fs . > trivy-${env.BRANCH_NAME}-raphee-beauty-result.txt"
             }
         }
 
